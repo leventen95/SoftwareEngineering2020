@@ -56,6 +56,7 @@
                 x.innerHTML = "Geolocation is not supported by this browser.";
               }
             midpoint={lat:lati, lng:longi};
+            map.setCenter(midpoint);
             map.panTo(midpoint);
             marker.setPosition(midpoint);
             }

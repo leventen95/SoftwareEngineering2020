@@ -21,10 +21,14 @@
         <button onclick="getLocation()">Try It</button>
 
         <p id="demo"></p>
+        <h3>My Google Maps Demo</h3>
+        <!--The div element for the map -->
+        <div id="map"></div>
 
         <script>
             var x = document.getElementById("demo");
-
+            var lati=40;
+            var longi=10;
             function getLocation() {
               if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -34,8 +38,8 @@
             }
 
             function showPosition(position) {
-              x.innerHTML = "Latitude: " + position.coords.latitude + 
-              "<br>Longitude: " + position.coords.longitude;
+              x.innerHTML = "Latitude: " + lati + 
+              "<br>Longitude: " + longi;
             }
 
             function showError(error) {
@@ -54,8 +58,20 @@
                   break;
               }
             }
+            // Initialize and add the map
+            function initMap() {
+              // The location of Uluru
+              var yourPos = {lat: lati, lng: longi};
+              // The map, centered at Uluru
+              var map = new google.maps.Map(
+                  document.getElementById('map'), {zoom: 4, center: yourPos});
+              // The marker, positioned at Uluru
+              var marker = new google.maps.Marker({position: yourPos, map: map});
+            }
         </script>
-
+        <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3B26T_Ul5DDDxv_ZGKa2icTY3Dcm7zE0&callback=initMap">
+        </script>
             <!--
             Get longitude and latitude
             https://www.w3schools.com/html/html5_geolocation.asp

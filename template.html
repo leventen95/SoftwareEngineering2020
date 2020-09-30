@@ -28,13 +28,29 @@
         <script>
             var lati=14.883333;
             var longi=5.26;
+            var midpoint={lat:lati, lng:longi};
             var x = document.getElementById("demo");
+            
+            // Initialize and add the map
+            function initMap() {
+              // The location of Uluru
+              var yourPos = {lat: lati, lng: longi};
+              // The map, centered at Uluru
+              var map = new google.maps.Map(
+                  document.getElementById('map'), {zoom: 4, center: yourPos});
+              // The marker, positioned at Uluru
+              var marker = new google.maps.Marker({position: yourPos, map: map});
+            }
+            
             function getLocation() {
               if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
               } else { 
                 x.innerHTML = "Geolocation is not supported by this browser.";
               }
+            midpoint={lat:lati, lng:longi};
+            map.panTo(midpoint);
+            marker.setPosition(midpoint);
             }
 
             function showPosition(position) {
@@ -60,16 +76,7 @@
                   break;
               }
             }
-            // Initialize and add the map
-            function initMap() {
-              // The location of Uluru
-              var yourPos = {lat: lati, lng: longi};
-              // The map, centered at Uluru
-              var map = new google.maps.Map(
-                  document.getElementById('map'), {zoom: 4, center: yourPos});
-              // The marker, positioned at Uluru
-              var marker = new google.maps.Marker({position: yourPos, map: map});
-            }
+
         </script>
         <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3B26T_Ul5DDDxv_ZGKa2icTY3Dcm7zE0&callback=initMap">

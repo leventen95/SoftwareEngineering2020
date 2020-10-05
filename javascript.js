@@ -11,7 +11,7 @@ getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RU
 }
 
 //Parking list i an 2darray with all parking locations
-//Currrent format is [] = name, city, longititude, lattitude
+//Currrent format is [] = adress, city, longititude, lattitude
 
 
 function getNearby(lognitue,lattitude){
@@ -27,6 +27,12 @@ function getNearby(lognitue,lattitude){
 }
 
 function createNearbyList(returnList){
+    let dropDownList;
+
+    //THis is where the list shoudl be in the HTML
+    let HTMLDropDown= document.getElementById("DropDown");
+
+
 
     if((returnList &&returnList.lenght) == 0){
 
@@ -36,15 +42,20 @@ function createNearbyList(returnList){
     }
 
 
+
+    //Might needd to change format of parkinglist so we can have adress street street number!
+    //Creates a drop down list to select from
     for(let i = 0; i <returnList; i++){
 
-
-
-
+        let adress =returnList[i][1]
+        
+        dropDownList+= '<option value="' + adress +'">' + adress + '</option>';
     }
- 
+
+    HTMLDropDown.innerHTML = "<Select name ='NearbySelector' id='parkingNearby'" +dropDownList +"</select>"
+    
 
 }
 
 
-}
+

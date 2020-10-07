@@ -19,6 +19,7 @@
         <p>Click the button to get your coordinates.</p>
 
         <button onclick="getLocation()">Try It</button>
+        <button onclick="moveMap()">Move map</button>
 
         <p id="demo"></p>
         <h3>My Google Maps Demo</h3>
@@ -51,10 +52,10 @@
               // The location of Uluru
               var yourPos = {lat: lati, lng: longi};
               // The map, centered at Uluru
-              var map = new google.maps.Map(
+              map = new google.maps.Map(
                   document.getElementById('map'), {zoom: 4, center: yourPos});
               // The marker, positioned at Uluru
-              var marker = new google.maps.Marker({position: yourPos, map: map});
+              marker = new google.maps.Marker({position: yourPos, map: map});
             }
             
             function getLocation() {
@@ -63,10 +64,6 @@
               } else { 
                 x.innerHTML = "Geolocation is not supported by this browser.";
               }
-            midpoint={lat:lati, lng:longi};
-            map.setCenter(midpoint);
-            map.panTo(midpoint);
-            marker.setPosition(midpoint);
             }
 
             function showPosition(position) {
@@ -91,6 +88,14 @@
                   x.innerHTML = "An unknown error occurred."
                   break;
               }
+            }
+            
+            function moveMap() {
+                midpoint={lat:lati, lng:longi};
+                map.setCenter(midpoint);
+                map.panTo(midpoint);
+                map.setZoom(15);
+                marker = new google.maps.Marker({position: midpoint, map: map});
             }
 
         </script>

@@ -93,13 +93,20 @@
             }
             
             function moveMap() {
-                clearOverlays();
-                midpoint={lat:lati, lng:longi};
-                map.setCenter(midpoint);
-                map.panTo(midpoint);
-                map.setZoom(15);
-                marker = new google.maps.Marker({position: midpoint, map: map});
-                markersArray.push(marker);
+                if(lati==14.883333 && longi==5.26){
+                        alert("Trykk 'Try it' først, for å hente posisjon");
+                    }
+                   
+                else{
+                        clearOverlays();
+                        midpoint={lat:lati, lng:longi};
+                        map.setCenter(midpoint);
+                        map.panTo(midpoint);
+                        map.setZoom(15);
+                        marker = new google.maps.Marker({position: midpoint, map: map});
+                        markersArray.push(marker);
+                    }
+
             }
             
             function clearOverlays() {

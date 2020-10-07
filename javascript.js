@@ -7,11 +7,27 @@ var parkinglist = [[]]
 function startup(){
 getNearbyButton = document.getElementById("GetNearby");
 getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RUN getNearby(longittude, lattitude) WITH THE USER INFO AS PARAMETER
+getNearbyInCity = document.getElementById("GetNearbyInCity");
+getNearbyButton.addEventListener("click", getCityLocation);
 
 }
 
 //Parking list i an 2darray with all parking locations
 //Currrent format is [] = adress, city, longititude, lattitude
+
+
+
+function getCityLocation(){
+    let city = document.getElementById("search");
+    for(let i = 0; i < parkinglist.lenght; i ++){
+        let current  =parkinglist[i]
+        //checks longitute and lattutde
+        if(city.getValue == parkinglist[1])
+        nearbyList.push(current);
+    }
+    
+    getNearby(nearbyList);
+}
 
 
 function getNearby(lognitue,lattitude){

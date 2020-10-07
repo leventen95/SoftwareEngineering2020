@@ -46,6 +46,7 @@
             var longi=5.26;
             var midpoint={lat:lati, lng:longi};
             var x = document.getElementById("demo");
+            var markersArray=[];
             
             // Initialize and add the map
             function initMap() {
@@ -56,6 +57,7 @@
                   document.getElementById('map'), {zoom: 4, center: yourPos});
               // The marker, positioned at Uluru
               marker = new google.maps.Marker({position: yourPos, map: map});
+              markersArray.push(marker);
             }
             
             function getLocation() {
@@ -91,11 +93,27 @@
             }
             
             function moveMap() {
-                midpoint={lat:lati, lng:longi};
-                map.setCenter(midpoint);
-                map.panTo(midpoint);
-                map.setZoom(15);
-                marker = new google.maps.Marker({position: midpoint, map: map});
+                if(lati==14.883333 && longi==5.26){
+                        alert("Trykk 'Try it' først, for å hente posisjon");
+                    }
+                   
+                else{
+                        clearOverlays();
+                        midpoint={lat:lati, lng:longi};
+                        map.setCenter(midpoint);
+                        map.panTo(midpoint);
+                        map.setZoom(15);
+                        marker = new google.maps.Marker({position: midpoint, map: map});
+                        markersArray.push(marker);
+                    }
+
+            }
+            
+            function clearOverlays() {
+              for (var i = 0; i < markersArray.length; i++ ) {
+                markersArray[i].setMap(null);
+              }
+              markersArray.length = 0;
             }
 
         </script>

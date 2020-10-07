@@ -19,7 +19,10 @@
         <p>Click the button to get your coordinates.</p>
 
         <button onclick="getLocation()">Try It</button>
-        <button onclick="moveMap()">Move map</button>
+        <button onclick="moveMap()">Move map</button><br><br>
+        <label for="search">Søk på adresse:</label>
+        <input type="text" id="search" name="search"><br>
+        <button id="searchBtn" onclick="geocodeAddress()">Søk</button>
 
         <p id="demo"></p>
         <h3>My Google Maps Demo</h3>
@@ -58,6 +61,22 @@
               // The marker, positioned at Uluru
               marker = new google.maps.Marker({position: yourPos, map: map});
               markersArray.push(marker);
+              geocoder = new google.maps.Geocoder();
+              }
+            
+            function geocodeAddress() {
+              const address = document.getElementById("search").value;
+              geocoder.geocode({ address: address }, (results, status) => {
+                if (status === "OK") {
+                  map.setCenter(results[0].geometry.location);
+                  new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                  });
+                } else {
+                  alert("Geocode was not successful for the following reason: " + status);
+                }
+              });
             }
             
             function getLocation() {
@@ -115,6 +134,8 @@
               }
               markersArray.length = 0;
             }
+            
+
 
         </script>
         <script defer

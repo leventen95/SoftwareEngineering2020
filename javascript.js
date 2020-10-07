@@ -7,8 +7,8 @@ var parkinglist = [[]]
 function startup(){
 getNearbyButton = document.getElementById("GetNearby");
 getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RUN getNearby(longittude, lattitude) WITH THE USER INFO AS PARAMETER
-getNearbyInCity = document.getElementById("GetNearbyInCity");
-getNearbyButton.addEventListener("click", getCityLocation);
+getByCity = document.getElementById("searchCityButton");
+getByCity.addEventListener("click", getCityLocations);
 
 }
 
@@ -17,13 +17,14 @@ getNearbyButton.addEventListener("click", getCityLocation);
 
 
 
-function getCityLocation(){
-    let city = document.getElementById("search");
+function getCityLocations(){
+    let city = document.getElementById("searchCityInput");
     for(let i = 0; i < parkinglist.lenght; i ++){
         let current  =parkinglist[i]
         //checks longitute and lattutde
-        if(city.getValue == parkinglist[1])
+        if(city.getValue == parkinglist[1]){
         nearbyList.push(current);
+        }
     }
     
     getNearby(nearbyList);

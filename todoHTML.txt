@@ -1,0 +1,2 @@
+Search by filend needs a button and the search field id needs to be searchCityInput. 
+The search button ID needs to be searchCity

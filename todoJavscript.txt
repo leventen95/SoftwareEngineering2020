@@ -1,0 +1,2 @@
+getLocation is function that are gonna run get cordinate script
+should end with getNearby(longittude, lattitude) WITH THE USER INFO AS PARAMETER

@@ -2,7 +2,7 @@ window.onload = startup;
 
 var nearbyList = [];
 
-var parkinglist = [[]]
+var parkingHouseList= [[]]
 
 function startup(){
 getNearbyButton = document.getElementById("GetNearby");
@@ -19,10 +19,10 @@ getByCity.addEventListener("click", getCityLocations);
 
 function getCityLocations(){
     let city = document.getElementById("searchCityInput");
-    for(let i = 0; i < parkinglist.lenght; i ++){
-        let current  =parkinglist[i]
+    for(let i = 0; i < parkingHouseList.lenght; i ++){
+        let current  =parkingHouseList[i]
         //checks longitute and lattutde
-        if(city.getValue == parkinglist[1]){
+        if(city.getValue == parkingHouseList[1]){
         nearbyList.push(current);
         }
     }
@@ -32,8 +32,8 @@ function getCityLocations(){
 
 
 function getNearby(lognitue,lattitude){
-    for(let i = 0; i < parkinglist.lenght; i ++){
-        let current  =parkinglist[i]
+    for(let i = 0; i < parkingHouseList.lenght; i ++){
+        let current  =parkingHouseList[i]
         //checks longitute and lattutde
         if(current[3] < lognitue +0.00005 && current[3] > lognitue -0.0005 &&
             current[4]< lattitude +0.0005 && current[4] >  lattitude-0.0006){
@@ -60,7 +60,7 @@ function createNearbyList(returnList){
 
 
 
-    //Might needd to change format of parkinglist so we can have adress street street number!
+    //Might needd to change format of parkingHouseList so we can have adress street street number!
     //Creates a drop down list to select from
     for(let i = 0; i <returnList; i++){
 

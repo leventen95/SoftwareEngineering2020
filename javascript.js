@@ -13,7 +13,8 @@ function startup(){
 
 
     getNearbyButton = document.getElementById("GetNearby");
-    getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RUN getNearby(longittude, lattitude) WITH THE USER INFO AS PARAMETER
+    getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RUN getNearby(longittude, lattitude)
+    // WITH THE USER INFO AS PARAMETER
     getByCity = document.getElementById("searchCityButton");
     getByCity.addEventListener("click", getCityLocations);
 }
@@ -48,15 +49,15 @@ function getCityLocations(){
     for(let i = 0; i < parkingHouseList.length; i ++){
         let current  =parkingHouseList[i];
         //checks longitute and lattutde
-        if(city.toLowerCase()=== parkingHouseList[i][1].toLowerCase()){
+        if(city.toLowerCase()=== current[1].toLowerCase()){
         nearbyList.push(current);
         }
     }
     
-    getNearby(nearbyList);
+    createNearbyList(nearbyList)
 }
 
-
+//get Nearby from GPS
 function getNearby(lognitue,lattitude){
     for(let i = 0; i < parkingHouseList.length; i ++){
         let current  =parkingHouseList[i];
@@ -66,6 +67,7 @@ function getNearby(lognitue,lattitude){
                 nearbyList.push(current);
             }
     }
+    createNearbyList(nearbyList)
 
 }
 

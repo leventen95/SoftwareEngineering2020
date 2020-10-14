@@ -13,10 +13,12 @@
         <div id="nav">
             <a href="template.html">Hjem</a>
             <a href = "om.html">Om oss</a>
+            <a href = "registrer.html">Registrer</a>
+            <a href = "login.html">Login</a>
         </div>
 
 
-        <form id = "form">
+        <form id = "registrer">
     
                 Navn:<br>
                 <input type = "text" name = "navn" id="name"><br><br>
@@ -25,34 +27,16 @@
                 Telefonnummer:<br>
                 <input type = "text" name="nummer" id="nummer"><br><br>
             
-                <input type = "submit" value = "Registrer" name = "knapp">
-            
+                
+                <button onclick = "alertMessage()">Registrer</button>
                 <script>
-                    
-                   alert("Du er registrert!"); 
-                    
+                    function alertMessage() {
+                        alert("Du er registrert!");
+                    }   
                 </script>
             </form>
         
-        <!--Innlogging-->     
-            <form id = "logg-inn">
-    
-                E-post:<br>
-                <input type = "text" name = "e-post"><br><br>
-                Passord:<br>
-                <input type = "text" name="nummer"><br><br>
-            
-                <input type = "submit" value = "Logg inn" name = "knapp">
-            
-                <script>
-
-                    alert("Du er logget inn");
-
-                </script>        
-        
-
-            </form>
-        <!--End Innlogging-->
+      
 
         
          <div id = "footer">

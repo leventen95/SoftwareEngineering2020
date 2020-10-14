@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Gruppe 3 </title>
+        <link rel="stylesheet" type="text/css" href="css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="css/Grid.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+    <div id = "wrapper">
+
+        <div id="nav">
+            <a href="template.html">Hjem</a>
+            <a href = "om.html">Om oss</a>
+        </div>
+        
+        <div id= "nav2">
+            <a href = "registrer.html">Registrer</a>
+            <a href = "login.html" >Login</a>
+        </div>
+
+        
+           <!--Innlogging-->     
+            <form id = "login">
+    
+                E-post:<br>
+                <input type = "text" name = "e-post"><br><br>
+                Passord:<br>
+                <input type = "text" name="nummer"><br><br>
+            
+            
+                <button onclick = "alertMessage()">Login</button>
+                <script>
+                    function alertMessage() {
+                        alert("Du er logget inn");
+                    }   
+                </script>       
+
+            </form>
+        <!--End Innlogging-->
+
+        
+         <div id = "footer">
+             ...
+         </div>  
+        
+        </div>
+    </body>
+</html>

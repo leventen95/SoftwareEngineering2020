@@ -5,7 +5,7 @@ var xmlhttp;
 
 function startup(){
     xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = readFile
+    xmlhttp.onreadystatechange = readFile;
     xmlhttp. open("GET", "parkingHouses.csv", true);
     xmlhttp.send();
 
@@ -18,12 +18,12 @@ function startup(){
     remove.addEventListener("click", removeParkingHouse);
 
 
-    readFile(parkingHouseFile.csv);
+
 }
 
 
 
-function readFile() {
+function readFile(){
     if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
         let response = xmlhttp.responseText;
         parkingHouseList = response.result.split("\n");
@@ -42,10 +42,10 @@ function readFile() {
 
 function addParkingHouse(){
 
-    let newAdress = promt("Please enter the new parkings house's  Adress");
-    let newCity = promt("Please enter the new parkings house's  City");
-    let newLongtitude = promt("Please enter the new parkings house's Longtitude");
-    let newLatitude = promt("Please enter the new parkings house's Latitude");
+    let newAdress = prompt("Please enter the new parkings house's  Adress");
+    let newCity = prompt("Please enter the new parkings house's  City");
+    let newLongtitude = prompt("Please enter the new parkings house's Longtitude");
+    let newLatitude = prompt("Please enter the new parkings house's Latitude");
 
     let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude];
 
@@ -87,7 +87,7 @@ function addParkingHouse(){
 function writeToCsv() {
     let csvRows = [];
 
-    let csvContent = "data:text/csv;charset=utf-8,";
+
 
     for(let i = 0; i < parkingHouseList.length; i ++){
         csvRows[i] = parkingHouseList[i].valueOf();
@@ -99,7 +99,7 @@ function writeToCsv() {
 
 
        //adds a new line as long as it isnt last one
-       if(i ==csvRows.length-1){
+       if(i ===csvRows.length-1){
            dataToCsv = dataToCsv +"\n" + csvRows[i];
        }
        else {
@@ -117,7 +117,7 @@ function removeParkingHouse(){
     for(let i = 0; i < parkingHouseList.length; i++){
 
 
-        if(removeTargetAdress ==  parkingHouseList[i][0]){
+        if(removeTargetAdress ===  parkingHouseList[i][0]){
             //Removes the one that matches
             parkingHouseList.slice(i,1);
             writeToCsv();

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3e6525cb-aec2-45aa-a275-980aac61ae87" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todoHTML.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todoHTML.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +37,7 @@
       <updated>1601544492650</updated>
       <workItem from="1601544494584" duration="61000" />
       <workItem from="1602644068877" duration="6765000" />
-      <workItem from="1602667536783" duration="1244000" />
+      <workItem from="1602667536783" duration="1933000" />
     </task>
     <task id="LOCAL-00001" summary="Lagt til legg til og fjern parkerings hus">
       <created>1602645339525</created>
@@ -73,9 +73,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Fixed errror where return list was not called" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2560" y="167" key="CommitChangelistDialog2" timestamp="1602650566929">
-      <screen x="2560" y="-387" width="1080" height="1920" />
+    <state x="0" y="404" key="CommitChangelistDialog2" timestamp="1602693170969">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
+    <state x="0" y="404" key="CommitChangelistDialog2/0.0.2560.1400/2560.-387.1080.1920@0.0.2560.1400" timestamp="1602693170969" />
     <state x="2560" y="167" key="CommitChangelistDialog2/0.0.2560.1400/2560.-387.1080.1920@2560.-387.1080.1920" timestamp="1602650566929" />
     <state x="2880" y="328" key="FileChooserDialogImpl" timestamp="1602645769406">
       <screen x="2560" y="-387" width="1080" height="1920" />

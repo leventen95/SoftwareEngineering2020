@@ -56,13 +56,26 @@ head{
        }
 
 
-#form{
+#registrer {
 	border: 2px solid black;
 	padding: 20px;
 	height: 400px;
 	width: 300px;
 	margin-top: 22px;
-	float:right;
+	margin-right: 45px;
+	display: right;
+	background-color:grey;
+}
+
+
+#login {
+	border: 2px solid black;
+	padding: 20px;
+	height: 400px;
+	width: 300px;
+	margin-top: 22px;
+	margin-right: 45px;
+	display: right;
 	background-color:grey;
 }
 

@@ -18,7 +18,7 @@
         </div>
 
         
-        <!--Innlogging-->     
+           <!--Innlogging-->     
             <form id = "login">
     
                 E-post:<br>
@@ -26,15 +26,13 @@
                 Passord:<br>
                 <input type = "text" name="nummer"><br><br>
             
-                <!--Lag en onclick script versjon-->
-                <input type = "submit" value = "Logg inn" name = "knapp">
             
+                <button onclick = "alertMessage()">Login</button>
                 <script>
-
-                    alert("Du er logget inn");
-
-                </script>        
-        
+                    function alertMessage() {
+                        alert("Du er logget inn");
+                    }   
+                </script>       
 
             </form>
         <!--End Innlogging-->

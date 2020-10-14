@@ -68,11 +68,14 @@
               const address = document.getElementById("search").value;
               geocoder.geocode({ address: address }, (results, status) => {
                 if (status === "OK") {
+                  clearOverlays();
                   map.setCenter(results[0].geometry.location);
-                  new google.maps.Marker({
+                  marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location,
                   });
+                  markersArray.push(marker);
+                  map.setZoom(17);
                 } else {
                   alert("Geocode was not successful for the following reason: " + status);
                 }

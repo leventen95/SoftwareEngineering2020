@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e6525cb-aec2-45aa-a275-980aac61ae87" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin.js" afterDir="false" />
-    </list>
+    <list default="true" id="3e6525cb-aec2-45aa-a275-980aac61ae87" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +34,7 @@
       <updated>1601544492650</updated>
       <workItem from="1601544494584" duration="61000" />
       <workItem from="1602644068877" duration="6765000" />
-      <workItem from="1602667536783" duration="1933000" />
+      <workItem from="1602667536783" duration="2063000" />
     </task>
     <task id="LOCAL-00001" summary="Lagt til legg til og fjern parkerings hus">
       <created>1602645339525</created>
@@ -60,7 +57,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602650567413</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixed miss spleiing of prompt and minor bugs">
+      <created>1602693187643</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602693187643</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -70,13 +74,15 @@
     <MESSAGE value="Lagt til legg til og fjern parkerings hus" />
     <MESSAGE value="Lagt til les fra CSV file" />
     <MESSAGE value="Fixed errror where return list was not called" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed errror where return list was not called" />
+    <MESSAGE value="Fixed miss spleiing of prompt" />
+    <MESSAGE value="Fixed miss spleiing of prompt and minor bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed miss spleiing of prompt and minor bugs" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="0" y="404" key="CommitChangelistDialog2" timestamp="1602693170969">
+    <state x="0" y="404" key="CommitChangelistDialog2" timestamp="1602693186744">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="0" y="404" key="CommitChangelistDialog2/0.0.2560.1400/2560.-387.1080.1920@0.0.2560.1400" timestamp="1602693170969" />
+    <state x="0" y="404" key="CommitChangelistDialog2/0.0.2560.1400/2560.-387.1080.1920@0.0.2560.1400" timestamp="1602693186744" />
     <state x="2560" y="167" key="CommitChangelistDialog2/0.0.2560.1400/2560.-387.1080.1920@2560.-387.1080.1920" timestamp="1602650566929" />
     <state x="2880" y="328" key="FileChooserDialogImpl" timestamp="1602645769406">
       <screen x="2560" y="-387" width="1080" height="1920" />

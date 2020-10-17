@@ -112,12 +112,13 @@ function writeToCsv() {
 //Currrent format is [] = adress, city, longititude, lattitude
 
 function removeParkingHouse(){
-    removeTargetAdress = document.getElementById("removeInput").value;
+    removeTargetAdress = document.getElementById("removeAdress").value;
+    removeTargetcity = document.getElementById("cityInput").value;
 
     for(let i = 0; i < parkingHouseList.length; i++){
 
 
-        if(removeTargetAdress ===  parkingHouseList[i][0]){
+        if(removeTargetAdress ===  parkingHouseList[i][0] && removeTargetcity === [i][2]){
             //Removes the one that matches
             parkingHouseList.slice(i,1);
             writeToCsv();

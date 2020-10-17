@@ -12,8 +12,8 @@ function startup(){
     xmlhttp.send();
 
 
-    getNearbyButton = document.getElementById("GetNearby");
-    getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RUN getNearby(longittude, lattitude)
+    getNearbyButton = document.getElementById("GetNearbyButton");
+   // getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RUN getNearby(longittude, lattitude) CANCELLED /POSTPONED
     // WITH THE USER INFO AS PARAMETER
     getByCity = document.getElementById("searchCityButton");
     getByCity.addEventListener("click", getCityLocations);
@@ -57,6 +57,11 @@ function getCityLocations(){
     createNearbyList(nearbyList)
 }
 
+
+
+
+
+/*WE DECIDED TO WAIT WITH FIXING THIS
 //get Nearby from GPS
 function getNearby(lognitue,lattitude){
     for(let i = 0; i < parkingHouseList.length; i ++){
@@ -70,6 +75,10 @@ function getNearby(lognitue,lattitude){
     createNearbyList(nearbyList)
 
 }
+
+
+*/
+
 
 function createNearbyList(returnList){
 

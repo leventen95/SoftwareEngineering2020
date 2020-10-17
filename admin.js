@@ -1,4 +1,10 @@
+//THIS SCRIPT IS CONNECTED TO admin.html
+
+
+
+
 window.onload = startup;
+
 
 var  parkingHouseList = [];
 var xmlhttp;
@@ -6,7 +12,7 @@ var xmlhttp;
 function startup(){
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = readFile;
-    xmlhttp. open("GET", "parkingHouses.csv", true);
+    xmlhttp. open("GET", "../parkingHouses.csv", true);
     xmlhttp.send();
 
 
@@ -26,6 +32,7 @@ function startup(){
 function readFile(){
     if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
         let response = xmlhttp.responseText;
+        
         parkingHouseList = response.result.split("\n");
 
 
@@ -33,7 +40,9 @@ function readFile(){
             //Splits the parking house into a 2d array on comma
             parkingHouseList[i] = parkingHouseList[i].split(",")
         }
+        
 
+        console.log("Loadead parking HouseList complete: \n " + parkingHouseList);
 
     }
 
@@ -48,6 +57,9 @@ function addParkingHouse(){
     let newLatitude = prompt("Please enter the new parkings house's Latitude");
 
     let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude];
+    
+    
+    console.log(newParkingHouse);
 
     parkingHouseList.push(newParkingHouse);
 
@@ -113,7 +125,7 @@ function writeToCsv() {
 
 function removeParkingHouse(){
     removeTargetAdress = document.getElementById("removeAdress").value;
-    removeTargetcity = document.getElementById("cityInput").value;
+    removeTargetcity = document.getElementById("removeInCity").value;
 
     for(let i = 0; i < parkingHouseList.length; i++){
 

@@ -3,10 +3,18 @@
 
 
 
+
+
 window.onload = startup;
 
+//Currrent format is [] = adress, city, longititude, lattitude
+var  parkingHouseList = [
+    ["BRA VEIEN 6a", "Halden", 45.32, 32131],
+    ["MOSSE VEIEN 53b","Fredrikstad", 43.32, 32131],
+    ["Ant 23", "Moss", 423.231, 62.132]
+];
 
-var  parkingHouseList = [];
+
 var xmlhttp;
 
 function startup(){
@@ -123,22 +131,73 @@ function writeToCsv() {
 //Parking list i an 2darray with all parking locations
 //Currrent format is [] = adress, city, longititude, lattitude
 
-function removeParkingHouse(){
-    removeTargetAdress = document.getElementById("removeAdress").value;
-    removeTargetcity = document.getElementById("removeInCity").value;
-
+function removeParkingHouse(removeTargetAdress, removeTargetcity){
+    //removeTargetAdress = document.getElementById("removeAdress").value;
+    //removeTargetcity = document.getElementById("removeInCity").value;
+    
     for(let i = 0; i < parkingHouseList.length; i++){
 
 
-        if(removeTargetAdress ===  parkingHouseList[i][0] && removeTargetcity === [i][2]){
+        if(removeTargetAdress ===  parkingHouseList[i][0] 
+            && removeTargetcity === parkingHouseList[i][1]){
             //Removes the one that matches
             parkingHouseList.slice(i,1);
             writeToCsv();
+            return parkingHouseList;
 
         }
 
-        else {
+        else if(i = parkingHouseList.length -i){
             alert("No parking house on that adress");
         }
     }
 }
+
+
+/*
+//Currrent format is [] = adress, city, longititude, lattitude
+//var  parkingHouseList = [
+    ["BRA VEIEN 6a", "Halden", 45.32, 32131],
+    ["MOSSE VEIEN 53b","Fredrikstad", 43.32, 32131]
+    ];*/
+
+    function findAdress(targetAdress){
+   
+
+        for(let i = 0; i < parkingHouseList.length; i++){
+            check = parkingHouseList[i][0];
+            
+            if( targetAdress === check ){
+                
+               return true;
+               
+           }
+   
+           
+       }
+ function findCity(targetCity){
+   
+
+     for(let i = 0; i < parkingHouseList.length; i++){
+         check = parkingHouseList[i][1];
+         
+         if( targetCity === check ){
+             
+            return true;
+            
+        }
+
+        
+    }
+}
+
+function returnArray(){
+    return parkingHouseList;
+}
+
+
+module.exports = {
+    findCity: findCity,
+    removeParkingHouse: removeParkingHouse,
+    returnArray: returnArray
+};

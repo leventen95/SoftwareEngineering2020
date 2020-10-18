@@ -21,24 +21,37 @@
         </div>
 
         
-           <!--Innlogging-->     
+                   <!--Innlogging-->     
+        <img src="images/garasje.jpg" width="955" height="600" no-repeat>
             <form id = "login">
-    
-                E-post:<br>
-                <input type = "text" name = "e-post"><br><br>
-                Passord:<br>
-                <input type = "text" name="nummer"><br><br>
-            
-            
-                <button onclick = "alertMessage()">Login</button>
-                <script>
-                    function alertMessage() {
-                        alert("Du er logget inn");
-                    }   
-                </script>       
+                <div class="login-box">
+                    <h1>Login</h1>
+                    <!--Brukernavn-->
+                    <div class="textbox">
+                        <input type="text" placeholder="Brukernavn" name="" value="" required>
+                    </div>
+                    <!--End brukernavn-->
+        
+                    <!--Passord-->
+                    <div class="textbox">
+                        <input type="password" placeholder="Passord" name="" value="" required> 
+                    </div>
+        
+                    <button class="btn" onclick = "alertMessage()">Login</button>
+                        <script>
+                            function alertMessage() {
+                                alert("Du er logget inn");
+                            }   
+                        </script>
 
+                    <!--End passord-->
+        
+                    <span class="psw">Glemt passord?</a></span>
+
+                </div>   
+               
             </form>
-        <!--End Innlogging-->
+            <!--End Innlogging-->
 
         
          <div id = "footer">

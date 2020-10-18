@@ -57,49 +57,27 @@ function readFile() {
 }
 
 
-function addParkingHouse() {
-
+function addParkingHouse([newAdress, newCity, newLatitude, newLongtitude)
+    //newAdress, newCity, newLatitude, newLongtitude
+     {
+        /*
     let newAdress = prompt("Please enter the new parkings house's  Adress");
     let newCity = prompt("Please enter the new parkings house's  City");
     let newLongtitude = prompt("Please enter the new parkings house's Longtitude");
     let newLatitude = prompt("Please enter the new parkings house's Latitude");
+*/
+    let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude];
 
-    let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude];
+    console.log("OLD! " + parkingHouseList)
 
-
-    console.log(newParkingHouse);
-
+    
     parkingHouseList.push(newParkingHouse);
 
-    //Eksempel, forbredet metode
-    /*
-    let numberOfComma = 0;
-    let addInfo = document.getElementById("addInput").value;
+    // writeToCsv();
 
-
-
-
-        //Checks thru all of the inputs for commas
-    for(let i = 0; i < addInfo.length; i ++){
-        let currentCharacter = addInfo.charAt(i);
-
-        if(currentCharacter == ","){
-            numberOfComma ++;
-        }
-    }
-
-
-        //Sjekker at at vi har minimums antall av komma og så legger vi til
-    if(numberOfComma == 3){
-       
-
-
-
-
-        parkingHouseList.push(addInfo);
-
-    }*/
-    writeToCsv();
+    
+    console.log("NEW! :" +parkingHouseList)
+    return parkingHouseList;
 
 }
 
@@ -134,30 +112,27 @@ function writeToCsv() {
 function removeParkingHouse(removeTargetAdress, removeTargetCity) {
     //removeTargetAdress = document.getElementById("removeAdress").value;
     //removeTargetCity = document.getElementById("removeInCity").value;
-    let newParkingHouseList= [];
+   
     for (let i = 0; i < parkingHouseList.length; i++) {
 
 
         if (removeTargetAdress === parkingHouseList[i][0]
             && removeTargetCity === parkingHouseList[i][1]) {
-            //makes a new list without the one to be removed
+          
 
+           //Honesthly no idea but it works. I kinda know but confused 
+        cloneArray = parkingHouseList.slice();
 
-            for(var m = 0; m <parkingHouseList.length; m++){
-                if(!m === i){
-                    newParkingHouseList.push(parkingHouseList[i])
-                }
-                
+        parkingHouseList.splice(i, 1);
 
-            }
           
             
-            
+            //removes the extra arry created
                 
             
             //writeToCsv();
-            console.log(newParkingHouseList);
-            return newParkingHouseList;
+            
+            return parkingHouseList;
 
         }
 
@@ -167,13 +142,6 @@ function removeParkingHouse(removeTargetAdress, removeTargetCity) {
     }
 }
 
-
-/*
-//Currrent format is [] = adress, city, longititude, lattitude
-//var  parkingHouseList = [
-    ["BRA VEIEN 6a", "Halden", 45.32, 32131],
-    ["MOSSE VEIEN 53b","Fredrikstad", 43.32, 32131]
-    ];*/
 
 
 
@@ -197,12 +165,16 @@ function returnArray() {
     return parkingHouseList;
 }
 
+function newArray(newAdress, newCity, newLatitude, newLongtitude){
+    let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude];
+    return newParkingHouseCheck
+}
 
 module.exports = {
     
     removeParkingHouse: removeParkingHouse,
     returnArray: returnArray,
-    findPlace: findPlace
-    
-    
+    findPlace: findPlace,
+    addParkingHouse: addParkingHouse,
+    newArray: newArray
 };

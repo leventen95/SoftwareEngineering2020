@@ -11,7 +11,8 @@ window.onload = startup;
 var parkingHouseList = [
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31],
     ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31],
-    ["Ant 23", "Moss", 423.231, 62.132]
+    ["Ant 23", "Moss", 423.231, 62.132],
+    ["MaurStien 17", "Halden", 45.31, 321.35]
 ]
 
 
@@ -156,7 +157,9 @@ function findPlace(targetAdress, targetCity) {
                 
             return true;
                 
-         }
+        }
+        else
+        return false
             
             
     }

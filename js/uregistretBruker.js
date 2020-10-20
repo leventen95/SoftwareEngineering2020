@@ -6,8 +6,6 @@ var parkingHouseList = [
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31],
     ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31],
     ["Ant 23", "Moss", 423.231, 62.132],
-
-    //NB! DIFFERENT FROM ADMINS FIXED ARRAY
     ["MaurStien 17", "Halden", 45.31, 321.35]
 ]
 

@@ -18,23 +18,55 @@
         </div>
 
 
-        <form id = "registrer">
-    
-                Navn:<br>
-                <input type = "text" name = "navn" id="name"><br><br>
-                E-post:<br>
-                <input type = "text" name = "e-post"><br><br>
-                Telefonnummer:<br>
-                <input type = "text" name="nummer" id="nummer"><br><br>
-            
-                
-                <button onclick = "alertMessage()">Registrer</button>
-                <script>
-                    function alertMessage() {
-                        alert("Du er registrert!");
-                    }   
-                </script>
+     <!--Innlogging-->     
+        <img src="images/tomparkeringsplass.jpg" width="955" height="600" no-repeat>
+            <form id = "registrer">
+                <div class="login-box">
+                    <h1>Registrer</h1>
+                    <!--Brukernavn-->
+                    <div class="textbox">
+                        <input type="text" placeholder="Brukernavn" name="" value="" required>
+                    </div>
+                    <!--End brukernavn-->
+
+                    <!--E-post-->
+                    <div class="textbox">
+                        <input type="text" placeholder="E-post" name="" value="" required>
+                    </div>
+                    <!--End e-post-->
+
+                    <!--Telefonnummer-->
+                    <div class="textbox">
+                        <input type="text" placeholder="Telefonnummer" name="" value="" required>
+                    </div>
+                    <!--End telefonnummer-->
+        
+                    <!--Passord-->
+                    <div class="textbox">
+                        <input type="password" placeholder="Passord" name="" value="" required> 
+                    </div>
+
+                    <!--Bekreft passord-->
+                    <div class="textbox">
+                        <input type="password" placeholder="Bekreft passord" name="psw-repeat" required>
+                    </div>
+                    <!--End bekreft passord-->
+
+                    <p class="togp">By creating an account you agree to our <a href="#" style="color:white">Terms & Privacy</a>.</p>
+        
+                    <button class="btn" onclick = "alertMessage()">Registrer</button>
+                        <script>
+                            function alertMessage() {
+                                alert("Godkjent registrering");
+                            }   
+                        </script>
+
+                    <!--End passord-->
+
+                </div>   
+               
             </form>
+            <!--End Innlogging-->     
         
       
 

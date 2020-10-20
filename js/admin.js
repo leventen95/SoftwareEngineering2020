@@ -122,62 +122,62 @@ function removeParkingHouse(removeTargetAdress, removeTargetCity) {
                 
                 
                 //Honesthly no idea but it works. I kinda know but confused 
-                let cloneArray = parkingHouseList.slice();
+            let cloneArray = parkingHouseList.slice();
                 
-                parkingHouseList.splice(i, 1);
+             parkingHouseList.splice(i, 1);
                 
                 
                 
-                //removes the extra arry created
+             //removes the extra arry created
                 
                 
                 //writeToCsv();
-                
-                return parkingHouseList;
-                
-            }
             
-            /*else if (i = parkingHouseList.length - i) {
-                alert("No parking house on that adress");
-            }*/
-        }
-    }
-    
-    
-    
-    
-    function findPlace(targetAdress, targetCity) {
-        
-        for (let i = 0; i < parkingHouseList.length; i++) {
-            
-            
-            if (targetAdress === parkingHouseList[i][0]
-                && targetCity === parkingHouseList[i][1]) {
-                    
-                    return true;
-                    
-                }
-                
-                
-            }
-        }
-        
-        
-        function newArray(newAdress, newCity, newLatitude, newLongtitude){
-            let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude];
-            return newParkingHouseCheck
-        }
-        
-        function  returnArray(){
             return parkingHouseList;
+                
         }
-
-
-        module.exports = {
             
-            removeParkingHouse: removeParkingHouse,
-            returnArray: returnArray,
-            findPlace: findPlace,
-            addParkingHouse: addParkingHouse,
-            newArray: newArray
-        };
+        /*else if (i = parkingHouseList.length - i) {
+            alert("No parking house on that adress");
+        }*/
+    }
+}
+    
+    
+    
+    
+function findPlace(targetAdress, targetCity) {
+    
+    for (let i = 0; i < parkingHouseList.length; i++) {
+        
+        
+        if (targetAdress === parkingHouseList[i][0]
+            && targetCity === parkingHouseList[i][1]) {
+                
+            return true;
+                
+         }
+            
+            
+    }
+}
+        
+        
+function newArray(newAdress, newCity, newLatitude, newLongtitude){
+    let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude];
+    return newParkingHouseCheck
+}
+        
+function  returnArray(){
+    return parkingHouseList;
+}
+
+
+module.exports = {
+        
+    removeParkingHouse: removeParkingHouse,
+    returnArray: returnArray,
+    findPlace: findPlace,
+    addParkingHouse: addParkingHouse,
+    newArray: newArray
+};

@@ -2,7 +2,14 @@ window.onload = startup;
 
 var nearbyList = [];
 var dropDownList;
-var parkingHouseList= [];
+var parkingHouseList = [
+    ["BRA VEIEN 6a", "Halden", 45.32, 321.31],
+    ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31],
+    ["Ant 23", "Moss", 423.231, 62.132],
+
+    //NB! DIFFERENT FROM ADMINS FIXED ARRAY
+    ["MaurStien 17", "Halden", 45.31, 321.35]
+]
 
 function startup(){
 
@@ -19,6 +26,10 @@ function startup(){
     getByCity.addEventListener("click", getCityLocations);
 }
 
+
+
+//TO BE REMOVED AND REPLAYED WITH PHP SCRIPT!
+/*
 function readFile() {
     if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
         let response = xmlhttp.responseText;
@@ -34,7 +45,7 @@ function readFile() {
     }
 
 }
-
+*/
 
 //Parking list i an 2darray with all parking locations
 //Currrent format is [] = adress, city, longititude, lattitude
@@ -43,9 +54,9 @@ function readFile() {
 
 //Searches for all parking houses in the city by name
 
-function getCityLocations(){
-    let city = document.getElementById("searchCityInput").value;
-
+function getCityLocations(city){
+   // let city = document.getElementById("searchCityInput").value;
+    
     for(let i = 0; i < parkingHouseList.length; i ++){
         let current  =parkingHouseList[i];
         //checks longitute and lattutde
@@ -54,7 +65,8 @@ function getCityLocations(){
         }
     }
     
-    createNearbyList(nearbyList)
+    return nearbyList;
+    //createNearbyList(nearbyList)
 }
 
 
@@ -80,6 +92,8 @@ function getNearby(lognitue,lattitude){
 */
 
 
+
+//NOT SURE IF I CAN TEST THIS
 function createNearbyList(returnList){
 
 
@@ -110,6 +124,10 @@ function createNearbyList(returnList){
     
 
 }
+
+module.exports = {
+    getCityLocations : getCityLocations
+};
 
 
 

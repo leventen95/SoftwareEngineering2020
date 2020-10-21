@@ -51,14 +51,7 @@ var parkingHouseReservationInfo = [
 
 
 function startup() {
-    /*xmlhttp = new XMLHttpRequest();
-     xmlhttp.onreadystatechange = readFile;
-     xmlhttp. open("GET", "parkingHouses.csv", true);
-     xmlhttp.send();
- 
-     getNearbyButton = document.getElementById("GetNearbyButton");
-    // getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RUN getNearby(longittude, lattitude) CANCELLED /POSTPONED*/
-    // WITH THE USER INFO AS PARAMETER
+    
 
 
     getByCity = document.getElementById("searchCityButton");
@@ -66,29 +59,10 @@ function startup() {
 
 
     selectButton = document.getElementById("selectButton");
-    //selectButton = document.addEventListener("click", getParkingHouseInfo);
+   
 }
 
 
-
-//TO BE REMOVED AND REPLAYED WITH PHP SCRIPT!
-/*
-function readFile() {
-    if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
-        let response = xmlhttp.responseText;
-        parkingHouseList = response.result.split("\n");
-
-
-        for(let i = 0; i <parkingHouseList.length; i++){
-            //Splits the parking house into a 2d array on comma
-            parkingHouseList[i] = parkingHouseList[i].split(",")
-        }
-
-
-    }
-
-}
-*/
 
 //Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
 // number of spots,  unike ID of parking house 
@@ -188,58 +162,61 @@ function createParkingHouseInfo() {
 
     //Loops thru all ids and retures them if they match
     if (selectedHouseId == "all") {
-        
+
         console.log("SELECTED NEARBY" + nearByParkingList)
-        
+
         if (nearByParkingList.length > 0) {
-            
-            
+
+
             for (let i = 0; i < nearByParkingList.length; i++) {
-                
+
                 for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
-                    
-                    
+
+
                     if (
                         nearByParkingList[i][6]
                         == parkingHouseReservationInfo[m][0])
-                        
+
                         showInfoList.push(parkingHouseReservationInfo[m])
-                    }
                 }
             }
         }
-        
-        
-        //loops tuor just one id 
-        else {
-            for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
-                if (
-                    selectedHouseId == parkingHouseReservationInfo[m][0])
-                    
-                    showInfoList.push(parkingHouseReservationInfo[m])
-                }
-            }
-            
-            console.log("LENGHT IS \n" + showInfoList.length);
-            
-            for (let i = 0; i < showInfoList.length; i++) {
-                console.log(showInfoList[i] + "\n")
-            }
-            
-            //Hides user info for unecasry eyes
-            for (let i = 0; i < showInfoList.length; i++) {
-                showInfoList[i].pop()
-                showInfoList[i].pop()
-            }
-            
-            
-            //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
-            showInfoList = showInfoList.sort(function (a, b) {
-                return a[1] - b[1];
-            });
-            
-            alert("VALUE WAS" + selectedHouseId)
-            //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
+    }
+
+
+    //loops tuor just one id 
+    else {
+        for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
+            if (
+                selectedHouseId == parkingHouseReservationInfo[m][0])
+
+                showInfoList.push(parkingHouseReservationInfo[m])
+        }
+    }
+
+    console.log("LENGHT IS \n" + showInfoList.length);
+
+    for (let i = 0; i < showInfoList.length; i++) {
+        console.log(showInfoList[i] + "\n")
+    }
+
+    //Hides user info for unecasry eyes
+    for (let i = 0; i < showInfoList.length; i++) {
+        showInfoList[i].pop()
+        showInfoList[i].pop()
+    }
+
+
+    //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
+    showInfoList = showInfoList.sort(function (a, b) {
+        return a[1] - b[1];
+    });
+
+    alert("VALUE WAS" + selectedHouseId)
+    //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
+
+
+
     showInfoList = showInfoList.sort(function (a, b) {
         return a[0] - b[0];
     });

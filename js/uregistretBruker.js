@@ -1,15 +1,29 @@
 window.onload = startup;
 
-var nearbyList = [];
+var nearByParkingList = [];
 
+//Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName, number of spots,  unike ID of parking house 
 var parkingHouseList = [
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
     ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
     ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
     ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
 ]
-//Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
-// number of spots,  unike ID of parking house 
+
+
+
+var parkingHouseReservationInfo = [
+    [1,1,"EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time", 42016969, "Slowpoke_Rodriguez"],
+    [1,2,"EasyPark", "", "", 000000000, "NaN"],
+    [1,3,"EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time", 42016969, "Slowpoke_Rodriguez"],
+    [1,4,"EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time", 42016969, "Slowpoke_Rodriguez"],
+    [1,5,"EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time", 42016969, "Slowpoke_Rodriguez"],
+    [1,6,"EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time", 42016969, "Slowpoke_Rodriguez"],
+]
+//Current format on ParkingHosueReservationList [[]] = 
+//parkinghosueId, parkingspotID, ownerCompanyUserName, date and time of begging of  reservation,, date time of ending of reservation bruker telefon nummer, brukersbrukernavn
+
+
 
 function startup() {
     /*xmlhttp = new XMLHttpRequest();
@@ -20,14 +34,14 @@ function startup() {
      getNearbyButton = document.getElementById("GetNearbyButton");
     // getNearbyButton.addEventListener("click", getLocation); //THE LOCATION SHOULD RUN getNearby(longittude, lattitude) CANCELLED /POSTPONED*/
     // WITH THE USER INFO AS PARAMETER
-    
-    
+
+
     getByCity = document.getElementById("searchCityButton");
     getByCity.addEventListener("click", getCityLocations);
-    
-    
+
+
     selectButton = document.getElementById("selectButton");
-   // selectButton = document.addEventListener("click", getParkingHouseInfo);
+    //selectButton = document.addEventListener("click", getParkingHouseInfo);
 }
 
 
@@ -66,15 +80,16 @@ function getCityLocations() {
         //checks if the city has the same name
 
         if (city.toLowerCase() === current[1].toLowerCase()) {
-            nearbyList.push(current);
+            nearByParkingList.push(current);
         }
     }
-    console.log("NEARBY: \n" + nearbyList);
+    console.log("NEARBY: \n" + nearByParkingList);
 
 
-    //return nearbyList;
-    createNearbyList(nearbyList)
+    //return nearByParkingList;
+    createNearbyList(nearByParkingList)
 }
+
 
 
 /*WE DECIDED TO WAIT WITH FIXING THIS
@@ -85,10 +100,10 @@ function getNearby(lognitue,lattitude){
         //checks longitute and lattutde
         if(current[3] < lognitue +0.00005 && current[3] > lognitue -0.0005 &&
             current[4]< lattitude +0.0005 && current[4] >  lattitude-0.0006){
-                nearbyList.push(current);
+                nearByParkingList.push(current);
             }
     }
-    createNearbyList(nearbyList)
+    createNearbyList(nearByParkingList)
 
 }
 */
@@ -126,25 +141,65 @@ function createNearbyList(returnList) {
     for (let i = 0; i < returnList.length; i++) {
         adress = returnList[i][0]
         city = returnList[i][1];
-        parkingHouseId = returnList[i][6]
+        parkingId = returnList[i][6]
 
 
         dropDownList = dropDownList + '<option value="'
-            + parkingHouseId +'">' + adress + " " + city +
+            + parkingId + '">' + adress + " " + city +
             '</option>';
     }
 
 
 
     HTMLDropDown.innerHTML = "<select name ='NearbySelector' id='parkingHouseListNearby'>"
-        + dropDownList + "</select>" + " " + '<button type="button" id ="selectButton" onclick="getParkingHouseInfo()">Select</button>';
+        //onclick="getParkingHouseInfo()
+        + dropDownList + "</select>" + " " + '<button type="button" id ="selectButton" onclick="createParkingHouseInfo()" ">Select</button>';
 }
 
 
-function getParkingHouseInfo(){
-    let parkingHouseId = document.getElementById("parkingHouseListNearby");
 
-    alert(parkingHouseId.value)
+//CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
+function createParkingHouseInfo() {
+    let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
+    let showInfoList = [[]];
+    let nearByParkingSelected;
+
+    
+    //Loops thru all ids and retures them if they match
+    if (selectedHouseId == "all"){
+
+        console.log("RETURN LIST TEST" + nearByParkingList)
+
+        nearByParkingSelected = nearByParkingList;
+
+        if (!nearByParkingList == null) {
+
+            for (let i = 0; i < nearByParkingSelected.length; i++) {
+
+                for (let m = 0; m < parkingHouseReservationInfo.length; i++){
+
+                    if (nearByParkingSelected[i][6] == parkingHouseReservationInfo[m][0])
+                        alert("INNER IF ")
+                        showInfoList.push(parkingHouseReservationInfo[m])
+                }
+            }
+        }
+    }
+    
+
+    
+    else{
+        
+    }
+
+console.log("PRE REMOVE INFOLIST \n" + showInfoList)
+
+    //Hides user info for unecasry eyes
+    for(let i = 0; i<showInfoList.length; i ++){
+        showInfoList.pop()
+        showInfoList.pop()
+    }
+    console.log("INFO FOUND\n " +showInfoList)
 }
 
 module.exports = {
@@ -152,5 +207,6 @@ module.exports = {
 
 }
 
-
+//Currrent format on parkingHouseList [[]] = adress, city, longititude, lattitude, ownerCompanyUserName
+// number of spots,  unike ID of parking house 
 

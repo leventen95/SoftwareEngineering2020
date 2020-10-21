@@ -233,10 +233,24 @@ function createParkingHouseInfo() {
         showInfoList[i].pop()
     }
 
+
+    //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
+    showInfoList = showInfoList.sort(function(a,b) {
+        return a[1] - b[1];
+    });
+
+    //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
+    showInfoList = showInfoList.sort(function(a,b) {
+        return a[0] - b[0];
+    });
+
     console.log("REMOVED INFO\n ")
     for(let i = 0; i <showInfoList.length; i ++){
         console.log(showInfoList[i] +"\n")
     }
+
+
+    return showInfoLis;
 
 }
 

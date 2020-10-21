@@ -15,44 +15,46 @@ test("Check if they  cant find target location", ()=> {
 
 
 
-// NB! YOU CAN ONLY RUN THE TEST THAT CHANGES THE ARRAY SEPERATLY! 
-/*
-test("checks if Newparkinghouselist is without the found one", () => {
-    expect(admin.removeParkingHouse("BRA VEIEN 6a", "Halden")).toEqual([
-        ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31],
-        ["Ant 23", "Moss", 423.231, 62.132]
-        ["MaurStien 17", "Halden", 45.31, 321.35]
-    ]); 
-})
-*/
 
 test("Checks if new array imput is valid, does not change array context", ()=>{
     expect(admin.newArray(
-        "Jessheim24", "Voss", 232.32, 512.32
-        )).toEqual(["Jessheim24", "Voss", 232.32, 512.32]);
+        "Jessheim24", "Voss", 232.32, 512.32, "EasyPark", 12, 5
+        )).toEqual(["Jessheim24", "Voss", 232.32, 512.32, "EasyPark", 12, 5]);
     })
     
-    /*
+    
     test("Check if i wrote return array test correctly :O", () => {
         expect(admin.returnArray()).toEqual([
-            ["BRA VEIEN 6a", "Halden", 45.32, 321.31],
-            ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31],
-            ["Ant 23", "Moss", 423.231, 62.132],
-            ["MaurStien 17", "Halden", 45.31, 321.35]
-     ]);
-    });*/
-    
-    
-    test("Check if i newhouse works", () => {
-        expect(admin.addParkingHouse("Jessheim 24", "Voss", 232.32, 512.32)).toEqual([
-            ["BRA VEIEN 6a", "Halden", 45.32, 321.31],
-            ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31],
-            ["Ant 23", "Moss", 423.231, 62.132],
-            ["MaurStien 17", "Halden", 45.31, 321.35],
-            ["Jessheim 24", "Voss", 232.32, 512.32]
+            ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6,1],
+            ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark",17, 2],
+            ["Ant 23", "Moss", 423.231, 62.132,"BadSpot", 5,3],
+            ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16,4]
         ]);
-        
     });
+    
+    // NB! YOU CAN ONLY RUN THE TEST THAT CHANGES THE ARRAY SEPERATLY FROM OTHERS THAT CHANGES ARRAY! 
+    /*
+    test("Check if adding a newhouse works", () => {
+        expect(admin.addParkingHouse("Jessheim 24", "Voss", 232.32, 512.32, "EasyPark", 12, 5)).toEqual([
+            ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6,1],
+            ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark",17, 2],
+            ["Ant 23", "Moss", 423.231, 62.132,"BadSpot", 5,3],
+            ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16,4],
+            ["Jessheim 24", "Voss", 232.32, 512.32, "EasyPark", 12, 5]
+        ]);
+    });
+       */
+
+       
+        
+        test("checks if Newparkinghouselist had removed the desired house without the found one", () => {
+            expect(admin.removeParkingHouse("BRA VEIEN 6a", "Halden")).toEqual([
+                ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark",17, 2],
+                ["Ant 23", "Moss", 423.231, 62.132,"BadSpot", 5,3],
+                ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16,4]
+            ]); 
+        })
+        
     
     
     

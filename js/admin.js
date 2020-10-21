@@ -7,13 +7,14 @@
 
 window.onload = startup;
 
-//Currrent format is [] = adress, city, longititude, lattitude
 var parkingHouseList = [
-    ["BRA VEIEN 6a", "Halden", 45.32, 321.31],
-    ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31],
-    ["Ant 23", "Moss", 423.231, 62.132],
-    ["MaurStien 17", "Halden", 45.31, 321.35]
+    ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6,1],
+    ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark",17, 2],
+    ["Ant 23", "Moss", 423.231, 62.132,"BadSpot", 5,3],
+    ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16,4]
 ]
+//Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
+// number of spots,  unike ID of parking house 
 
 
 var xmlhttp;
@@ -57,8 +58,9 @@ function readFile() {
     
 }
 
-
-function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude)
+//Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
+// number of spots,  unike ID of parking house 
+function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId)
 //newAdress, newCity, newLatitude, newLongtitude
 {
     /*
@@ -67,8 +69,7 @@ function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude)
     let newLongtitude = prompt("Please enter the new parkings house's Longtitude");
     let newLatitude = prompt("Please enter the new parkings house's Latitude");
     */
-   let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude];
-   
+   let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude,companyNayUserName, numberOfSpots, houseId];   
    console.log("OLD! " + parkingHouseList)
    
    
@@ -108,8 +109,11 @@ function writeToCsv() {
     }
 }
 
-//Parking list i an 2darray with all parking locations
-//Currrent format is [] = adress, city, longititude, lattitude
+
+//Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
+// number of spots,  unike ID of parking house 
+
+
 
 function removeParkingHouse(removeTargetAdress, removeTargetCity) {
     //removeTargetAdress = document.getElementById("removeAdress").value;
@@ -166,9 +170,9 @@ function findPlace(targetAdress, targetCity) {
 }
         
         
-function newArray(newAdress, newCity, newLatitude, newLongtitude){
-    let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude];
-    return newParkingHouseCheck
+function newArray(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId){
+    let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude,companyNayUserName, numberOfSpots, houseId];
+    return newParkingHouseCheck;
 }
         
 function  returnArray(){

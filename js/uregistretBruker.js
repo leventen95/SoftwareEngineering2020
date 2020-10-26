@@ -71,7 +71,7 @@ function startup() {
 
 function getCityLocations() {
     let city = document.getElementById("searchCityInput").value;
-
+    let checkIfFound = false;
 
 
     for (let i = 0; i < parkingHouseList.length; i++) {
@@ -80,11 +80,15 @@ function getCityLocations() {
 
         if (city.toLowerCase() === current[1].toLowerCase()) {
             nearByParkingList.push(current);
+            checkIfFound = true;
         }
     }
     console.log("NEARBY: \n" + nearByParkingList);
 
-
+    if(!checkIfFound){
+        alert("No parking found nearby!")
+        return; 
+    }
     //return nearByParkingList;
     createNearbyList(nearByParkingList)
 }
@@ -117,14 +121,6 @@ function createNearbyList(returnList) {
 
     let dropDownList = '<option value="all">All</option>';
 
-
-
-    if (returnList == null) {
-
-        alert("No nearby parking places found");
-        //Stopts the fucntion
-        return;
-    }
 
     let city;
     let adress;
@@ -226,8 +222,27 @@ function createParkingHouseInfo() {
         console.log(showInfoList[i] + "\n")
     }
 
+    createTable(showInfoList);
+    return showInfoList;
+    
+}   
 
-    return showInfoLis;
+
+function createTable(parkingInfoList){
+    let table ="";
+
+    for(let i = 0; i <parkingInfoList.length; i++){
+        currentLine= parkingInfoList[i];
+        let addRow = currentLine.join("</td><td>");
+
+        table += "<tr><td>" + addRow  + "</td></tr>";
+    }
+
+    let tableHeader = "<tr><th>ParkignHouseId</th><th>ParkingSpotId</th><th>Owner Company</th><th>Occupied from</th><th>Occupied to</th></tr>"
+
+    HTMLtable= document.getElementById("tableList");
+    HTMLtable.innerHTML= "<table border='1'>"+tableHeader +table +"</table>";
+
 
 }
 

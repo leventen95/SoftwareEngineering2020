@@ -109,7 +109,7 @@ function createNearbyList(returnList) {
     let city;
     let adress;
     let parkingId;
-    
+
     //Creates a drop down list to select from
     //Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
     // number of spots,  unike ID of parking house */
@@ -123,7 +123,6 @@ function createNearbyList(returnList) {
             + parkingId + '">' + adress + " " + city +
             '</option>';
     }
-
 
 
     HTMLDropDown.innerHTML = "<select name ='NearbySelector' id='parkingHouseListNearby'>"

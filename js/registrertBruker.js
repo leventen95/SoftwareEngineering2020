@@ -231,7 +231,7 @@ function addToInfoList() {
     targetedHouseID = parseInt(writeTargetId())
     //NEED TO ADD TARGET HOUSE ID
 
-
+    let currentSpotID
     //checks if the target ID matches that house 
     checker:
     for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
@@ -254,15 +254,7 @@ function addToInfoList() {
 
                 
                 let checkCurrentStartDate = checkCurrent[4]
-                let checkCurrentEndDate = checkCurrent[5]
-
-                console.log("New start date: " + startInfo + " " + typeof(startInfo))
-                console.log("Old start date: " + checkCurrentStartDate + " " + typeof (checkCurrentStartDate));
-
-
-                console.log("New end date: " + endInfo + " " + typeof (endInfo))
-                console.log("Old end date = " + checkCurrentEndDate + " " + typeof (checkCurrentEndDate))
-           
+                let checkCurrentEndDate = checkCurrent[5]          
                 
 
                 //Checks if the new info does not collide with anything 
@@ -284,9 +276,12 @@ function addToInfoList() {
                     canBeAdded = false
                   
                 }
-                alert("Current Status" + canBeAdded)
+
+
+
+                alert("Current Status " + canBeAdded)
                 //When it has been detected that all the info on that parking spot has been looped thru it will check if can be added is true, 
-                if (currentSpotID != parkingHouseReservationInfo[i][2]) {
+                if (currentSpotID != parkingHouseReservationInfo[b][2]) {
                     alert("Breaker check! " + canBeAdded)
                     //If it is true it will break the entire search alogythem and add the new info to a list later
                     if (canBeAdded == true) {
@@ -304,8 +299,14 @@ function addToInfoList() {
     console.log(parkingHouseReservationInfo)
     if (canBeAdded == true) {
         alert("ADDING")
-        let addToParkingHouseReseveation = [targetedHouseID, getAdress(targetedHouseID), currentSpotID, getCompanyName(targetedHouseID), startInfo, endInfo, user[0], user[1]]
+        let newParkingAdress= getAdress(targetedHouseID);
+        let newParkingCompanyName = getCompanyName(targetedHouseID);
+
+        let addToParkingHouseReseveation = [targetedHouseID, newParkingAdress , currentSpotID ,newParkingCompanyName, startInfo, endInfo, user[0], user[1]]
         parkingHouseReservationInfo.push(addToParkingHouseReseveation);
+        console.log(addToParkingHouseReseveation)
+        alert("New parking regristered. Starting at :" 
+        + startInfo + "\n Endig at: " + endInfo +  "\n At " + addToParkingHouseReseveation[1])
     }
 
     //Current format on ParkingHosueReservationList [[]] = 
@@ -458,16 +459,17 @@ function endOfParking(startYear, startMonth, startDay, startHours, startMinutes)
     return parkingEnding;
 }
 function getAdress(id) {
-    for (let i = 0; i < parkingHouseReservationInfo; i++) {
-        if (parkingHouseReservationInfo[i] === id) {
-            return parkingHouseReservationInfo[1]
+    for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
+        if (parkingHouseReservationInfo[i][0] === id) {
+            return parkingHouseReservationInfo[i][1]
         }
     }
 }
+
 function getCompanyName(id) {
-    for (let i = 0; i < parkingHouseReservationInfo; i++) {
-        if (parkingHouseReservationInfo[i] === id) {
-            return parkingHouseReservationInfo[3]
+    for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
+        if (parkingHouseReservationInfo[i][0] === id) {
+            return parkingHouseReservationInfo[i][3]
         }
     }
 }
@@ -491,4 +493,10 @@ function writeTargetId() {
     }
 
     return targetId;
+}
+
+module.exports = {
+   getAdress : getAdress,
+   getCompanyName : getCompanyName
+
 }

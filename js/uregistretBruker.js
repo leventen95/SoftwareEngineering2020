@@ -1,6 +1,7 @@
 window.onload = startup;
 
 var nearByParkingList = [];
+var showInfoList = [];
 
 
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
@@ -16,27 +17,27 @@ var parkingHouseList = [
 //parkinghosueId[0], adress[1], parkingspotID[2], ownerCompanyUserName[3], date and time of begging of  reservation[4], date time of ending of reservation[5], user phone number[6], brukersbrukernavn[7]
 
 var parkingHouseReservationInfo = [
-    [1, "BRA VEIEN 6a Halden", 1, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [1, "BRA VEIEN 6a Halden", 1, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 2, "EasyPark", "", "", 12345678, "NaN"],
-    [1, "BRA VEIEN 6a Halden", 3, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
-    [1, "BRA VEIEN 6a Halden", 4, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
-    [1, "BRA VEIEN 6a Halden", 5, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
-    [1, "BRA VEIEN 6a Halden", 6, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [1, "BRA VEIEN 6a Halden", 3, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [1, "BRA VEIEN 6a Halden", 4, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [1, "BRA VEIEN 6a Halden", 5, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [1, "BRA VEIEN 6a Halden", 6, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
 
-    [2, "MOSSE VEIEN 53b Fredrikstad", 1, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Speedy_Gonzales"],
+    [2, "MOSSE VEIEN 53b Fredrikstad", 1, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer )", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Speedy_Gonzales"],
     [2, "MOSSE VEIEN 53b Fredrikstad", 2, "NotSoEasyPark", "", "", 12345678, "NaN"],
-    [2, "MOSSE VEIEN 53b Fredrikstad", 3, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 68516969, "Robbie_Rotten"],
-    [2, "MOSSE VEIEN 53b Fredrikstad", 4, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 23401669, "Hipster_Jesus"],
-    [2, "MOSSE VEIEN 53b Fredrikstad", 5, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
-    [2, "MOSSE VEIEN 53b Fredrikstad", 6, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [2, "MOSSE VEIEN 53b Fredrikstad", 3, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 68516969, "Robbie_Rotten"],
+    [2, "MOSSE VEIEN 53b Fredrikstad", 4, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 23401669, "Hipster_Jesus"],
+    [2, "MOSSE VEIEN 53b Fredrikstad", 5, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [2, "MOSSE VEIEN 53b Fredrikstad", 6, "NotSoEasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
 
 
-    [3, "Ant 23 Moss", 1, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Speedy_Gonzales"],
+    [3, "Ant 23 Moss", 1, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Speedy_Gonzales"],
     [3, "Ant 23 Moss", 2, "BadSpot", "", "", 12345678, "NaN"],
-    [3, "Ant 23 Moss", 3, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 68516969, "Robbie_Rotten"],
-    [3, "Ant 23 Moss", 4, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 23401669, "Hipster_Jesus"],
-    [3, "Ant 23 Moss", 5, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
-    [3, "Ant 23 Moss", 6, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [3, "Ant 23 Moss", 3, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 68516969, "Robbie_Rotten"],
+    [3, "Ant 23 Moss", 4, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 23401669, "Hipster_Jesus"],
+    [3, "Ant 23 Moss", 5, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [3, "Ant 23 Moss", 6, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
 
 
     [4, "MaurStien 17 Halden", 1, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Speedy_Gonzales"],
@@ -60,34 +61,49 @@ function startup() {
 
 //Searches for all parking houses in the city by name
 
-function getCityLocations() {
-    let city = document.getElementById("searchCityInput").value;
+function getCityLocations(city) {
+
+    // let city = document.getElementById("searchCityInput").value;
     let checkIfFound = false;
 
-
-    for (let i = 0; i < parkingHouseList.length; i++) {
-        let current = parkingHouseList[i];
+    if (findCityInList(city)) {
 
 
-        //checks if the city has the same name
+        checkIfFound = true;
+    }
 
-        if (city.toLowerCase() === current[1].toLowerCase()) {
+    if (checkIfFound) {
+
+        //createNearbyList(nearByParkingList)
+        //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER
+        return nearByParkingList;
+    }
+
+    else {
+        alert("No parking found nearby!");
+        return;
+    }
+}
+
+function findCityInList(findCity) {
+    let checkIfFound = false;
+    for (const houseInList of parkingHouseList) {
+        let current = houseInList;
+        if (findCity.toLowerCase() === current[1].toLowerCase()) {
+
             nearByParkingList.push(current);
             checkIfFound = true;
         }
     }
-    console.log("NEARBY: \n" + nearByParkingList);
 
-    if (!checkIfFound) {
-        alert("No parking found nearby!")
-        return;
-    }
-    //return nearByParkingList;
-    createNearbyList(nearByParkingList)
+    return checkIfFound;
 }
 
 
+function clearNearByParkingList() {
+    nearByParkingList = []
 
+}
 
 //NOT SURE IF I CAN TEST THIS
 function createNearbyList(returnList) {
@@ -124,30 +140,47 @@ function createNearbyList(returnList) {
 }
 
 
+function checkIfIdExsist(id) {
+    let lock = false;
 
+    for (const index of parkingHouseReservationInfo) {
+        indexHouseId = index[0]
+        if (indexHouseId === id) { 
+            showInfoList.push(index)
+            lock = true;
+        }
+        
+        
+    }
+    
+    return lock;
+    
+    
+}
+
+
+function clearShowList(){
+    showInfoList = []
+}
 //CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
-function createParkingHouseInfo() {
-    let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
-    let showInfoList = [[]];
-
-
-
+function createParkingHouseInfo(selectedHouseId) {
+    //let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
+    
     //Loops thru all ids and retures them if they match
+    let status = false
     if (selectedHouseId == "all") {
 
-        console.log("SELECTED NEARBY" + nearByParkingList)
+
+        //Nearby parking list sends all houses in targeted city into an array
 
         if (nearByParkingList.length > 0) {
-
-
             for (let i = 0; i < nearByParkingList.length; i++) {
 
                 for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
 
 
-                    if (
-                        nearByParkingList[i][6]
-                        == parkingHouseReservationInfo[m][0])
+                    //hus sin id 00 iden i parkerings reservasjons liste 
+                    if (nearByParkingList[i][6] == parkingHouseReservationInfo[m][0])
 
                         showInfoList.push(parkingHouseReservationInfo[m])
                 }
@@ -155,56 +188,48 @@ function createParkingHouseInfo() {
         }
     }
 
-
     //loops tuor just one id 
     else {
-        for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
-            if (
-                selectedHouseId == parkingHouseReservationInfo[m][0])
 
-                showInfoList.push(parkingHouseReservationInfo[m])
+         status = checkIfIdExsist(selectedHouseId)
+
+    }
+
+
+    /*
+        //Hides user info for unecasry eyes
+        for (let i = 0; i < showInfoList.length; i++) {
+            showInfoList[i].pop()
+            showInfoList[i].pop()
         }
+    */
+
+
+    //createTable(showInfoList);
+    if (showInfoList[0] == null || status ==false) { return false }
+    else {
+        
+        return showInfoList;
     }
-
-    console.log("LENGHT IS \n" + showInfoList.length);
-
-    for (let i = 0; i < showInfoList.length; i++) {
-        console.log(showInfoList[i] + "\n")
-    }
-
-    //Hides user info for unecasry eyes
-    for (let i = 0; i < showInfoList.length; i++) {
-        showInfoList[i].pop()
-        showInfoList[i].pop()
-    }
-
-
-
-    //sort by occupied time
-    showInfoList = showInfoList.sort(function (a, b) {
-        return a[4] - b[4];
-    });
-    //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
-    showInfoList = showInfoList.sort(function (a, b) {
-        return a[2] - b[2];
-    });
-
-    alert("VALUE WAS" + selectedHouseId)
-    //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
-
-
-
-    showInfoList = showInfoList.sort(function (a, b) {
-        return a[0] - b[0];
-    });
-
-    console.log("REMOVED INFO\n ")
-    for (let i = 0; i < showInfoList.length; i++) {
-        console.log(showInfoList[i] + "\n")
-    }
-
-    createTable(showInfoList);
-    return showInfoList;
+    /* MOVE BACK LATER!!
+        //sort by occupied time
+        showInfoList = showInfoList.sort(function (a, b) {
+            return a[4] - b[4];
+        });
+        //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
+        showInfoList = showInfoList.sort(function (a, b) {
+            return a[2] - b[2];
+        });
+    
+        
+        //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
+    
+    
+        showInfoList = showInfoList.sort(function (a, b) {
+            return a[0] - b[0];
+        });
+    
+        */
 
 }
 
@@ -228,8 +253,13 @@ function createTable(parkingInfoList) {
 }
 
 module.exports = {
-    getCityLocations: getCityLocations
-
+    getCityLocations: getCityLocations,
+    clearNearByParkingList: clearNearByParkingList,
+    findCityInList: findCityInList,
+    createParkingHouseInfo: createParkingHouseInfo,
+    checkIfIdExsist : checkIfIdExsist,
+    clearShowList : clearShowList
+   
 }
 
 //Currrent format on parkingHouseList [[]] = adress, city, longititude, lattitude, ownerCompanyUserName

@@ -93,7 +93,8 @@ test("Check if Fredikstad is valid City", () => {
 test("Check if Tokyo is invalid City", () => {
     expect(admin.checkValidCity("Tokyo")).toBeFalsy();
 })
-test("checks if Newparkinghouselist had removed the desired house without the found one", () => {
+
+test("check if target parking house is removed from list", () => {
     expect(admin.removeParkingHouse("BRA VEIEN 6a", "Halden")).toEqual([
         ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
         ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],

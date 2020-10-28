@@ -1,4 +1,7 @@
 window.onload = startup;
+
+//Currrent format on Parking House List[] =
+// adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseList = [
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
     ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
@@ -50,8 +53,6 @@ function startup() {
 
 
     selectButton = document.getElementById("selectButton");
-
-
 }
 
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
@@ -67,42 +68,38 @@ function getCityLocations() {
     for (let i = 0; i < parkingHouseList.length; i++) {
         let current = parkingHouseList[i];
 
-
         //checks if the city has the same name
-
         if (city.toLowerCase() === current[1].toLowerCase()) {
             nearByParkingList.push(current);
             checkIfFound = true;
         }
     }
+
     console.log("NEARBY: \n" + nearByParkingList);
 
     if (!checkIfFound) {
         alert("No parking found nearby!")
         return;
     }
+
     //return nearByParkingList;
     createNearbyList(nearByParkingList)
 }
 
 
 function createNearbyList(returnList) {
-
-
     //THis is where the list shoudl be in the HTML
     let HTMLDropDown = document.getElementById("DropDown");
-
     let dropDownList = '<option value="all">All</option>';
-
 
     let city;
     let adress;
     let parkingId;
 
     //Creates a drop down list to select from
-    //Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
-    // number of spots,  unike ID of parking house */
-
+   //Currrent format on Parking House List[] =
+    // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
+   
     for (let i = 0; i < returnList.length; i++) {
         adress = returnList[i][0]
         city = returnList[i][1];
@@ -278,8 +275,6 @@ function addToInfoList() {
                   
                 }
 
-
-
                 alert("Current Status " + canBeAdded)
                 //When it has been detected that all the info on that parking spot has been looped thru it will check if can be added is true, 
                 if (currentSpotID != parkingHouseReservationInfo[b][2]) {
@@ -379,9 +374,8 @@ function parkingMonth() {
 }
 
 function parkingDay(year, month) {
-    addDay = ""
-    numberOfDaysInMonth = new Date(year, month, 0).getDate();
-
+    let addDay = ""
+    let numberOfDaysInMonth = new Date(year, month, 0).getDate();
 
     while (addDay < 1 || addDay > numberOfDaysInMonth || addDay == "" || isNaN(addDay)) {
         addDay = prompt("What Day number?");
@@ -397,6 +391,7 @@ function parkingDay(year, month) {
 
 function parkingHour() {
     let addHour = "";
+
     while (addHour < 0 || addHour > 23 || addHour == "" || isNaN(addHour)) {
         addHour = prompt("What hour?");
         addHour = parseInt(addHour)
@@ -421,7 +416,9 @@ function parkingMinute() {
 
 //Checks if the it ends before the parking starts
 function endOfParking(startYear, startMonth, startDay, startHours, startMinutes) {
+    
     let year = parseInt(parkingYear());
+    
     while (year < startYear) {
         alert("Parking cant end at a year that happend before the parking started. Try again.")
         year = parseInt(parkingYear());
@@ -429,26 +426,27 @@ function endOfParking(startYear, startMonth, startDay, startHours, startMinutes)
 
     let month = parseInt(parkingMonth() - 1);
 
-
-
     while (year === startYear && month < startMonth) {
         alert("Parking cant end at month that happend befor parking started. Try again")
         month = parseInt(parkingMonth() - 1);
     }
 
     let day = parseInt(parkingDay(year, month) - 1);
+
     while (year === startYear && month === startMonth && day < startDay) {
         alert("Parking cant end at a day before parking started. Try again")
         day = parseInt(parkingDay(year, month) - 1);
     }
 
     let hours = parseInt(parkingHour());
+
     while (year === startYear && month === startMonth && day === startDay && hours < startHours) {
         alert("Parking cant end at  time before the parking started. Try agfain");
         hours = parseInt(parkingHour());
     }
 
     let minutes = parseInt(parkingMinute());
+
     console.log("STARTMINUTE:  " + startMinutes + "NEW MINUTES" + minutes)
     while (year === startYear && month === startMonth && day === startDay && hours === startHours && minutes < startMinutes) {
         alert("Parking cant end at  time before the parking started. Try agfain");
@@ -456,9 +454,9 @@ function endOfParking(startYear, startMonth, startDay, startHours, startMinutes)
     }
 
     parkingEnding = new Date(year, month, day, hours, minutes, 0, 0)
-
     return parkingEnding;
 }
+
 function getAdress(id) {
     for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
         if (parkingHouseReservationInfo[i][0] === id) {

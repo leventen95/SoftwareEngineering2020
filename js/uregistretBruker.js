@@ -49,15 +49,8 @@ var parkingHouseReservationInfo = [
 ]
 
 function startup() {
-
-
-
     getByCity = document.getElementById("searchCityButton");
     getByCity.addEventListener("click", getCityLocations);
-
-
-    selectButton = document.getElementById("selectButton");
-
 }
 
 

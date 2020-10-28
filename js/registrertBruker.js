@@ -10,6 +10,7 @@ var nearByParkingList = [];
 var user = [42066669, "Kim_Jong_Trump"]
 var checkIdInThisList;
 
+//Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseReservationInfo = [
     [1, "BRA VEIEN 6a Halden", 1, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
@@ -418,7 +419,7 @@ function parkingMinute() {
     return addMinute;
 }
 
-
+//Checks if the it ends before the parking starts
 function endOfParking(startYear, startMonth, startDay, startHours, startMinutes) {
     let year = parseInt(parkingYear());
     while (year < startYear) {

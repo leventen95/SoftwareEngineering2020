@@ -83,7 +83,8 @@ describe("checks if correct info are created in parkinghousetable in city halden
     beforeAll(() => {
         getCityLocations("Halden");
     });
-    afterAll (()=>{clearShowList})
+
+    afterEach(()=>{clearShowList()})
 
 
     test("check if parking house 1 returns deisred arrayy", () => {

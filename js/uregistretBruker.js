@@ -148,20 +148,19 @@ function checkIfIdExsist(id) {
         if (indexHouseId === id) { 
             showInfoList.push(index)
             lock = true;
-        }
-        
-        
+        }         
     }
-    
+
     return lock;
-    
-    
 }
 
 
 function clearShowList(){
+    console.log("CLEAR")
     showInfoList = []
+    
 }
+
 //CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
 function createParkingHouseInfo(selectedHouseId) {
     //let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
@@ -174,6 +173,7 @@ function createParkingHouseInfo(selectedHouseId) {
         //Nearby parking list sends all houses in targeted city into an array
 
         if (nearByParkingList.length > 0) {
+          
             for (let i = 0; i < nearByParkingList.length; i++) {
 
                 for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
@@ -190,8 +190,8 @@ function createParkingHouseInfo(selectedHouseId) {
 
     //loops tuor just one id 
     else {
-
-         status = checkIfIdExsist(selectedHouseId)
+       
+        status = checkIfIdExsist(selectedHouseId)
 
     }
 
@@ -206,7 +206,7 @@ function createParkingHouseInfo(selectedHouseId) {
 
 
     //createTable(showInfoList);
-    if (showInfoList[0] == null || status ==false) { return false }
+    if (showInfoList[0] == null ) { return status }
     else {
         
         return showInfoList;

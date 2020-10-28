@@ -39,7 +39,7 @@ test("Check if adding a newhouse works", () => {
 
 
 
-
+describe("Checks if they find target place tests",()=>{
 //FIND PLACE!
 test("Check if true find BRA VEIEN 6a, Halden", () => {
     expect(admin.findPlace("BRA VEIEN 6a", "Halden")).toBeTruthy();
@@ -53,10 +53,10 @@ test("Check if true find Ant 23, Moss", () => {
 test("Check if they  cant find target location", () => {
     expect(admin.findPlace("BRA 23EN 6a", "Sweden")).toBeFalsy();
 });
-
+})
 
 //CHECK VALID ADRESS
-
+describe('Check if valid adress tests', () => {
 test("Check if ant 23 is valid adress ", () => {
     expect(admin.checkValidAdress("Ant 23")).toBeTruthy();
 })
@@ -76,11 +76,12 @@ test("Check ifMaurStien 17 is valid adress ", () => {
 test("Check if johnny 35 is invalid adress ", () => {
     expect(admin.checkValidAdress("johnny 35")).toBeFalsy();
 })
-
+});
 
 
 //Check valid city
 
+describe('check valid city tests', () => {
 test("Check if Halden is valid City", () => {
     expect(admin.checkValidCity("Halden")).toBeTruthy();
 })
@@ -101,7 +102,7 @@ test("check if target parking house is removed from list", () => {
         ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
     ]);
 })
-
+})
 
 
 

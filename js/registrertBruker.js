@@ -433,6 +433,14 @@ function parkingMinute() {
     return addMinute;
 }
 
+function checkIfMinuteIsValid(addMinute) {
+	
+	if (addMinute > 59 || addMinute < 0 || isNaN(addMinute)) {
+		return false;
+	}
+	else return true;
+}
+
 //Checks if the it ends before the parking starts
 function endOfParking(startYear, startMonth, startDay, startHours, startMinutes) {
 
@@ -518,7 +526,9 @@ module.exports = {
     getCompanyName: getCompanyName,
     parkingYear: parkingYear,
     checkIfYearIsInvalid: checkIfYearIsValid,
-    checkIfMonthIsValid: checkIfMonthIsValid,
-    checkIfDayIsValid: checkIfDayIsValid
+    checkIfMonthIsValid: checkIfMonthIsValid, 
+    checkIfDayIsValid: checkIfDayIsValid,
+    checkIfHourIsValid: checkIfHourIsValid,
+    checkIfMinuteIsValid: checkIfMinuteIsValid
 
 }

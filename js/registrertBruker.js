@@ -16,7 +16,9 @@ var checkIdInThisList;
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseReservationInfo = [
     [1, "BRA VEIEN 6a Halden", 1, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
-    [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
+   // [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
+   [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
+    
     [1, "BRA VEIEN 6a Halden", 3, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 4, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 5, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
@@ -61,44 +63,60 @@ function startup() {
 //Searches for all parking houses in the city by name
 
 function getCityLocations() {
+    //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER ADD VARIABLE TO PARAMETER
     let city = document.getElementById("searchCityInput").value;
     let checkIfFound = false;
 
+    if (findCityInList(city)) {
 
-    for (let i = 0; i < parkingHouseList.length; i++) {
-        let current = parkingHouseList[i];
 
-        //checks if the city has the same name
-        if (city.toLowerCase() === current[1].toLowerCase()) {
+        checkIfFound = true;
+    }
+
+    if (checkIfFound) {
+
+        createNearbyList(nearByParkingList)
+        //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER
+        //return nearByParkingList;
+    }
+
+    else {
+        alert("No parking found nearby!");
+        return;
+    }
+}
+
+function findCityInList(findCity) {
+    let checkIfFound = false;
+    for (const houseInList of parkingHouseList) {
+        let current = houseInList;
+        if (findCity.toLowerCase() === current[1].toLowerCase()) {
+
             nearByParkingList.push(current);
             checkIfFound = true;
         }
     }
 
-    console.log("NEARBY: \n" + nearByParkingList);
-
-    if (!checkIfFound) {
-        alert("No parking found nearby!")
-        return;
-    }
-
-    //return nearByParkingList;
-    createNearbyList(nearByParkingList)
+    return checkIfFound;
 }
 
-
+//NOT SURE IF I CAN TEST THIS
 function createNearbyList(returnList) {
+
+
     //THis is where the list shoudl be in the HTML
     let HTMLDropDown = document.getElementById("DropDown");
+
     let dropDownList = '<option value="all">All</option>';
+
 
     let city;
     let adress;
     let parkingId;
 
     //Creates a drop down list to select from
-    //Currrent format on Parking House List[] =
-    // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
+    //Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
+    // number of spots,  unike ID of parking house */
 
     for (let i = 0; i < returnList.length; i++) {
         adress = returnList[i][0]
@@ -115,73 +133,62 @@ function createNearbyList(returnList) {
         //onclick="getParkingHouseInfo()
         + dropDownList + "</select>" + " " + '<button type="button" id ="selectButton" onclick="createParkingHouseInfo()" ">Select</button>';
 }
+var showInfoList = [];
 
-//CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
-function createParkingHouseInfo() {
-    let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
-    let showInfoList = [[]];
+//checks if ID exsist if it does it adds it to show list
+function checkIfIdExsist(id) {
+    let lock = false;
 
-    //Loops thru all ids and retures them if they match
-    if (selectedHouseId == "all") {
+    for (const index of parkingHouseReservationInfo) {
+        indexHouseId = index[0]
 
-        console.log("SELECTED NEARBY" + nearByParkingList)
-
-        if (nearByParkingList.length > 0) {
-            for (let i = 0; i < nearByParkingList.length; i++) {
-                for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
-                    if (nearByParkingList[i][6]
-                        == parkingHouseReservationInfo[m][0]){
-
-                        showInfoList.push(parkingHouseReservationInfo[m])}
-                }
-            }
-        }
-    }
-    //loops tuor just one id 
-    else {
-        for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
-            if (
-                selectedHouseId == parkingHouseReservationInfo[m][0])
-                showInfoList.push(parkingHouseReservationInfo[m])
+        if (indexHouseId === id) {
+            showInfoList.push(index)
+            lock = true;
         }
     }
 
-    
-
-    for (let i = 0; i < showInfoList.length; i++) {
-        console.log(showInfoList[i] + "\n")
-    }
-
-    //Hides user info for unecasry eyes
-    for (let i = 0; i < showInfoList.length; i++) {
-        showInfoList[i].pop()
-        showInfoList[i].pop()
-    }
-
-    //sort by occupied time
-    showInfoList = showInfoList.sort(function (a, b) {
-        return a[4] - b[4];
-    });
-    //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
-    showInfoList = showInfoList.sort(function (a, b) {
-        return a[2] - b[2];
-    });
-    //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
-    showInfoList = showInfoList.sort(function (a, b) {
-        return a[0] - b[0];
-    });
-    for (let i = 0; i < showInfoList.length; i++) {
-        console.log(showInfoList[i] + "\n")
-    }
-
-    createTable(showInfoList);
-    checkIdInThisList = showInfoList;
-    return showInfoList;
-
+    return lock;
 }
 
 
+
+//CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
+function createParkingHouseInfo() {
+
+    //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER ADD VARIABLE TO PARAMETER
+    let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
+
+    let status = false;
+    if (selectedHouseId === "all") {
+
+        for (const lines of nearByParkingList) {
+            //Loops thu all ids that we had in nearbyparking list, checks and ads them to show list
+            status = checkIfIdExsist(lines[6])
+        }
+    }
+
+    else { status = checkIfIdExsist(selectedHouseId) }
+    //Hides user info for unecasry eyes
+    for (const eachLine of showInfoList) {
+        eachLine.pop()
+        eachLine.pop()
+    }
+
+    if (showInfoList[0] == null) { return status }
+
+    else {
+
+        createTable(showInfoList);
+        //ADD/REMOVE COMMENTS
+        //return showInfoList;
+    }
+
+}
+
 function createTable(parkingInfoList) {
+
+    sortShowList();
     let table = "";
 
     for (let i = 0; i < parkingInfoList.length; i++) {
@@ -199,6 +206,24 @@ function createTable(parkingInfoList) {
     addParkingButton = document.getElementById("parkingAdd")
 
     addParkingButton.innerHTML = '<button type="button" id ="addParkingButton" onclick="addToInfoList()" ">Regrister a reservation</button>'
+
+
+}
+function sortShowList() {
+
+    showInfoList = showInfoList.sort(function (a, b) {
+        return a[4] - b[4];
+    });
+
+    //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
+    showInfoList = showInfoList.sort(function (a, b) {
+        return a[2] - b[2];
+    });
+    //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
+
+    showInfoList = showInfoList.sort(function (a, b) {
+        return a[0] - b[0];
+    });
 }
 
 
@@ -297,7 +322,7 @@ function addToInfoList() {
 function addNewParkingDate() {
     let year = parseInt(parkingYear());
     let month = parseInt(parkingMonth() - 1);
-    let day = parseInt(parkingDay(year, month) - 1);
+    let day = parseInt(parkingDay(year, month));
     let hours = parseInt(parkingHour());
     let minutes = parseInt(parkingMinute());
 
@@ -319,57 +344,66 @@ function addNewParkingDate() {
 
 
 function parkingYear() {
-    let addYear = "";
-
     let thisYear = new Date();
     thisYear = thisYear.getFullYear();
-
-
-
+    let addYear;
     //Check that its either this or next year, due to it might be on new years eve. This makes it a limited time.
-    while (addYear < thisYear || addYear > thisYear + 1 || addYear == "" || isNaN(addYear)) {
-        addYear = prompt("What Year");
-        addYear = parseInt(addYear)
+    while (!checkIfYearIsValid(addYear)) {
+        let addYear = prompt("What Year");
 
-
-
-        if (addYear < thisYear || addYear > thisYear + 1 || addYear == NaN || isNaN(addYear)) {
+        if (checkIfYearIsValid(addYear)) { return addYear; }
+        else if (!checkIfYearIsValid(addYear)) {
             alert("Invalid year!\n Only valid years are " + thisYear + " and "
                 + (thisYear + 1) + "! \n Try again.")
         }
     }
+}
+function checkIfYearIsValid(checkYear) {
+    checkYear = parseInt(checkYear)
+    let thisYear = new Date();
+    thisYear = thisYear.getFullYear();
 
-    return addYear;
+    if (checkYear < thisYear || checkYear > thisYear + 1 || isNaN(checkYear)) { return false }
+    else { return true }
 }
 
+
+function checkIfMonthIsValid(monthToCheck) {
+    if (monthToCheck < 1 || monthToCheck > 12 || monthToCheck == "" || isNaN(monthToCheck)) { return false }
+    else return (true)
+
+}
 function parkingMonth() {
     let addMonth = "";
-    while (addMonth < 1 || addMonth > 12 || addMonth == "" || isNaN(addMonth)) {
+    while (!checkIfMonthIsValid(addMonth)) {
         addMonth = prompt("What month number?");
-        addMonth = parseInt(addMonth);
-        console.log(typeof (addMonth) + " " + addMonth);
-        if (addMonth < 1 || addMonth > 12 || addMonth == "" || isNaN(addMonth)) {
+        if (!checkIfMonthIsValid(addMonth)) {
             alert("Invalid month!\n Only valid  numbers are from 1 up to 12! \n Try again!")
         }
+        else if (checkIfMonthIsValid(addMonth)) { return addMonth }
     }
-
-    return addMonth;
 }
 
+
 function parkingDay(year, month) {
-    let addDay = ""
+    let addDay;
     let numberOfDaysInMonth = new Date(year, month, 0).getDate();
 
-    while (addDay < 1 || addDay > numberOfDaysInMonth || addDay == "" || isNaN(addDay)) {
+    while (!checkIfDayIsValid(year, month, addDay)) {
         addDay = prompt("What Day number?");
-        addDay = parseInt(addDay)
-        if (addDay < 1 || addDay > numberOfDaysInMonth || addDay == "" || isNaN(addDay)) {
+        if (!checkIfDayIsValid(year, month, addDay)) {
             alert("Invalid day!\n Only valid  numbers are from 1 up to " +
                 numberOfDaysInMonth + "! \n Only v Try again!");
         }
     }
-
     return addDay;
+}
+function checkIfDayIsValid(dayToCheck, month, year){
+    let numberOfDaysInMonth = new Date(year, month, 0).getDate();
+    if(dayToCheck < 1 || dayToCheck > numberOfDaysInMonth || isNaN(dayToCheck)){
+        return false;
+    }
+    else return true
 }
 
 function parkingHour() {
@@ -460,7 +494,7 @@ function getCompanyName(id) {
 function writeTargetId() {
     let targetId = ""
     let exsistInList = false;
-
+    checkIdInThisList = showInfoList
     while (exsistInList == false) {
         targetId = prompt("Write the prefered parkinghouseId");
         targetId = parseInt(targetId)
@@ -479,6 +513,10 @@ function writeTargetId() {
 
 module.exports = {
     getAdress: getAdress,
-    getCompanyName: getCompanyName
+    getCompanyName: getCompanyName,
+    parkingYear: parkingYear,
+    checkIfYearIsInvalid: checkIfYearIsValid,
+    checkIfMonthIsValid: checkIfMonthIsValid, 
+    checkIfDayIsValid: checkIfDayIsValid
 
 }

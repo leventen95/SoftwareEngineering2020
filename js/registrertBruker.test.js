@@ -1,18 +1,9 @@
 const { test, expect } = require("@jest/globals");
-const registrerBruker = require("./registrertBruker");
+const registrertBruker = require("./registrertBruker");
 
-test("check if we get the adress from the parking list", ()=> {
-    expect(registrerBruker.getAdress(1)).toEqual("BRA VEIEN 6a Halden")
-})
-
-
-
-
-test("Check if we get company name", ()=> {
-    expect(registrerBruker.getCompanyName(1)).toEqual("EasyPark");
-
-})
+// adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 /*var parkingHouseList = [
+
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
     ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
     ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
@@ -56,3 +47,46 @@ var parkingHouseReservationInfo = [
 
 ]
  */
+
+///---------UNIT TEST------
+describe("Tests add parking year",()=>{
+    test("Test if year 2020 is valid", ()=>{
+        expect(registrertBruker.checkIfYearIsInvalid(2020)).toBeTruthy()
+    })
+    test("Test if year 2021 is valid", ()=>{
+        expect(registrertBruker.checkIfYearIsInvalid(2021)).toBeTruthy()
+    })
+    test("Test if year 2019 is invalid", ()=>{
+        expect(registrertBruker.checkIfYearIsInvalid(2019)).toBeFalsy()
+    })
+    test("Test if year 2022 is invalid", ()=>{
+        expect(registrertBruker.checkIfYearIsInvalid(2022)).toBeFalsy()
+    })
+
+})
+
+
+
+describe("Test if months are valid",()=>{
+    test("Test if month 4 is valid", ()=>{
+        expect(registrertBruker.checkIfMonthIsValid(4)).toBeTruthy()
+    })
+    test("Test if month 9 is valid", ()=>{
+        expect(registrertBruker.checkIfMonthIsValid(9)).toBeTruthy()
+    })
+    test("Test if month 12 is valid", ()=>{
+        expect(registrertBruker.checkIfMonthIsValid(12)).toBeTruthy()
+    })
+    test("Test if month 15 is invalid", ()=>{
+        expect(registrertBruker.checkIfMonthIsValid(15)).toBeFalsy()
+    })
+})
+
+
+
+
+describe("Testing if days are valid",()=>{
+    test("Tests if day 29 of feburary 2020 is valid", ()=>{
+        
+    })
+})

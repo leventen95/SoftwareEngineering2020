@@ -144,6 +144,7 @@ function checkIfIdExsist(id) {
 
     for (const index of parkingHouseReservationInfo) {
         indexHouseId = index[0]
+
         if (indexHouseId === id) {
             showInfoList.push(index)
             lock = true;
@@ -157,11 +158,10 @@ function checkIfIdExsist(id) {
 var showInfoList = [];
 
 function clearShowList() {
-    console.log("CLEAR " + showInfoList)
 
+    showInfoList = []
+    
 
-    showInfoList = [];
-    console.log("CLEAREssssssD " + showInfoList)
 }
 
 
@@ -190,6 +190,7 @@ function createParkingHouseInfo(selectedHouseId) {
     if (showInfoList[0] == null) { return status }
 
     else {
+        
         //createTable(showInfoList);
         return showInfoList;
     }
@@ -198,6 +199,7 @@ function createParkingHouseInfo(selectedHouseId) {
 
 
 function createTable(parkingInfoList) {
+
     sortShowList();
     let table = "";
 

@@ -401,12 +401,12 @@ function checkIfDayIsValid(dayToCheck, month, year) {
 }
 
 function parkingHour() {
-    let addHour = "";
+    let addHour;
 
-    while (addHour < 0 || addHour > 23 || addHour == "" || isNaN(addHour)) {
+    while (!checkIfHourIsValid(addHour)) {
         addHour = prompt("What hour?");
-        addHour = parseInt(addHour)
-        if (addHour < 0 || addHour > 23 || addHour == "" || isNaN(addHour)) {
+        
+        if (!checkIfHourIsValid(addHour)) {
             alert("Invalid hour! \n Only valid  numbers are from 0 up to 23! \nTry again!")
         }
     }

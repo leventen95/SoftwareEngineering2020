@@ -416,13 +416,10 @@ function checkIfHourIsValid(addHour) {
 
 function parkingMinute() {
     let addMinute = "";
-    while (addMinute < 0 || addMinute > 59 || addMinute == "" || isNaN(addMinute)) {
         addMinute = prompt("What minute of the hour?");
-        addMinute = parseInt(addMinute)
         if (addMinute < 0 || addMinute > 59 || addMinute == "" || isNaN(addMinute)) {
             alert("Invalid minute! \n Only valid minutes are from 0 up to 59§ \n Try again!")
         }
-    }
     return addMinute;
 }
 

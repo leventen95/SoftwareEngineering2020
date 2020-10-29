@@ -1,5 +1,5 @@
 const { test, expect } = require("@jest/globals");
-const { checkIfDayIsValid } = require("./registrertBruker");
+
 const registrertBruker = require("./registrertBruker");
 
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
@@ -93,19 +93,19 @@ describe("Checks for each input of year",()=>{
     
     describe("Testing if days are valid",()=>{
         test("Tests if day 29 of feburary 2020 is valid", ()=>{
-            expect(checkIfDayIsValid(29, 2, 2020)).toBeTruthy()
+            expect(registrertBruker.checkIfDayIsValid(2020, 2, 19)).toBeTruthy()
             
         })
         test("Tests if day 15 of december 2020 is valid", ()=>{
-            expect(checkIfDayIsValid(29, 12, 2020)).toBeTruthy()
+            expect(registrertBruker.checkIfDayIsValid(2020 ,12,15)).toBeTruthy()
             
         })
         test("Tests if day 29 of feburary 2019 is Invalid", ()=>{
-            expect(checkIfDayIsValid(29, 2, 2019)).toBeFalsy()
+            expect(registrertBruker.checkIfDayIsValid(2019, 2,29)).toBeFalsy()
             
         })
         test("Tests if day 6th of april 2020 is valid", ()=>{
-            expect(checkIfDayIsValid(6, 4, 2020)).toBeTruthy()
+            expect(registrertBruker.checkIfDayIsValid(2020, 4, 6)).toBeTruthy()
             
         })
     })
@@ -118,10 +118,10 @@ describe("Testing if hour is valid",()=>{
 	test("Test if hour 23 is valid", ()=>{
 		expect(registrertBruker.checkIfHourIsValid(23)).toBeTruthy()
 	})
-	test("Test if hour 24 is valid", ()=>{
+	test("Test if hour 24 is invalid", ()=>{
 		expect(registrertBruker.checkIfHourIsValid(24)).toBeFalsy()
 	})
-	test("Test if hour -1 is valid", ()=>{
+	test("Test if hour -1 is invalid", ()=>{
 		expect(registrertBruker.checkIfHourIsValid(-1)).toBeFalsy()
 	})
 })
@@ -131,15 +131,15 @@ describe("Testing if minute is valid",()=>{
 		expect(registrertBruker.checkIfMinuteIsValid(13)).toBeTruthy()
 	})
 	test("Test if minute 59 is valid", ()=>{
-		expect(registrertBruker.checkIfHourIsValid(59)).toBeTruthy()
+		expect(registrertBruker.checkIfMinuteIsValid(59)).toBeTruthy()
 	})
 	test("Test if minute 0 is valid", ()=>{
-		expect(registrertBruker.checkIfHourIsValid(0)).toBeTruthy()
+		expect(registrertBruker.checkIfMinuteIsValid(0)).toBeTruthy()
 	})
-	test("Test if minute 60 is valid", ()=>{
-		expect(registrertBruker.checkIfHourIsValid(60)).toBeFalsy()
+	test("Test if minute 60 is invalid", ()=>{
+		expect(registrertBruker.checkIfMinuteIsValid(60)).toBeFalsy()
 	})
-	test("Test if minute -1 is valid", ()=>{
-		expect(registrertBruker.checkIfHourIsValid(-1)).toBeFalsy()
+	test("Test if minute -1 is invalid", ()=>{
+		expect(registrertBruker.checkIfMinuteIsValid(-1)).toBeFalsy()
 	})
 })

@@ -60,9 +60,9 @@ function startup() {
 
 //Searches for all parking houses in the city by name
 
-function getCityLocations(city) {
+function getCityLocations() {
     //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER ADD VARIABLE TO PARAMETER
-    //let city = document.getElementById("searchCityInput").value;
+    let city = document.getElementById("searchCityInput").value;
     let checkIfFound = false;
 
     if (findCityInList(city)) {
@@ -73,9 +73,9 @@ function getCityLocations(city) {
 
     if (checkIfFound) {
 
-        //createNearbyList(nearByParkingList)
+        createNearbyList(nearByParkingList)
         //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER
-        return nearByParkingList;
+       // return nearByParkingList;
     }
 
     else {
@@ -167,9 +167,9 @@ function clearShowList() {
 
 
 //CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
-function createParkingHouseInfo(selectedHouseId) {
+function createParkingHouseInfo() {
     //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER ADD VARIABLE TO PARAMETER
-    //let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
+    let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
 
     let status = false;
     if (selectedHouseId === "all") {
@@ -191,8 +191,9 @@ function createParkingHouseInfo(selectedHouseId) {
 
     else {
         
-        //createTable(showInfoList);
-        return showInfoList;
+        createTable(showInfoList);
+        //ADD/REMOVE //
+        //return showInfoList;
     }
 
 }

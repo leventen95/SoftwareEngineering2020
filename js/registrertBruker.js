@@ -16,8 +16,8 @@ var checkIdInThisList;
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseReservationInfo = [
     [1, "BRA VEIEN 6a Halden", 1, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
-    // [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
-    [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
+     [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
+    //[1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
 
     [1, "BRA VEIEN 6a Halden", 3, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 4, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
@@ -241,9 +241,9 @@ function addToInfoList() {
     //checks if the target ID matches that house 
     checker:
     for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
-
+        
         if (parkingHouseReservationInfo[i][0] == targetedHouseID) {
-            ("Alert first for loop, if condition met")
+            
             //if it does it adds a can be added variable the is always false unless the condition is met
             canBeAdded = false;
             //Loops thru all the spots in the targeted house
@@ -325,7 +325,7 @@ function addNewParkingDate() {
     //takes the old imput to make sure it doesnt overwrite
     endTime = endOfParking(year, month, day, hours, minutes)
     let startAndEnd = [newParking, endTime]
-
+alert("StARTED")
     return startAndEnd;
 
 }
@@ -337,11 +337,11 @@ function parkingYear() {
     thisYear = thisYear.getFullYear();
     let addYear;
     //Check that its either this or next year, due to it might be on new years eve. This makes it a limited time.
-    while (!checkIfYearIsValid(addYear, thisYear)) {
+    while (!checkIfYearIsValid(addYear)) {
         let addYear = prompt("What Year");
 
-        if (checkIfYearIsValid(addYear, targetedHouseID)) return addYear;
-        else if (!checkIfYearIsValid(addYear, thisYear)) {
+        if (checkIfYearIsValid(addYear)) return addYear;
+        else if (!checkIfYearIsValid(addYear)) {
             alert("Invalid year!\n Only valid years are " + thisYear + " and "
                 + (thisYear + 1) + "! \n Try again.")
         }
@@ -373,7 +373,6 @@ function checkIfMonthIsValid(monthToCheck) {
 
 
 function parkingDay(year, month) {
-
     let addDay;
     let numberOfDaysInMonth = new Date(year, month, 0).getDate();
 
@@ -383,11 +382,15 @@ function parkingDay(year, month) {
             alert("Invalid day!\n Only valid  numbers are from 1 up to " +
                 numberOfDaysInMonth + "! \n Only v Try again!");
         }
+        else if(checkIfDayIsValid(year, month, addDay)){
+            break;
+        }
     }
     return addDay;
 }
 
-function checkIfDayIsValid(dayToCheck, month, year) {
+function checkIfDayIsValid( year, month, dayToCheck) {
+    
     let numberOfDaysInMonth = new Date(year, month, 0).getDate();
     if (dayToCheck < 1 || dayToCheck > numberOfDaysInMonth || isNaN(dayToCheck)) return false;
     else return true
@@ -513,5 +516,4 @@ module.exports = {
     checkIfDayIsValid: checkIfDayIsValid,
     checkIfHourIsValid: checkIfHourIsValid,
     checkIfMinuteIsValid: checkIfMinuteIsValid
-
 }

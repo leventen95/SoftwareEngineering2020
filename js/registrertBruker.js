@@ -419,6 +419,14 @@ function parkingHour() {
     return addHour;
 }
 
+function checkIfHourIsValid(addHour) {
+	
+	if (addHour > 23 || addHour < 0 || isNaN(addHour)) {
+		return false;
+	}
+	else return true;
+}
+
 function parkingMinute() {
     let addMinute = "";
     while (addMinute < 0 || addMinute > 59 || addMinute == "" || isNaN(addMinute)) {

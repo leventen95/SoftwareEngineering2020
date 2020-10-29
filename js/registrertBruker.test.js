@@ -1,4 +1,5 @@
 const { test, expect } = require("@jest/globals");
+const { checkIfDayIsValid } = require("./registrertBruker");
 const registrertBruker = require("./registrertBruker");
 
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
@@ -49,44 +50,63 @@ var parkingHouseReservationInfo = [
  */
 
 ///---------UNIT TEST------
-describe("Tests add parking year",()=>{
-    test("Test if year 2020 is valid", ()=>{
-        expect(registrertBruker.checkIfYearIsInvalid(2020)).toBeTruthy()
-    })
-    test("Test if year 2021 is valid", ()=>{
-        expect(registrertBruker.checkIfYearIsInvalid(2021)).toBeTruthy()
-    })
-    test("Test if year 2019 is invalid", ()=>{
-        expect(registrertBruker.checkIfYearIsInvalid(2019)).toBeFalsy()
-    })
-    test("Test if year 2022 is invalid", ()=>{
-        expect(registrertBruker.checkIfYearIsInvalid(2022)).toBeFalsy()
-    })
+describe("Checks for each input of year",()=>{
 
-})
-
-
-
-describe("Test if months are valid",()=>{
-    test("Test if month 4 is valid", ()=>{
-        expect(registrertBruker.checkIfMonthIsValid(4)).toBeTruthy()
-    })
-    test("Test if month 9 is valid", ()=>{
-        expect(registrertBruker.checkIfMonthIsValid(9)).toBeTruthy()
-    })
-    test("Test if month 12 is valid", ()=>{
-        expect(registrertBruker.checkIfMonthIsValid(12)).toBeTruthy()
-    })
-    test("Test if month 15 is invalid", ()=>{
-        expect(registrertBruker.checkIfMonthIsValid(15)).toBeFalsy()
-    })
-})
-
-
-
-
-describe("Testing if days are valid",()=>{
-    test("Tests if day 29 of feburary 2020 is valid", ()=>{
+    describe("Tests add parking year",()=>{
+        test("Test if year 2020 is valid", ()=>{
+            expect(registrertBruker.checkIfYearIsInvalid(2020)).toBeTruthy()
+        })
+        test("Test if year 2021 is valid", ()=>{
+            expect(registrertBruker.checkIfYearIsInvalid(2021)).toBeTruthy()
+        })
+        test("Test if year 2019 is invalid", ()=>{
+            expect(registrertBruker.checkIfYearIsInvalid(2019)).toBeFalsy()
+        })
+        test("Test if year 2022 is invalid", ()=>{
+            expect(registrertBruker.checkIfYearIsInvalid(2022)).toBeFalsy()
+        })
         
+    })
+    
+    
+    
+    describe("Test if months are valid",()=>{
+        test("Test if month 4 is valid", ()=>{
+            expect(registrertBruker.checkIfMonthIsValid(4)).toBeTruthy()
+        })
+        test("Test if month 9 is valid", ()=>{
+            expect(registrertBruker.checkIfMonthIsValid(9)).toBeTruthy()
+        })
+        test("Test if month 12 is valid", ()=>{
+            expect(registrertBruker.checkIfMonthIsValid(12)).toBeTruthy()
+        })
+        test("Test if month 15 is invalid", ()=>{
+            expect(registrertBruker.checkIfMonthIsValid(15)).toBeFalsy()
+        })
+        test("Test if month 0 is invalid", ()=>{
+            expect(registrertBruker.checkIfMonthIsValid(0)).toBeFalsy()
+        })
+    })
+    
+    
+    
+    
+    describe("Testing if days are valid",()=>{
+        test("Tests if day 29 of feburary 2020 is valid", ()=>{
+            expect(checkIfDayIsValid(29, 2, 2020)).toBeTruthy()
+            
+        })
+        test("Tests if day 15 of december 2020 is valid", ()=>{
+            expect(checkIfDayIsValid(29, 12, 2020)).toBeTruthy()
+            
+        })
+        test("Tests if day 29 of feburary 2019 is Invalid", ()=>{
+            expect(checkIfDayIsValid(29, 2, 2019)).toBeFalsy()
+            
+        })
+        test("Tests if day 6th of april 2020 is valid", ()=>{
+            expect(checkIfDayIsValid(6, 4, 2020)).toBeTruthy()
+            
+        })
     })
 })

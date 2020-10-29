@@ -16,9 +16,9 @@ var checkIdInThisList;
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseReservationInfo = [
     [1, "BRA VEIEN 6a Halden", 1, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
-   // [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
-   [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
-    
+    // [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
+    [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
+
     [1, "BRA VEIEN 6a Halden", 3, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 4, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 5, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
@@ -321,20 +321,18 @@ function addToInfoList() {
 
 function addNewParkingDate() {
     let year = parseInt(parkingYear());
-    let month = parseInt(parkingMonth() - 1);
+    let month = parseInt(parkingMonth());
     let day = parseInt(parkingDay(year, month));
     let hours = parseInt(parkingHour());
     let minutes = parseInt(parkingMinute());
 
 
-
-
     //         new Date(year, month, day, hours, minutes, seconds, milliseconds)
     newParking = new Date(year, month, day, hours, minutes, 0, 0)
-    console.log("STARTING TIME" + typeof (newParking) + "\n" + newParking)
-
-
+    
     alert("Please enter when you wish parking to end")
+
+    //takes the old imput to make sure it doesnt overwrite
     endTime = endOfParking(year, month, day, hours, minutes)
     let startAndEnd = [newParking, endTime]
 
@@ -343,16 +341,17 @@ function addNewParkingDate() {
 }
 
 
+
 function parkingYear() {
     let thisYear = new Date();
     thisYear = thisYear.getFullYear();
     let addYear;
     //Check that its either this or next year, due to it might be on new years eve. This makes it a limited time.
-    while (!checkIfYearIsValid(addYear)) {
+    while (!checkIfYearIsValid(addYear , thisYear)) {
         let addYear = prompt("What Year");
 
-        if (checkIfYearIsValid(addYear)) { return addYear; }
-        else if (!checkIfYearIsValid(addYear)) {
+        if (checkIfYearIsValid(addYear, targetedHouseID)) { return addYear; }
+        else if (!checkIfYearIsValid(addYear, thisYear)) {
             alert("Invalid year!\n Only valid years are " + thisYear + " and "
                 + (thisYear + 1) + "! \n Try again.")
         }
@@ -360,32 +359,29 @@ function parkingYear() {
 }
 function checkIfYearIsValid(checkYear) {
     checkYear = parseInt(checkYear)
-    let thisYear = new Date();
-    thisYear = thisYear.getFullYear();
-
-    if (checkYear < thisYear || checkYear > thisYear + 1 || isNaN(checkYear)) { return false }
-    else { return true }
+    if (checkYear < thisYear || checkYear > thisYear + 1 || isNaN(checkYear))  return false 
+    else  return true 
 }
 
 
-function checkIfMonthIsValid(monthToCheck) {
-    if (monthToCheck < 1 || monthToCheck > 12 || monthToCheck == "" || isNaN(monthToCheck)) { return false }
-    else return (true)
-
-}
 function parkingMonth() {
-    let addMonth = "";
+    let addMonth;
     while (!checkIfMonthIsValid(addMonth)) {
         addMonth = prompt("What month number?");
         if (!checkIfMonthIsValid(addMonth)) {
             alert("Invalid month!\n Only valid  numbers are from 1 up to 12! \n Try again!")
         }
-        else if (checkIfMonthIsValid(addMonth)) { return addMonth }
+        else if (checkIfMonthIsValid(addMonth)) return addMonth - 1 
     }
+}
+function checkIfMonthIsValid(monthToCheck) {
+    if (monthToCheck < 1 || monthToCheck > 12 || isNaN(monthToCheck)) { return false }
+    else return true
 }
 
 
 function parkingDay(year, month) {
+
     let addDay;
     let numberOfDaysInMonth = new Date(year, month, 0).getDate();
 
@@ -398,11 +394,9 @@ function parkingDay(year, month) {
     }
     return addDay;
 }
-function checkIfDayIsValid(dayToCheck, month, year){
+function checkIfDayIsValid(dayToCheck, month, year) {
     let numberOfDaysInMonth = new Date(year, month, 0).getDate();
-    if(dayToCheck < 1 || dayToCheck > numberOfDaysInMonth || isNaN(dayToCheck)){
-        return false;
-    }
+    if (dayToCheck < 1 || dayToCheck > numberOfDaysInMonth || isNaN(dayToCheck)) return false;
     else return true
 }
 
@@ -516,7 +510,7 @@ module.exports = {
     getCompanyName: getCompanyName,
     parkingYear: parkingYear,
     checkIfYearIsInvalid: checkIfYearIsValid,
-    checkIfMonthIsValid: checkIfMonthIsValid, 
+    checkIfMonthIsValid: checkIfMonthIsValid,
     checkIfDayIsValid: checkIfDayIsValid
 
 }

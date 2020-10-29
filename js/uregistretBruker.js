@@ -1,7 +1,6 @@
 window.onload = startup;
 
 var nearByParkingList = [];
-var showInfoList = [];
 
 
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
@@ -40,12 +39,12 @@ var parkingHouseReservationInfo = [
     [3, "Ant 23 Moss", 6, "BadSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
 
 
-    [4, "MaurStien 17 Halden", 1, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Speedy_Gonzales"],
+    [4, "MaurStien 17 Halden", 1, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Speedy_Gonzales"],
     [4, "MaurStien 17 Halden", 2, "HandiCapSpot", "", "", 12345678, "NaN"],
-    [4, "MaurStien 17 Halden", 3, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time", 68516969, "Robbie_Rotten"],
-    [4, "MaurStien 17 Halden", 4, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 23401669, "Hipster_Jesus"],
-    [4, "MaurStien 17 Halden", 5, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
-    [4, "MaurStien 17 Halden", 6, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [4, "MaurStien 17 Halden", 3, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 68516969, "Robbie_Rotten"],
+    [4, "MaurStien 17 Halden", 4, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 23401669, "Hipster_Jesus"],
+    [4, "MaurStien 17 Halden", 5, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
+    [4, "MaurStien 17 Halden", 6, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
 
 ]
 
@@ -62,8 +61,8 @@ function startup() {
 //Searches for all parking houses in the city by name
 
 function getCityLocations(city) {
-
-    // let city = document.getElementById("searchCityInput").value;
+    //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER ADD VARIABLE TO PARAMETER
+    //let city = document.getElementById("searchCityInput").value;
     let checkIfFound = false;
 
     if (findCityInList(city)) {
@@ -139,102 +138,67 @@ function createNearbyList(returnList) {
         + dropDownList + "</select>" + " " + '<button type="button" id ="selectButton" onclick="createParkingHouseInfo()" ">Select</button>';
 }
 
-
+//checks if ID exsist if it does it adds it to show list
 function checkIfIdExsist(id) {
     let lock = false;
 
     for (const index of parkingHouseReservationInfo) {
         indexHouseId = index[0]
-        if (indexHouseId === id) { 
+        if (indexHouseId === id) {
             showInfoList.push(index)
             lock = true;
-        }         
+        }
     }
 
     return lock;
 }
 
 
-function clearShowList(){
-    console.log("CLEAR")
-    showInfoList = []
-    
+var showInfoList = [];
+
+function clearShowList() {
+    console.log("CLEAR " + showInfoList)
+
+
+    showInfoList = [];
+    console.log("CLEAREssssssD " + showInfoList)
 }
+
+
 
 //CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
 function createParkingHouseInfo(selectedHouseId) {
+    //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER ADD VARIABLE TO PARAMETER
     //let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
-    
-    //Loops thru all ids and retures them if they match
-    let status = false
-    if (selectedHouseId == "all") {
 
+    let status = false;
+    if (selectedHouseId === "all") {
 
-        //Nearby parking list sends all houses in targeted city into an array
-
-        if (nearByParkingList.length > 0) {
-          
-            for (let i = 0; i < nearByParkingList.length; i++) {
-
-                for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
-
-
-                    //hus sin id 00 iden i parkerings reservasjons liste 
-                    if (nearByParkingList[i][6] == parkingHouseReservationInfo[m][0])
-
-                        showInfoList.push(parkingHouseReservationInfo[m])
-                }
-            }
+        for (const lines of nearByParkingList) {
+            //Loops thu all ids that we had in nearbyparking list, checks and ads them to show list
+            status = checkIfIdExsist(lines[6])
         }
     }
 
-    //loops tuor just one id 
-    else {
-       
-        status = checkIfIdExsist(selectedHouseId)
-
+    else { status = checkIfIdExsist(selectedHouseId) }
+    //Hides user info for unecasry eyes
+    for (const eachLine of showInfoList) {
+        eachLine.pop()
+        eachLine.pop()
     }
 
+    if (showInfoList[0] == null) { return status }
 
-    /*
-        //Hides user info for unecasry eyes
-        for (let i = 0; i < showInfoList.length; i++) {
-            showInfoList[i].pop()
-            showInfoList[i].pop()
-        }
-    */
-
-
-    //createTable(showInfoList);
-    if (showInfoList[0] == null ) { return status }
     else {
-        
+        //createTable(showInfoList);
         return showInfoList;
     }
-    /* MOVE BACK LATER!!
-        //sort by occupied time
-        showInfoList = showInfoList.sort(function (a, b) {
-            return a[4] - b[4];
-        });
-        //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
-        showInfoList = showInfoList.sort(function (a, b) {
-            return a[2] - b[2];
-        });
-    
-        
-        //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
-    
-    
-        showInfoList = showInfoList.sort(function (a, b) {
-            return a[0] - b[0];
-        });
-    
-        */
 
 }
 
 
 function createTable(parkingInfoList) {
+    sortShowList();
     let table = "";
 
     for (let i = 0; i < parkingInfoList.length; i++) {
@@ -251,15 +215,32 @@ function createTable(parkingInfoList) {
 
 
 }
+function sortShowList() {
+
+    showInfoList = showInfoList.sort(function (a, b) {
+        return a[4] - b[4];
+    });
+
+    //SORTS BY SECOND COLLUM, THATS IS BY PARKINGSSPOT ID
+    showInfoList = showInfoList.sort(function (a, b) {
+        return a[2] - b[2];
+    });
+    //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
+
+    showInfoList = showInfoList.sort(function (a, b) {
+        return a[0] - b[0];
+    });
+}
 
 module.exports = {
     getCityLocations: getCityLocations,
     clearNearByParkingList: clearNearByParkingList,
     findCityInList: findCityInList,
     createParkingHouseInfo: createParkingHouseInfo,
-    checkIfIdExsist : checkIfIdExsist,
-    clearShowList : clearShowList
-   
+    checkIfIdExsist: checkIfIdExsist,
+    clearShowList: clearShowList,
+
+
 }
 
 //Currrent format on parkingHouseList [[]] = adress, city, longititude, lattitude, ownerCompanyUserName

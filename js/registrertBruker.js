@@ -97,9 +97,9 @@ function createNearbyList(returnList) {
     let parkingId;
 
     //Creates a drop down list to select from
-   //Currrent format on Parking House List[] =
+    //Currrent format on Parking House List[] =
     // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
-   
+
     for (let i = 0; i < returnList.length; i++) {
         adress = returnList[i][0]
         city = returnList[i][1];
@@ -121,43 +121,32 @@ function createParkingHouseInfo() {
     let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
     let showInfoList = [[]];
 
-
-
     //Loops thru all ids and retures them if they match
     if (selectedHouseId == "all") {
 
         console.log("SELECTED NEARBY" + nearByParkingList)
 
         if (nearByParkingList.length > 0) {
-
-
             for (let i = 0; i < nearByParkingList.length; i++) {
-
                 for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
+                    if (nearByParkingList[i][6]
+                        == parkingHouseReservationInfo[m][0]){
 
-
-                    if (
-                        nearByParkingList[i][6]
-                        == parkingHouseReservationInfo[m][0])
-
-                        showInfoList.push(parkingHouseReservationInfo[m])
+                        showInfoList.push(parkingHouseReservationInfo[m])}
                 }
             }
         }
     }
-
-
     //loops tuor just one id 
     else {
         for (let m = 0; m < parkingHouseReservationInfo.length; m++) {
             if (
                 selectedHouseId == parkingHouseReservationInfo[m][0])
-
                 showInfoList.push(parkingHouseReservationInfo[m])
         }
     }
 
-    console.log("LENGHT IS \n" + showInfoList.length);
+    
 
     for (let i = 0; i < showInfoList.length; i++) {
         console.log(showInfoList[i] + "\n")
@@ -169,8 +158,6 @@ function createParkingHouseInfo() {
         showInfoList[i].pop()
     }
 
-
-
     //sort by occupied time
     showInfoList = showInfoList.sort(function (a, b) {
         return a[4] - b[4];
@@ -179,14 +166,10 @@ function createParkingHouseInfo() {
     showInfoList = showInfoList.sort(function (a, b) {
         return a[2] - b[2];
     });
-
-
     //SORTS IT THEN BY FIRST COLLUM TO MAKE IT MORE READABLE
     showInfoList = showInfoList.sort(function (a, b) {
         return a[0] - b[0];
     });
-
-    console.log("REMOVED INFO\n ")
     for (let i = 0; i < showInfoList.length; i++) {
         console.log(showInfoList[i] + "\n")
     }
@@ -233,7 +216,7 @@ function addToInfoList() {
     //checks if the target ID matches that house 
     checker:
     for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
-        
+
         if (parkingHouseReservationInfo[i][0] == targetedHouseID) {
             ("Alert first for loop, if condition met")
             //if it does it adds a can be added variable the is always false unless the condition is met
@@ -250,29 +233,29 @@ function addToInfoList() {
             //check if starting time is after the exsisting one, then check if its before it ends
             for (let b = 0; b < parkingHouseReservationInfo.length; b++) {
 
-                
+
                 let checkCurrentStartDate = checkCurrent[4]
-                let checkCurrentEndDate = checkCurrent[5]          
-                
+                let checkCurrentEndDate = checkCurrent[5]
+
 
                 //Checks if the new info does not collide with anything 
                 //checks if it starts before or after the current info
                 if (startInfo < checkCurrentStartDate || startInfo > checkCurrentEndDate) {
-                   
+
                     //If it does it will check if it ends before the start or after the end    
                     if (endInfo < checkCurrentStartDate || endInfo > checkCurrentEndDate) {
-                       
+
                         canBeAdded = true;
                     }
                     //If it doesnt it will be added to false
                     else {
-                      
+
                         canBeAdded = false;
                     }
                 }
                 else {
                     canBeAdded = false
-                  
+
                 }
 
                 alert("Current Status " + canBeAdded)
@@ -295,14 +278,14 @@ function addToInfoList() {
     console.log(parkingHouseReservationInfo)
     if (canBeAdded == true) {
         alert("ADDING")
-        let newParkingAdress= getAdress(targetedHouseID);
+        let newParkingAdress = getAdress(targetedHouseID);
         let newParkingCompanyName = getCompanyName(targetedHouseID);
 
-        let addToParkingHouseReseveation = [targetedHouseID, newParkingAdress , currentSpotID ,newParkingCompanyName, startInfo, endInfo, user[0], user[1]]
+        let addToParkingHouseReseveation = [targetedHouseID, newParkingAdress, currentSpotID, newParkingCompanyName, startInfo, endInfo, user[0], user[1]]
         parkingHouseReservationInfo.push(addToParkingHouseReseveation);
         console.log(addToParkingHouseReseveation)
-        alert("New parking regristered. Starting at :" 
-        + startInfo + "\n Endig at: " + endInfo +  "\n At " + addToParkingHouseReseveation[1])
+        alert("New parking regristered. Starting at :"
+            + startInfo + "\n Endig at: " + endInfo + "\n At " + addToParkingHouseReseveation[1])
     }
 
     //Current format on ParkingHosueReservationList [[]] = 
@@ -416,9 +399,9 @@ function parkingMinute() {
 
 //Checks if the it ends before the parking starts
 function endOfParking(startYear, startMonth, startDay, startHours, startMinutes) {
-    
+
     let year = parseInt(parkingYear());
-    
+
     while (year < startYear) {
         alert("Parking cant end at a year that happend before the parking started. Try again.")
         year = parseInt(parkingYear());
@@ -495,7 +478,7 @@ function writeTargetId() {
 }
 
 module.exports = {
-   getAdress : getAdress,
-   getCompanyName : getCompanyName
+    getAdress: getAdress,
+    getCompanyName: getCompanyName
 
 }

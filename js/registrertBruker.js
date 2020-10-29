@@ -268,30 +268,20 @@ function addToInfoList() {
                 if (startInfo < checkCurrentStartDate || startInfo > checkCurrentEndDate) {
 
                     //If it does it will check if it ends before the start or after the end    
-                    if (endInfo < checkCurrentStartDate || endInfo > checkCurrentEndDate) {
+                    if (endInfo < checkCurrentStartDate || endInfo > checkCurrentEndDate) canBeAdded = true;
 
-                        canBeAdded = true;
-                    }
                     //If it doesnt it will be added to false
-                    else {
-
-                        canBeAdded = false;
-                    }
+                    else canBeAdded = false;
                 }
-                else {
-                    canBeAdded = false
-
-                }
+                else canBeAdded = false
 
                 alert("Current Status " + canBeAdded)
                 //When it has been detected that all the info on that parking spot has been looped thru it will check if can be added is true, 
                 if (currentSpotID != parkingHouseReservationInfo[b][2]) {
                     alert("Breaker check! " + canBeAdded)
                     //If it is true it will break the entire search alogythem and add the new info to a list later
-                    if (canBeAdded == true) {
-                        alert("BREAKER ACTIVATED!")
-                        break checker;
-                    }
+                    if (canBeAdded == true) break checker;
+
                 }
 
 
@@ -329,7 +319,7 @@ function addNewParkingDate() {
 
     //         new Date(year, month, day, hours, minutes, seconds, milliseconds)
     newParking = new Date(year, month, day, hours, minutes, 0, 0)
-    
+
     alert("Please enter when you wish parking to end")
 
     //takes the old imput to make sure it doesnt overwrite
@@ -347,10 +337,10 @@ function parkingYear() {
     thisYear = thisYear.getFullYear();
     let addYear;
     //Check that its either this or next year, due to it might be on new years eve. This makes it a limited time.
-    while (!checkIfYearIsValid(addYear , thisYear)) {
+    while (!checkIfYearIsValid(addYear, thisYear)) {
         let addYear = prompt("What Year");
 
-        if (checkIfYearIsValid(addYear, targetedHouseID)) { return addYear; }
+        if (checkIfYearIsValid(addYear, targetedHouseID)) return addYear;
         else if (!checkIfYearIsValid(addYear, thisYear)) {
             alert("Invalid year!\n Only valid years are " + thisYear + " and "
                 + (thisYear + 1) + "! \n Try again.")
@@ -361,8 +351,8 @@ function checkIfYearIsValid(checkYear) {
     let thisYear = new Date();
     thisYear = thisYear.getFullYear();
     checkYear = parseInt(checkYear)
-    if (checkYear < thisYear || checkYear > thisYear + 1 || isNaN(checkYear))  return false 
-    else  return true 
+    if (checkYear < thisYear || checkYear > thisYear + 1 || isNaN(checkYear)) return false
+    else return true
 }
 
 
@@ -373,7 +363,7 @@ function parkingMonth() {
         if (!checkIfMonthIsValid(addMonth)) {
             alert("Invalid month!\n Only valid  numbers are from 1 up to 12! \n Try again!")
         }
-        else if (checkIfMonthIsValid(addMonth)) return addMonth - 1 
+        else if (checkIfMonthIsValid(addMonth)) return addMonth - 1
     }
 }
 function checkIfMonthIsValid(monthToCheck) {
@@ -396,6 +386,7 @@ function parkingDay(year, month) {
     }
     return addDay;
 }
+
 function checkIfDayIsValid(dayToCheck, month, year) {
     let numberOfDaysInMonth = new Date(year, month, 0).getDate();
     if (dayToCheck < 1 || dayToCheck > numberOfDaysInMonth || isNaN(dayToCheck)) return false;
@@ -407,20 +398,20 @@ function parkingHour() {
 
     while (!checkIfHourIsValid(addHour)) {
         addHour = prompt("What hour?");
-        
+
         if (!checkIfHourIsValid(addHour)) {
             alert("Invalid hour! \n Only valid  numbers are from 0 up to 23! \nTry again!")
         }
     }
-    return addHour;
+    return addHour
 }
 
 function checkIfHourIsValid(addHour) {
-	
-	if (addHour > 23 || addHour < 0 || isNaN(addHour)) {
-		return false;
-	}
-	else return true;
+
+    if (addHour > 23 || addHour < 0 || isNaN(addHour)) {
+        return false;
+    }
+    else return true;
 }
 
 function parkingMinute() {
@@ -436,11 +427,11 @@ function parkingMinute() {
 }
 
 function checkIfMinuteIsValid(addMinute) {
-	
-	if (addMinute > 59 || addMinute < 0 || isNaN(addMinute)) {
-		return false;
-	}
-	else return true;
+
+    if (addMinute > 59 || addMinute < 0 || isNaN(addMinute)) {
+        return false;
+    }
+    else return true;
 }
 
 //Checks if the it ends before the parking starts
@@ -487,18 +478,14 @@ function endOfParking(startYear, startMonth, startDay, startHours, startMinutes)
 }
 
 function getAdress(id) {
-    for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
-        if (parkingHouseReservationInfo[i][0] === id) {
-            return parkingHouseReservationInfo[i][1]
-        }
+    for (const lines of parkingHouseReservationInfo) {
+        if (lines[0] === id) return lines[1]
     }
 }
 
 function getCompanyName(id) {
-    for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
-        if (parkingHouseReservationInfo[i][0] === id) {
-            return parkingHouseReservationInfo[i][3]
-        }
+    for (const lines of parkingHouseReservationInfo) {
+        if (lines[0] === id) return lines[3]
     }
 }
 
@@ -509,15 +496,12 @@ function writeTargetId() {
     checkIdInThisList = showInfoList
     while (exsistInList == false) {
         targetId = prompt("Write the prefered parkinghouseId");
-        targetId = parseInt(targetId)
 
         for (let i = 0; i < checkIdInThisList.length; i++) {
-            if (checkIdInThisList[i][0] == targetId)
-                exsistInList = true;
+            if (checkIdInThisList[i][0] == targetId) exsistInList = true;
         }
-        if (exsistInList == false) {
-            alert("Targeted id not found in list, try again")
-        }
+        if (exsistInList == false) alert("Targeted id not found in list, try again")
+
     }
 
     return targetId;
@@ -528,7 +512,7 @@ module.exports = {
     getCompanyName: getCompanyName,
     parkingYear: parkingYear,
     checkIfYearIsInvalid: checkIfYearIsValid,
-    checkIfMonthIsValid: checkIfMonthIsValid, 
+    checkIfMonthIsValid: checkIfMonthIsValid,
     checkIfDayIsValid: checkIfDayIsValid,
     checkIfHourIsValid: checkIfHourIsValid,
     checkIfMinuteIsValid: checkIfMinuteIsValid

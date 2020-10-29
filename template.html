@@ -28,7 +28,11 @@
         <button onclick="drawCircles()">Vis parkeringsplasser i nærheten</button>
         <label for="search">Søk på adresse:</label>
         <input type="text" id="search" name="search"><br>
-        <button id="searchBtn" onclick="geocodeAddress(document.getElementById('search').value)">Søk</button>
+        <button id="searchBtn" onclick="geocodeAddress(document.getElementById('search').value)">Søk</button><br>
+        <label for="searchTo">Søk på adresse å gjøre om til latLng:</label>
+        <input type="text" id="searchtoConvert" name="searchTo"><br>
+        <button id="searchBtn" onclick="convert(document.getElementById('searchtoConvert').value)">Konverter</button><br>
+        <label id="latLng">her skal latLng dukke opp. I hope.</label>
 
         <p id="demo"></p>
         <h3>My Google Maps Demo</h3>
@@ -44,6 +48,17 @@
             var markersArray=[];
             
             
+            
+            // Konvertere adresse til LatLng
+            function convert(address){
+                geocoder.geocode({ address: address }, (results, status) => {
+                if (status === "OK") {
+                    return results[0].geometry.location;
+                } else {
+                  alert("Geocode was not successful for the following reason: " + status);
+                }
+              });
+            }
             
             //Sette sirkler rundt parkeringsplasser i nærheten
             function drawCircles(){

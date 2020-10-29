@@ -125,3 +125,21 @@ describe("Testing if hour is valid",()=>{
 		expect(registrertBruker.checkIfHourIsValid(-1)).toBeFalsy()
 	})
 })
+
+describe("Testing if minute is valid",()=>{
+	test("Test if minute 13 is valid", ()=>{
+		expect(registrertBruker.checkIfMinuteIsValid(13)).toBeTruthy()
+	})
+	test("Test if minute 59 is valid", ()=>{
+		expect(registrertBruker.checkIfHourIsValid(59)).toBeTruthy()
+	})
+	test("Test if minute 0 is valid", ()=>{
+		expect(registrertBruker.checkIfHourIsValid(0)).toBeTruthy()
+	})
+	test("Test if minute 60 is valid", ()=>{
+		expect(registrertBruker.checkIfHourIsValid(60)).toBeFalsy()
+	})
+	test("Test if minute -1 is valid", ()=>{
+		expect(registrertBruker.checkIfHourIsValid(-1)).toBeFalsy()
+	})
+})

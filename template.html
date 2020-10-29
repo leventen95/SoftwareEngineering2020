@@ -25,6 +25,7 @@
 
         <button onclick="getLocation()">Try It</button>
         <button onclick="moveMap()">Move map</button><br><br>
+        <button onclick="drawCircles()">Vis parkeringsplasser i nærheten</button>
         <label for="search">Søk på adresse:</label>
         <input type="text" id="search" name="search"><br>
         <button id="searchBtn" onclick="geocodeAddress(document.getElementById('search').value)">Søk</button>
@@ -55,6 +56,48 @@
             var midpoint={lat:lati, lng:longi};
             var x = document.getElementById("demo");
             var markersArray=[];
+            
+            
+            
+            //Sette sirkler rundt parkeringsplasser i nærheten
+            function drawCircles(){
+            //Liste med parkeringsplasser
+              const parkPlasser = {
+              blaaklokkeveien1: {
+                center: { lat: 59.126, lng: 11.363 },
+                plasser: 2,
+              },
+              Edet2: {
+                center: { lat: 59.132880, lng: 11.352130 },
+                plasser: 1,
+              },
+              lokesvei2: {
+                center: { lat: 59.133070, lng: 11.360320 },
+                plasser: 3,
+              },
+              random: {
+                center: { lat: 59.133080, lng: 11.370700 },
+                plasser: 2,
+              },
+            };
+            
+            for (const plass in parkPlasser) {
+                // Add the circle for this place to the map.
+                const parkCircle = new google.maps.Circle({
+                  strokeColor: "#FF0000",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: "#FF0000",
+                  fillOpacity: 0.35,
+                  map,
+                  center: parkPlasser[plass].center,
+                  radius: Math.sqrt(parkPlasser[plass].plasser) * 20,
+                });
+              }
+            }
+            
+            
+            
             
             // Initialize and add the map
             function initMap() {

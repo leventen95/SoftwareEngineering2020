@@ -358,6 +358,8 @@ function parkingYear() {
     }
 }
 function checkIfYearIsValid(checkYear) {
+    let thisYear = new Date();
+    thisYear = thisYear.getFullYear();
     checkYear = parseInt(checkYear)
     if (checkYear < thisYear || checkYear > thisYear + 1 || isNaN(checkYear))  return false 
     else  return true 

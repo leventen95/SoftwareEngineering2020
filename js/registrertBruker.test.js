@@ -90,3 +90,18 @@ describe("Testing if days are valid",()=>{
         
     })
 })
+
+describe("Testing if hour is valid",()=>{
+	test("Test if hour 7 is valid", ()=>{
+		expect(registrertBruker.checkIfHourIsValid(7)).toBeTruthy()
+	})
+	test("Test if hour 23 is valid", ()=>{
+		expect(registrertBruker.checkIfHourIsValid(23)).toBeTruthy()
+	})
+	test("Test if hour 24 is valid", ()=>{
+		expect(registrertBruker.checkIfHourIsValid(24)).toBeFalsy()
+	})
+	test("Test if hour -1 is valid", ()=>{
+		expect(registrertBruker.checkIfHourIsValid(-1)).toBeFalsy()
+	})
+})

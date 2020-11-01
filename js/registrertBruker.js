@@ -51,7 +51,7 @@ var parkingHouseReservationInfo = [
 
 function startup() {
     getByCity = document.getElementById("searchCityButton");
-    getByCity.addEventListener("click", getCityLocations);
+    getByCity.addEventListener("click", getInputFromDocument);
 
 
     selectButton = document.getElementById("selectButton");
@@ -62,19 +62,16 @@ function startup() {
 
 //Searches for all parking houses in the city by name
 
-function getCityLocations() {
-    //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER ADD VARIABLE TO PARAMETER
+function getInputFromDocument(){
     let city = document.getElementById("searchCityInput").value;
+    getCityLocations(city);
+}
+function getCityLocations(city) {
     let checkIfFound = false;
 
-    if (findCityInList(city)) {
-
-
-        checkIfFound = true;
-    }
+    if (findCityInList(city)) checkIfFound = true;
 
     if (checkIfFound) {
-
         createNearbyList(nearByParkingList)
         //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER
         //return nearByParkingList;
@@ -86,6 +83,7 @@ function getCityLocations() {
     }
 }
 
+
 function findCityInList(findCity) {
     let checkIfFound = false;
     for (const houseInList of parkingHouseList) {
@@ -96,9 +94,11 @@ function findCityInList(findCity) {
             checkIfFound = true;
         }
     }
-
     return checkIfFound;
 }
+
+
+
 
 //NOT SURE IF I CAN TEST THIS
 function createNearbyList(returnList) {
@@ -131,7 +131,7 @@ function createNearbyList(returnList) {
 
     HTMLDropDown.innerHTML = "<select name ='NearbySelector' id='parkingHouseListNearby'>"
         //onclick="getParkingHouseInfo()
-        + dropDownList + "</select>" + " " + '<button type="button" id ="selectButton" onclick="createParkingHouseInfo()" ">Select</button>';
+        + dropDownList + "</select>" + " " + '<button type="button" id ="selectButton" onclick="getSelectHouseId()" ">Select</button>';
 }
 var showInfoList = [];
 
@@ -153,12 +153,14 @@ function checkIfIdExsist(id) {
 
 
 
-//CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
-function createParkingHouseInfo() {
-
-    //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER ADD VARIABLE TO PARAMETER
+function getSelectHouseId(){
     let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
+    createParkingHouseInfo(selectedHouseId)
+}
 
+
+//CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
+function createParkingHouseInfo(selectedHouseId) {
     let status = false;
     if (selectedHouseId === "all") {
 
@@ -206,9 +208,8 @@ function createTable(parkingInfoList) {
     addParkingButton = document.getElementById("parkingAdd")
 
     addParkingButton.innerHTML = '<button type="button" id ="addParkingButton" onclick="addToInfoList()" ">Regrister a reservation</button>'
-
-
 }
+
 function sortShowList() {
 
     showInfoList = showInfoList.sort(function (a, b) {

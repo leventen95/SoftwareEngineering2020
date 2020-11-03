@@ -125,10 +125,10 @@ function createNearbyList(returnList) {
     //Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
     // number of spots,  unike ID of parking house */
 
-    for (let i = 0; i < returnList.length; i++) {
-        adress = returnList[i][0]
-        city = returnList[i][1];
-        parkingId = returnList[i][6]
+    for (const info of returnList) {
+        adress = info[0]
+        city = info[1];
+        parkingId = info[6]
 
         dropDownList = dropDownList + '<option value="'
             + parkingId + '">' + adress + " " + city +
@@ -200,9 +200,9 @@ function createTable(parkingInfoList) {
     sortShowList();
     let table = "";
 
-    for (let i = 0; i < parkingInfoList.length; i++) {
-        currentLine = parkingInfoList[i];
-        let addRow = currentLine.join("</td><td>");
+    for (const lines of parkingInfoList) {
+        
+        let addRow = lines.join("</td><td>");
 
         table += "<tr><td>" + addRow + "</td></tr>";
     }

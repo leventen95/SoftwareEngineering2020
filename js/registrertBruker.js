@@ -11,12 +11,12 @@ var parkingHouseList = [
 var nearByParkingList = [];
 
 var user = [42066669, "Kim_Jong_Trump"]
-var checkIdInThisList;
+
 
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseReservationInfo = [
     [1, "BRA VEIEN 6a Halden", 1, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
-     [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
+    [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
     //[1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
 
     [1, "BRA VEIEN 6a Halden", 3, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
@@ -62,7 +62,7 @@ function startup() {
 
 //Searches for all parking houses in the city by name
 
-function getInputFromDocument(){
+function getInputFromDocument() {
     let city = document.getElementById("searchCityInput").value;
     getCityLocations(city);
 }
@@ -118,10 +118,10 @@ function createNearbyList(returnList) {
     //Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
     // number of spots,  unike ID of parking house */
 
-    for (let i = 0; i < returnList.length; i++) {
-        adress = returnList[i][0]
-        city = returnList[i][1];
-        parkingId = returnList[i][6]
+    for (const info of returnList) {
+        adress = info[0]
+        city = info[1];
+        parkingId = info[6]
 
         dropDownList = dropDownList + '<option value="'
             + parkingId + '">' + adress + " " + city +
@@ -153,7 +153,7 @@ function checkIfIdExsist(id) {
 
 
 
-function getSelectHouseId(){
+function getSelectHouseId() {
     let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
     createParkingHouseInfo(selectedHouseId)
 }
@@ -193,10 +193,8 @@ function createTable(parkingInfoList) {
     sortShowList();
     let table = "";
 
-    for (let i = 0; i < parkingInfoList.length; i++) {
-        currentLine = parkingInfoList[i];
-        let addRow = currentLine.join("</td><td>");
-
+    for (const lines of parkingInfoList) {
+        let addRow = lines.join("</td><td>");
         table += "<tr><td>" + addRow + "</td></tr>";
     }
 
@@ -230,42 +228,32 @@ function sortShowList() {
 
 
 function addToInfoList() {
+    let canBeAdded = false
+    let currentSpotID
 
     let timeInfo = addNewParkingDate();
     alert(timeInfo)
-    let startInfo = timeInfo[0];
-    let endInfo = timeInfo[1];
+    let startInfo = timeInfo[0]; //starting parking info
+    let endInfo = timeInfo[1];  //ending parking info
     targetedHouseID = parseInt(writeTargetId())
-    //NEED TO ADD TARGET HOUSE ID
-
-    let currentSpotID
+        
     //checks if the target ID matches that house 
     checker:
-    for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
-        
-        if (parkingHouseReservationInfo[i][0] == targetedHouseID) {
+    for (const parkingInfoSpot of parkingHouseReservationInfo) {
+        if (parkingInfoSpot[0] == targetedHouseID) {
             
-            //if it does it adds a can be added variable the is always false unless the condition is met
-            canBeAdded = false;
-            //Loops thru all the spots in the targeted house
-
-
-            checkCurrent = parkingHouseReservationInfo[i];
-            console.log(checkCurrent + "TEST!")
-
             //saves the spotId for later to check if all the info on that spot has been looped thru
-            currentSpotID = checkCurrent[2];
+            currentSpotID = parkingInfoSpot[2];
+            let checkCurrentStartDate = parkingInfoSpot[4]
+            let checkCurrentEndDate = parkingInfoSpot[5]
 
             //check if starting time is after the exsisting one, then check if its before it ends
-            for (let b = 0; b < parkingHouseReservationInfo.length; b++) {
-
-
-                let checkCurrentStartDate = checkCurrent[4]
-                let checkCurrentEndDate = checkCurrent[5]
-
-
+            for (const spotCheck of parkingHouseReservationInfo) {
                 //Checks if the new info does not collide with anything 
                 //checks if it starts before or after the current info
+
+                
+                //TO BE TESTED
                 if (startInfo < checkCurrentStartDate || startInfo > checkCurrentEndDate) {
 
                     //If it does it will check if it ends before the start or after the end    
@@ -276,15 +264,14 @@ function addToInfoList() {
                 }
                 else canBeAdded = false
 
-                alert("Current Status " + canBeAdded)
+                
                 //When it has been detected that all the info on that parking spot has been looped thru it will check if can be added is true, 
-                if (currentSpotID != parkingHouseReservationInfo[b][2]) {
-                    alert("Breaker check! " + canBeAdded)
+                if (currentSpotID != spotCheck[2]) {
+                    
                     //If it is true it will break the entire search alogythem and add the new info to a list later
                     if (canBeAdded == true) break checker;
 
                 }
-
 
             }
         }
@@ -293,11 +280,12 @@ function addToInfoList() {
 
     console.log(parkingHouseReservationInfo)
     if (canBeAdded == true) {
-        alert("ADDING")
+        
         let newParkingAdress = getAdress(targetedHouseID);
         let newParkingCompanyName = getCompanyName(targetedHouseID);
 
         let addToParkingHouseReseveation = [targetedHouseID, newParkingAdress, currentSpotID, newParkingCompanyName, startInfo, endInfo, user[0], user[1]]
+        console.log(parkingHouseReservationInfo)
         parkingHouseReservationInfo.push(addToParkingHouseReseveation);
         console.log(addToParkingHouseReseveation)
         alert("New parking regristered. Starting at :"
@@ -326,7 +314,7 @@ function addNewParkingDate() {
     //takes the old imput to make sure it doesnt overwrite
     endTime = endOfParking(year, month, day, hours, minutes)
     let startAndEnd = [newParking, endTime]
-alert("StARTED")
+ 
     return startAndEnd;
 
 }
@@ -383,15 +371,14 @@ function parkingDay(year, month) {
             alert("Invalid day!\n Only valid  numbers are from 1 up to " +
                 numberOfDaysInMonth + "! \n Only v Try again!");
         }
-        else if(checkIfDayIsValid(year, month, addDay)){
+        else if (checkIfDayIsValid(year, month, addDay)) {
             break;
         }
     }
     return addDay;
 }
 
-function checkIfDayIsValid( year, month, dayToCheck) {
-    
+function checkIfDayIsValid(year, month, dayToCheck) {
     let numberOfDaysInMonth = new Date(year, month, 0).getDate();
     if (dayToCheck < 1 || dayToCheck > numberOfDaysInMonth || isNaN(dayToCheck)) return false;
     else return true
@@ -412,24 +399,30 @@ function parkingHour() {
 
 function checkIfHourIsValid(addHour) {
 
-    if (addHour > 23 || addHour < 0 || isNaN(addHour)) {
+    if (addHour > 23 || addHour < 0 || isNaN(addHour) || addHour == "") {
         return false;
     }
     else return true;
 }
 
 function parkingMinute() {
+
     let addMinute = "";
+
+
+    while (!checkIfMinuteIsValid(addMinute)) {
         addMinute = prompt("What minute of the hour?");
-        if (addMinute < 0 || addMinute > 59 || addMinute == "" || isNaN(addMinute)) {
-            alert("Invalid minute! \n Only valid minutes are from 0 up to 59§ \n Try again!")
+
+        if (!checkIfMinuteIsValid(addMinute)) {
+            alert("Invalid minute! \n Only valid minutes are from 0 up to 59 \n Try again!")
         }
+    }
     return addMinute;
 }
 
 function checkIfMinuteIsValid(addMinute) {
 
-    if (addMinute > 59 || addMinute < 0 || isNaN(addMinute)) {
+    if (addMinute > 59 || addMinute < 0 || isNaN(addMinute) || addMinute == "") {
         return false;
     }
     else return true;
@@ -478,36 +471,40 @@ function endOfParking(startYear, startMonth, startDay, startHours, startMinutes)
     return parkingEnding;
 }
 
+//gets the house id by using loop
 function getAdress(id) {
     for (const lines of parkingHouseReservationInfo) {
         if (lines[0] === id) return lines[1]
     }
 }
-
+//get the comapny  from id with loop
 function getCompanyName(id) {
     for (const lines of parkingHouseReservationInfo) {
         if (lines[0] === id) return lines[3]
     }
 }
 
-
+//Checks if ID is on the shwon list 
 function writeTargetId() {
-    let targetId = ""
-    let exsistInList = false;
-    checkIdInThisList = showInfoList
-    while (exsistInList == false) {
+    let targetId;
+    while (!checkIdInShowList(targetId)) {
         targetId = prompt("Write the prefered parkinghouseId");
+        targetId = parseInt(targetId)
 
-        for (let i = 0; i < checkIdInThisList.length; i++) {
-            if (checkIdInThisList[i][0] == targetId) exsistInList = true;
-        }
-        if (exsistInList == false) alert("Targeted id not found in list, try again")
-
+        if (!checkIdInShowList(targetId)) alert("Targeted id not found in list, try again")
     }
-
-    return targetId;
+    return targetId
 }
 
+function checkIdInShowList(id) {
+    console.log(showInfoList)
+    let shownInfoList = showInfoList;
+
+    for (const ids of shownInfoList) {
+        if (id === ids[0]) return true
+    }
+    return false
+}
 module.exports = {
     getAdress: getAdress,
     getCompanyName: getCompanyName,
@@ -516,5 +513,6 @@ module.exports = {
     checkIfMonthIsValid: checkIfMonthIsValid,
     checkIfDayIsValid: checkIfDayIsValid,
     checkIfHourIsValid: checkIfHourIsValid,
-    checkIfMinuteIsValid: checkIfMinuteIsValid
+    checkIfMinuteIsValid: checkIfMinuteIsValid,
+    checkIdInShowList: checkIdInShowList
 }

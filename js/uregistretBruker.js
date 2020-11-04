@@ -177,7 +177,7 @@ function createParkingHouseInfo(selectedHouseId) {
         }
     }
 
-    else { status = checkIfIdExsist(selectedHouseId) }
+    else { status = checkIfIdExsist(parseInt(selectedHouseId)) }
     //Hides user info for unecasry eyes
     for (const eachLine of showInfoList) {
         eachLine.pop()

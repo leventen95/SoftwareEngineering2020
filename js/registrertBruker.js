@@ -64,6 +64,7 @@ function getInputFromDocument() {
     let city = document.getElementById("searchCityInput").value;
     getCityLocations(city);
 }
+
 function getCityLocations(city) {
     let checkIfFound = false;
 
@@ -168,14 +169,15 @@ function createParkingHouseInfo(selectedHouseId) {
         }
     }
 
-    else { status = checkIfIdExsist(selectedHouseId) }
+    else status = checkIfIdExsist(parseInt(selectedHouseId))
+
     //Hides user info for unecasry eyes
     for (const eachLine of showInfoList) {
         eachLine.pop()
         eachLine.pop()
     }
 
-    if (showInfoList[0] == null) { return status }
+    if (showInfoList[0] === null) { return status }
 
     else {
 
@@ -234,12 +236,12 @@ function addToInfoList() {
     let startInfo = timeInfo[0]; //starting parking info
     let endInfo = timeInfo[1];  //ending parking info
     targetedHouseID = parseInt(writeTargetId())
-        
+
     //checks if the target ID matches that house 
     checker:
     for (const parkingInfoSpot of parkingHouseReservationInfo) {
         if (parkingInfoSpot[0] == targetedHouseID) {
-            
+
             //saves the spotId for later to check if all the info on that spot has been looped thru
             currentSpotID = parkingInfoSpot[2];
             let checkCurrentStartDate = parkingInfoSpot[4]
@@ -250,7 +252,7 @@ function addToInfoList() {
                 //Checks if the new info does not collide with anything 
                 //checks if it starts before or after the current info
 
-                
+
                 //TO BE TESTED
                 if (startInfo < checkCurrentStartDate || startInfo > checkCurrentEndDate) {
 
@@ -262,10 +264,10 @@ function addToInfoList() {
                 }
                 else canBeAdded = false
 
-                
+
                 //When it has been detected that all the info on that parking spot has been looped thru it will check if can be added is true, 
                 if (currentSpotID != spotCheck[2]) {
-                    
+
                     //If it is true it will break the entire search alogythem and add the new info to a list later
                     if (canBeAdded == true) break checker;
 
@@ -278,7 +280,7 @@ function addToInfoList() {
 
     console.log(parkingHouseReservationInfo)
     if (canBeAdded == true) {
-        
+
         let newParkingAdress = getAdress(targetedHouseID);
         let newParkingCompanyName = getCompanyName(targetedHouseID);
 
@@ -312,7 +314,7 @@ function addNewParkingDate() {
     //takes the old imput to make sure it doesnt overwrite
     endTime = endOfParking(year, month, day, hours, minutes)
     let startAndEnd = [newParking, endTime]
- 
+
     return startAndEnd;
 
 }

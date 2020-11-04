@@ -58,30 +58,37 @@ function startup() {
     add = document.getElementById("addButton");
     remove = document.getElementById("removeButton");
 
-    add.addEventListener("click", addParkingHouse);
+    add.addEventListener("click", getNewHouseInfo);
     remove.addEventListener("click", getRemoveInfo);
 }
 
 
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 // number of spots,  unike ID of parking house 
-function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId)
-//newAdress, newCity, newLatitude, newLongtitude
-{
-    /*
+
+function getNewHouseInfo() {
     let newAdress = prompt("Please enter the new parkings house's  Adress");
     let newCity = prompt("Please enter the new parkings house's  City");
     let newLongtitude = prompt("Please enter the new parkings house's Longtitude");
     let newLatitude = prompt("Please enter the new parkings house's Latitude");
-    */
-    let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];
+    let companyNayUserName=prompt("Please enter the new parkings house's CompanysUSerName");
+    let numberOfSpots=prompt("Please enter the new parkings house's numberofSpots");
+    let houseId = parkingHouseList.length +1
+
+    addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId)
+}
+//newAdress, newCity, newLatitude, newLongtitude
+function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId)
+{
+   
+    let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];
 
 
 
-    //parkingHouseList[parkingHouseList.length]=newParkingHouseCheck;
-    m
+    
+    
 
-    parkingHouseList.splice(parkingHouseList.length, 0, newParkingHouseCheck)
+    parkingHouseList.push(newParkingHouse)
 
     // writeToCsv();
 
@@ -91,30 +98,6 @@ function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, company
 
 }
 
-
-function writeToCsv() {
-    let csvRows = [];
-
-
-
-    for (let i = 0; i < parkingHouseList.length; i++) {
-        csvRows[i] = parkingHouseList[i].valueOf();
-    }
-
-    let dataToCsv = csvRows[0];
-
-    for (let i = 1; i < csvRows.length; i++) {
-
-
-        //adds a new line as long as it isnt last one
-        if (i === csvRows.length - 1) {
-            dataToCsv = dataToCsv + "\n" + csvRows[i];
-        }
-        else {
-            dataToCsv = dataToCsv + csvRows[i];
-        }
-    }
-}
 
 
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 

@@ -32,18 +32,18 @@
         <label for="searchTo">Søk på adresse å gjøre om til latLng:</label>
         <input type="text" id="searchtoConvert" name="searchTo"><br>
         <button id="searchBtn" onclick="convert(document.getElementById('searchtoConvert').value)">Konverter</button><br>
-        <label id="latLng">her skal latLng dukke opp. I hope.</label>
+        <button id="test" onclick="getAddressAndMark()">Get address and mark</button><br>
 
         <p id="demo"></p>
         <h3>My Google Maps Demo</h3>
         <!--The div element for the map -->
         <div id="map"></div>
         
-        
         <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3B26T_Ul5DDDxv_ZGKa2icTY3Dcm7zE0&callback=initMap">
         </script>
         <script src="js/googleMaps.js"></script>
+        <script src="js/uregistretBruker.js"></script>
          <div id = "footer">
              ...
          </div>  

@@ -1,4 +1,4 @@
-var lati=14.883333;
+            var lati=14.883333;
             var longi=5.26;
             var midpoint={lat:lati, lng:longi};
             var x = document.getElementById("demo");
@@ -10,7 +10,17 @@ var lati=14.883333;
             function convert(address){
                 geocoder.geocode({ address: address }, (results, status) => {
                 if (status === "OK") {
-                    return results[0].geometry.location;
+                    alert(results[0].geometry.location);
+                } else {
+                  alert("Geocode was not successful for the following reason: " + status);
+                }
+              });
+            }
+            
+            function convertandDraw(address){
+                geocoder.geocode({ address: address }, (results, status) => {
+                if (status === "OK") {
+                    drawCirclesByAddress(results[0].geometry.location);
                 } else {
                   alert("Geocode was not successful for the following reason: " + status);
                 }
@@ -49,9 +59,23 @@ var lati=14.883333;
                   fillOpacity: 0.35,
                   map,
                   center: parkPlasser[plass].center,
-                  radius: Math.sqrt(parkPlasser[plass].plasser) * 20,
+                  radius: 100,
                 });
               }
+            }
+
+            function drawCirclesByAddress(latLng){
+                // Add the circle for this place to the map.
+                const parkCircle = new google.maps.Circle({
+                  strokeColor: "#FF0000",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: "#FF0000",
+                  fillOpacity: 0.35,
+                  map,
+                  center: latLng,
+                  radius: 20,
+                });
             }
             
             
@@ -146,3 +170,11 @@ var lati=14.883333;
             Get longitude and latitude
             https://www.w3schools.com/html/html5_geolocation.asp
             */
+
+            function getAddressAndMark(){
+                for (const houseInList of parkingHouseList) {
+                    let current = houseInList;
+                    convertandDraw(current[0]);
+                    console.log(current[0]);
+                }
+            }

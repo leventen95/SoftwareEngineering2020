@@ -6,6 +6,11 @@
         <link rel="stylesheet" type="text/css" href="css/Grid.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
+        <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3B26T_Ul5DDDxv_ZGKa2icTY3Dcm7zE0&callback=initMap">
+        </script>
+        <script src="js/googleMaps.js"></script>
+        <script src="js/uregistretBruker.js"></script>
     </head>
     <body>
     <div id = "wrapper">
@@ -25,14 +30,14 @@
 
         <button onclick="getLocation()">Try It</button>
         <button onclick="moveMap()">Move map</button><br><br>
-        <button onclick="drawCircles()">Vis parkeringsplasser i nærheten</button>
+        <button onclick="drawCircles()">Vis parkeringsplasser i nærheten</button><br><br>
         <label for="search">Søk på adresse:</label>
         <input type="text" id="search" name="search"><br>
-        <button id="searchBtn" onclick="geocodeAddress(document.getElementById('search').value)">Søk</button><br>
+        <button id="searchBtn" onclick="geocodeAddress(document.getElementById('search').value)">Søk</button><br><br>
         <label for="searchTo">Søk på adresse å gjøre om til latLng:</label>
         <input type="text" id="searchtoConvert" name="searchTo"><br>
         <button id="searchBtn" onclick="convert(document.getElementById('searchtoConvert').value)">Konverter</button><br>
-        <button id="test" onclick="getAddressAndMark()">Get address and mark</button><br>
+        <button id="test" onclick="getAddressAndMark()">Get address and mark</button><br><br>
 
         <p id="demo"></p>
         <h3>My Google Maps Demo</h3>
@@ -49,5 +54,8 @@
          </div>  
         
         </div>
+
+        <a href = "template.html">Home</a>
+
     </body>
 </html>

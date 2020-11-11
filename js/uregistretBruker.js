@@ -53,8 +53,6 @@ function startup() {
     getByCity = document.getElementById("searchCityButton");
     getByCity.addEventListener("click", getInputFromDocument);
 
-
-    selectButton = document.getElementById("selectButton");
 }
 
 function clearShowList() {
@@ -73,6 +71,7 @@ function getInputFromDocument() {
     let city = document.getElementById("searchCityInput").value;
     getCityLocations(city);
 }
+
 function getCityLocations(city) {
     let checkIfFound = false;
 
@@ -188,9 +187,9 @@ function createParkingHouseInfo(selectedHouseId) {
 
     else {
 
-        //createTable(showInfoList);
+        createTable(showInfoList);
         //ADD/REMOVE COMMENTS
-        return showInfoList;
+        //return showInfoList;
     }
 
 }

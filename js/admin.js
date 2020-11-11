@@ -52,7 +52,6 @@ var parkingHouseReservationInfo = [
 ]
 
 
-var xmlhttp;
 
 function startup() {
     add = document.getElementById("addButton");
@@ -83,11 +82,7 @@ function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, company
    
     let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];
 
-
-
     
-    
-
     parkingHouseList.push(newParkingHouse)
 
     // writeToCsv();

@@ -433,7 +433,6 @@ function parkingMinute() {
 }
 
 function checkIfMinuteIsValid(addMinute) {
-
     if (addMinute > 59 || addMinute < 0 || isNaN(addMinute) || addMinute == "") {
         return false;
     }

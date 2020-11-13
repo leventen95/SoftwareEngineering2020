@@ -16,7 +16,7 @@ var user = [42066669, "Kim_Jong_Trump"]
 var parkingHouseReservationInfo = [
     [1, "BRA VEIEN 6a Halden", 1, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
-    //[1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
+   // [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
 
     [1, "BRA VEIEN 6a Halden", 3, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 4, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
@@ -229,58 +229,16 @@ function sortShowList() {
 
 
 function addToInfoList() {
-    let canBeAdded = false
-    let currentSpotID
 
     let timeInfo = addNewParkingDate();
     alert(timeInfo)
     let startInfo = timeInfo[0]; //starting parking info
     let endInfo = timeInfo[1];  //ending parking info
-    targetedHouseID = parseInt(writeTargetId())
+    targetedHouseID = parseInt(writeTargetId(startInfo, endInfo))
 
-    //checks if the target ID matches that house 
-    checker:
-    for (const parkingInfoSpot of parkingHouseReservationInfo) {
-        if (parkingInfoSpot[0] == targetedHouseID) {
-
-            //saves the spotId for later to check if all the info on that spot has been looped thru
-            currentSpotID = parkingInfoSpot[2];
-            let checkCurrentStartDate = parkingInfoSpot[4]
-            let checkCurrentEndDate = parkingInfoSpot[5]
-
-            //check if starting time is after the exsisting one, then check if its before it ends
-            for (const spotCheck of parkingHouseReservationInfo) {
-                //Checks if the new info does not collide with anything 
-                //checks if it starts before or after the current info
-
-
-                //TO BE TESTED
-                if (startInfo < checkCurrentStartDate || startInfo > checkCurrentEndDate) {
-
-                    //If it does it will check if it ends before the start or after the end    
-                    if (endInfo < checkCurrentStartDate || endInfo > checkCurrentEndDate) canBeAdded = true;
-
-                    //If it doesnt it will be added to false
-                    else canBeAdded = false;
-                }
-                else canBeAdded = false
-
-
-                //When it has been detected that all the info on that parking spot has been looped thru it will check if can be added is true, 
-                if (currentSpotID != spotCheck[2]) {
-
-                    //If it is true it will break the entire search alogythem and add the new info to a list later
-                    if (canBeAdded == true) break checker;
-
-                }
-
-            }
-        }
-    }
-
-
+    let currentSpotID;
     console.log(parkingHouseReservationInfo)
-    if (canBeAdded == true) {
+    if (checkIfAvaibleSpot(startInfo, endInfo)) {
 
         let newParkingAdress = getAdress(targetedHouseID);
         let newParkingCompanyName = getCompanyName(targetedHouseID);
@@ -288,9 +246,13 @@ function addToInfoList() {
         let addToParkingHouseReseveation = [targetedHouseID, newParkingAdress, currentSpotID, newParkingCompanyName, startInfo, endInfo, user[0], user[1]]
         console.log(parkingHouseReservationInfo)
         parkingHouseReservationInfo.push(addToParkingHouseReseveation);
-        console.log(addToParkingHouseReseveation)
+        console.log(addToParkingHouseReseveation + "REE")
         alert("New parking regristered. Starting at :"
             + startInfo + "\n Endig at: " + endInfo + "\n At " + addToParkingHouseReseveation[1])
+    }
+
+    else{
+        alert("No spots avaible at that time on selcted house ")
     }
 
     //Current format on ParkingHosueReservationList [[]] = 
@@ -299,6 +261,55 @@ function addToInfoList() {
     console.log(parkingHouseReservationInfo)
 }
 
+function checkIfAvaibleSpot(startInfo, endInfo) {
+    currentSpotIDSecondCheck = ""
+    let canBeAdded = true
+    //For each spot in the house
+    for(let i = 0; i < parkingHouseReservationInfo.length; i++) {
+        let parkingInfoSpot = parkingHouseReservationInfo[i];
+        if (parkingInfoSpot[0] == targetedHouseID) {
+
+            //saves the spotId for later to check if all the info on that spot has been looped thru
+            let currentSpotIDFirstCheck = parkingInfoSpot[2];
+            let checkCurrentStartDate = parkingInfoSpot[4]
+            let checkCurrentEndDate = parkingInfoSpot[5]
+
+            if (!checkIfDoesNotDatesCollide(startInfo, endInfo, checkCurrentStartDate, checkCurrentEndDate)) {
+                canBeAdded = false
+            }
+            //seconds if the spot id has changed an then check if its avaible
+            if (i != 0) {
+                console.log(currentSpotIDFirstCheck + "     " + currentSpotIDSecondCheck)
+                if ((currentSpotIDFirstCheck != currentSpotIDSecondCheck)) {
+                    
+                    if(canBeAdded){
+                        currentSpotID = currentSpotIDSecondCheck
+                        return  currentSpotIDFirstCheck
+                    }
+                    else canBeAdded=true
+                    //return true
+                }
+            }
+            currentSpotIDSecondCheck = currentSpotIDFirstCheck;
+
+        }
+    }
+}
+
+
+
+function checkIfDoesNotDatesCollide(startOfParking, EndOfNewParking, startToBeChecked, EndToBeChecked) {
+
+    console.log("CHECKING THE START OF NEW PARKING    " +startOfParking.getTime())
+    console.log("CHECKING THE START OF CURRENT PARKIN    " +startToBeChecked.getTime())
+    console.log("CHECKING THE END OF NEW PARKING    " +EndOfNewParking.getTime() )
+
+    console.log("CHECKING THE END OF EXSISTING PARKING    " + EndToBeChecked.getTime())
+    if ((startOfParking.getTime() < startToBeChecked.getTime() && EndOfNewParking.getTime() < startToBeChecked.getTime()) || (startOfParking.getTime() > EndToBeChecked.getTime())) {
+        return true
+    }
+    else return false
+}
 function addNewParkingDate() {
     let year = parseInt(parkingYear());
     let month = parseInt(parkingMonth());
@@ -439,18 +450,18 @@ function endOfParking(startYear, startMonth, startDay, startHours, startMinutes)
         year = parseInt(parkingYear());
     }
 
-    let month = parseInt(parkingMonth() - 1);
+    let month = parseInt(parkingMonth());
 
     while (year === startYear && month < startMonth) {
         alert("Parking cant end at month that happend befor parking started. Try again")
-        month = parseInt(parkingMonth() - 1);
+        month = parseInt(parkingMonth() );
     }
 
-    let day = parseInt(parkingDay(year, month) - 1);
+    let day = parseInt(parkingDay(year, month));
 
     while (year === startYear && month === startMonth && day < startDay) {
         alert("Parking cant end at a day before parking started. Try again")
-        day = parseInt(parkingDay(year, month) - 1);
+        day = parseInt(parkingDay(year, month));
     }
 
     let hours = parseInt(parkingHour());
@@ -516,4 +527,5 @@ module.exports = {
     checkIfHourIsValid: checkIfHourIsValid,
     checkIfMinuteIsValid: checkIfMinuteIsValid,
     checkIdInShowList: checkIdInShowList
+
 }

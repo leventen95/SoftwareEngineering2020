@@ -28,8 +28,8 @@
 
         <p>Click the button to get your coordinates.</p>
 
-        <button onclick="getLocation()">Try It</button>
-        <button onclick="moveMap()">Move map</button><br><br>
+        <button onclick="getLocation()">Hent lokasjon</button>
+        <button onclick="moveMap()">Flytt til lokasjon</button><br><br>
         <button onclick="drawCircles()">Vis parkeringsplasser i nærheten</button><br><br>
         <label for="search">Søk på adresse:</label>
         <input type="text" id="search" name="search"><br>
@@ -37,7 +37,7 @@
         <label for="searchTo">Søk på adresse å gjøre om til latLng:</label>
         <input type="text" id="searchtoConvert" name="searchTo"><br><br>
         <button id="searchBtn" onclick="convert(document.getElementById('searchtoConvert').value)">Konverter</button><br><br>
-        <button id="test" onclick="getAddressAndMark()">Get address and mark</button><br><br>
+        <button id="test" onclick="getAddressAndMark()">Marker parkeringsplasser</button><br><br>
 
         <p id="demo"></p>
         <h3>My Google Maps Demo</h3>
@@ -54,8 +54,5 @@
          </div>  
         
         </div>
-
-        <a href = "template.html">Home</a>
-
     </body>
 </html>

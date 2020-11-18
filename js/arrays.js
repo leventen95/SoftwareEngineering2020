@@ -1,5 +1,3 @@
-
-//Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseList = [
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
     ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
@@ -43,7 +41,5 @@ var parkingHouseReservationInfo = [
     [4, "MaurStien 17 Halden", 6, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)", 42016969, "Slowpoke_Rodriguez"],
 
 ]
-module.exports = {
-   parkingHouseList : parkingHouseList,
-   parkingHouseReservationInfo : parkingHouseReservationInfo
-}
+
+//export{parkingHouseList, parkingHouseReservationInfo};

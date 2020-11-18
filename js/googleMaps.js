@@ -118,7 +118,7 @@
                 x.innerHTML = "Geolocation is not supported by this browser.";
               }
             }
-
+            
             function showPosition(position) {
                 lati= position.coords.latitude;
                 longi=position.coords.longitude;
@@ -143,6 +143,7 @@
               }
             }
             
+            //Moves map and zooms in on users location
             function moveMap() {
                 if(lati==14.883333 && longi==5.26){
                         alert("Trykk 'Try it' først, for å hente posisjon");
@@ -160,6 +161,7 @@
 
             }
             
+            //To remove previous markers
             function clearOverlays() {
               for (var i = 0; i < markersArray.length; i++ ) {
                 markersArray[i].setMap(null);
@@ -171,6 +173,7 @@
             https://www.w3schools.com/html/html5_geolocation.asp
             */
 
+            //Gets array from uregistrertbruker.js, converts address to lattitude and longitude, then draws circles around these addresses
             function getAddressAndMark(){
                 for (const houseInList of parkingHouseList) {
                     let current = houseInList;

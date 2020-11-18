@@ -96,7 +96,6 @@ function findCityInList(findCity) {
     for (const houseInList of parkingHouseList) {
         let current = houseInList;
         if (findCity.toLowerCase() === current[1].toLowerCase()) {
-
             nearByParkingList.push(current);
             checkIfFound = true;
         }

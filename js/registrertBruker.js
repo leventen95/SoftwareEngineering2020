@@ -234,7 +234,7 @@ function addToInfoList() {
     alert(timeInfo)
     let startInfo = timeInfo[0]; //starting parking info
     let endInfo = timeInfo[1];  //ending parking info
-    targetedHouseID = parseInt(writeTargetId(startInfo, endInfo))
+    targetedHouseID = parseInt(writeTargetId())
 
     let currentSpotID;
     console.log(parkingHouseReservationInfo)
@@ -246,6 +246,7 @@ function addToInfoList() {
         let addToParkingHouseReseveation = [targetedHouseID, newParkingAdress, currentSpotID, newParkingCompanyName, startInfo, endInfo, user[0], user[1]]
         console.log(parkingHouseReservationInfo)
         parkingHouseReservationInfo.push(addToParkingHouseReseveation);
+        
         console.log(addToParkingHouseReseveation + "REE")
         alert("New parking regristered. Starting at :"
             + startInfo + "\n Endig at: " + endInfo + "\n At " + addToParkingHouseReseveation[1])
@@ -284,8 +285,9 @@ function checkIfAvaibleSpot(startInfo, endInfo) {
                     
                     if(canBeAdded){
                         currentSpotID = currentSpotIDSecondCheck
-                        return  currentSpotIDFirstCheck
+                        return  true
                     }
+                    //resets the value of can be added to
                     else canBeAdded=true
                     //return true
                 }

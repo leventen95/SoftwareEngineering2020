@@ -79,15 +79,8 @@ function getNewHouseInfo() {
 //newAdress, newCity, newLatitude, newLongtitude
 function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId)
 {
-   
-    let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];
-
-    
+    let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];    
     parkingHouseList.push(newParkingHouse)
-
-    // writeToCsv();
-
-
     console.log("NEW! :" + parkingHouseList)
     return parkingHouseList;
 
@@ -101,18 +94,13 @@ function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, company
 
 
 function getRemoveInfo() {
-    removeTargetAdress = document.getElementById("removeAdress").value;
+    removeTargetAdress = document.getElementById("adressInput").value;
     removeTargetCity = document.getElementById("removeInCity").value;
-
-
     removeParkingHouse(removeTargetAdress, removeTargetCity)
 }
 
 //Removes the target house with adress and city 
 function removeParkingHouse(removeTargetAdress, removeTargetCity) {
-
-
-
     if (findPlace(removeTargetAdress, removeTargetCity)) {
         let idOfRemoved = parseInt(getId(removeTargetAdress, removeTargetCity))
 
@@ -124,9 +112,6 @@ function removeParkingHouse(removeTargetAdress, removeTargetCity) {
             }
         }
         //removes the extra arry created
-
-
-        //writeToCsv();
         removeAllSpotsOfHous(idOfRemoved)
 
         return parkingHouseList;
@@ -148,6 +133,8 @@ function getId(houseRemoveAdress, houseRemoveCity) {
         if (houseRemoveAdress === curentHousadress && houseRemoveCity === curretnHouseCity) return places[6]
     }
 }
+
+/*
 function removeAllSpotsOfHous(id) {
     for (let i = 0; i > parkingHouseReservationInfo.length; i++) {
         let currentIdOfHouse = parkingHouseReservationInfo[i][o];
@@ -159,7 +146,7 @@ function removeAllSpotsOfHous(id) {
             i--
         }
     }
-}
+}*/
 
 
 function findPlace(targetAdress, targetCity) {

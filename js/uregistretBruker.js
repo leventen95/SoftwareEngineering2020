@@ -7,7 +7,7 @@ var nearByParkingList = [];
 var parkingHouseList = [
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
     ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
-    ["Kvartsveien 2", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
+    ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
     ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
 ]
 
@@ -80,7 +80,7 @@ function getCityLocations(city) {
 
     if (checkIfFound) {
         createNearbyList(nearByParkingList)
-        //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER
+        //TEST ADD COMMENT ABOVE FOR TESTING AND REMOVE THE COMMENT UNDER 
         //return nearByParkingList;
     }
 
@@ -174,6 +174,8 @@ function createParkingHouseInfo(selectedHouseId) {
             //Loops thu all ids that we had in nearbyparking list, checks and ads them to show list
             status = checkIfIdExsist(lines[6])
         }
+        //TEST REMOVE COMMENT UNDER FOR TESTING REVERSE FOR FRONT END USAGE
+        //return showInfoList
     }
 
     else { status = checkIfIdExsist(parseInt(selectedHouseId)) }
@@ -188,7 +190,7 @@ function createParkingHouseInfo(selectedHouseId) {
     else {
 
         createTable(showInfoList);
-        //ADD/REMOVE COMMENTS
+        //TEST ADD COMMENT ABOVE FOR TESTING AND REMOVE THE COMMENT UNDER 
         //return showInfoList;
     }
 

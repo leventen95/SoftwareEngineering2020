@@ -86,9 +86,11 @@ afterEach(() => {
 
 describe("checks if correct info are created in parkinghousetable in city halden, valid IDS are 1 and 4", () => {
     beforeAll(() => {
+        clearNearByParkingList();
         getCityLocations("Halden");
     });
-/*
+    
+
     test("check if parking house 1 returns deisred arrayy", () => {
         expect(uregistretBruker.createParkingHouseInfo(1)).toEqual([
             [1, "BRA VEIEN 6a Halden", 1, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"],
@@ -110,7 +112,7 @@ describe("checks if correct info are created in parkinghousetable in city halden
             [4, "MaurStien 17 Halden", 5, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"],
             [4, "MaurStien 17 Halden", 6, "HandiCapSpot", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"]
         ])
-    })*/
+    })
 
     test("check if all is returns wished array", () => {
         expect(uregistretBruker.createParkingHouseInfo("all")).toEqual([

@@ -1,6 +1,10 @@
 const { test, expect } = require("@jest/globals");
+const { resetParkingHouseList } = require("./admin");
 const admin = require('./admin');
 
+beforeAll(() => {
+    resetParkingHouseList()
+});
 
 
 
@@ -24,8 +28,8 @@ test("Check if i wrote return array test correctly :O", () => {
     ]);
 });
 
-// NB! YOU CAN ONLY RUN THE TEST THAT CHANGES THE ARRAY SEPERATLY FROM OTHERS THAT CHANGES ARRAY! 
-/*
+
+
 test("Check if adding a newhouse works", () => {
     expect(admin.addParkingHouse("Jessheim 24", "Voss", 232.32, 512.32, "EasyPark", 12, 5)).toEqual([
         ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6,1],
@@ -35,7 +39,7 @@ test("Check if adding a newhouse works", () => {
         ["Jessheim 24", "Voss", 232.32, 512.32, "EasyPark", 12, 5]
     ]);
 });
-*/
+
 
 
 
@@ -82,6 +86,11 @@ test("Check if johnny 35 is invalid adress ", () => {
 //Check valid city
 
 describe('check valid city tests', () => {
+    beforeAll(() => {
+        resetParkingHouseList()
+    });
+    
+    
 test("Check if Halden is valid City", () => {
     expect(admin.checkValidCity("Halden")).toBeTruthy();
 })
@@ -97,6 +106,7 @@ test("Check if Tokyo is invalid City", () => {
 
 test("check if target parking house is removed from list", () => {
     expect(admin.removeParkingHouse("BRA VEIEN 6a", "Halden")).toEqual([
+        [null, null, 45.32, 321.31, "EasyPark", 6, null],
         ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
         ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
         ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
@@ -106,16 +116,4 @@ test("check if target parking house is removed from list", () => {
 
 
 
-
-
-
-
-/*------------------------UNIT TESTING ---------*/
-
-/*var  parkingHouseList = [
-    ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
-["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
-["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
-["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
-];*/
 

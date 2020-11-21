@@ -73,7 +73,7 @@ function getCityLocations(city) {
 
     if (checkIfFound) {
         createNearbyList(nearByParkingList)
-        //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER
+       //TEST ADD COMMENT ABOVE FOR TESTING AND REMOVE THE COMMENT UNDER, REVERSE FOR FRONT END USAGE
         //return nearByParkingList;
     }
 
@@ -163,11 +163,12 @@ function getSelectHouseId() {
 function createParkingHouseInfo(selectedHouseId) {
     let status = false;
     if (selectedHouseId === "all") {
-
+        
         for (const lines of nearByParkingList) {
             //Loops thu all ids that we had in nearbyparking list, checks and ads them to show list
             status = checkIfIdExsist(lines[6])
         }
+        
     }
 
     else status = checkIfIdExsist(parseInt(selectedHouseId))
@@ -183,7 +184,7 @@ function createParkingHouseInfo(selectedHouseId) {
     else {
 
         createTable(showInfoList);
-        //ADD/REMOVE COMMENTS
+        //TEST ADD COMMENT ABOVE FOR TESTING AND REMOVE THE COMMENT UNDER REVERSE FOR FRONT END USAGE
         //return showInfoList;
     }
 
@@ -237,17 +238,15 @@ function addToInfoList() {
     targetedHouseID = parseInt(writeTargetId())
 
     let currentSpotID;
-    console.log(parkingHouseReservationInfo)
+    
     if (checkIfAvaibleSpot(startInfo, endInfo)) {
 
         let newParkingAdress = getAdress(targetedHouseID);
         let newParkingCompanyName = getCompanyName(targetedHouseID);
 
         let addToParkingHouseReseveation = [targetedHouseID, newParkingAdress, currentSpotID, newParkingCompanyName, startInfo, endInfo, user[0], user[1]]
-        console.log(parkingHouseReservationInfo)
         parkingHouseReservationInfo.push(addToParkingHouseReseveation);
         
-        console.log(addToParkingHouseReseveation + "REE")
         alert("New parking regristered. Starting at :"
             + startInfo + "\n Endig at: " + endInfo + "\n At " + addToParkingHouseReseveation[1])
     }
@@ -259,7 +258,6 @@ function addToInfoList() {
     //Current format on ParkingHosueReservationList [[]] = 
     //parkinghosueId[0], adress[1], parkingspotID[2], ownerCompanyUserName[3], date and time of begging of  reservation[4], date time of ending of reservation[5], user phone number[6], brukersbrukernavn[7]
 
-    console.log(parkingHouseReservationInfo)
 }
 
 function checkIfAvaibleSpot(startInfo, endInfo) {
@@ -280,7 +278,6 @@ function checkIfAvaibleSpot(startInfo, endInfo) {
             }
             //seconds if the spot id has changed an then check if its avaible
             if (i != 0) {
-                console.log(currentSpotIDFirstCheck + "     " + currentSpotIDSecondCheck)
                 if ((currentSpotIDFirstCheck != currentSpotIDSecondCheck)) {
                     
                     if(canBeAdded){
@@ -301,13 +298,7 @@ function checkIfAvaibleSpot(startInfo, endInfo) {
 
 
 function checkIfDoesNotDatesCollide(startOfParking, EndOfNewParking, startToBeChecked, EndToBeChecked) {
-
-    console.log("CHECKING THE START OF NEW PARKING    " +startOfParking.getTime())
-    console.log("CHECKING THE START OF CURRENT PARKIN    " +startToBeChecked.getTime())
-    console.log("CHECKING THE END OF NEW PARKING    " +EndOfNewParking.getTime() )
-
-    console.log("CHECKING THE END OF EXSISTING PARKING    " + EndToBeChecked.getTime())
-    if ((startOfParking.getTime() < startToBeChecked.getTime() && EndOfNewParking.getTime() < startToBeChecked.getTime()) || (startOfParking.getTime() > EndToBeChecked.getTime())) {
+if((startOfParking.getTime() > EndToBeChecked.getTime())) {
         return true
     }
     else return false
@@ -435,6 +426,10 @@ function parkingMinute() {
 }
 
 function checkIfMinuteIsValid(addMinute) {
+    addMinute = parseInt(addMinute)
+
+    if(addMinute === 0) return true
+
     if (addMinute > 59 || addMinute < 0 || isNaN(addMinute) || addMinute == "") {
         return false;
     }
@@ -474,7 +469,6 @@ function endOfParking(startYear, startMonth, startDay, startHours, startMinutes)
 
     let minutes = parseInt(parkingMinute());
 
-    console.log("STARTMINUTE:  " + startMinutes + "NEW MINUTES" + minutes)
     while (year === startYear && month === startMonth && day === startDay && hours === startHours && minutes < startMinutes) {
         alert("Parking cant end at  time before the parking started. Try agfain");
         hours = parseInt(parkingHour());
@@ -510,7 +504,6 @@ function writeTargetId() {
 }
 
 function checkIdInShowList(id) {
-    console.log(showInfoList)
     let shownInfoList = showInfoList;
 
     for (const ids of shownInfoList) {

@@ -52,6 +52,17 @@ var parkingHouseReservationInfo = [
 ]
 
 
+function resetParkingHouseList(){
+    parkingHouseList = [
+        ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
+        ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
+        ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
+        ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
+    ]
+}
+
+
+
 
 function startup() {
     add = document.getElementById("addButton");
@@ -81,7 +92,6 @@ function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, company
 {
     let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];    
     parkingHouseList.push(newParkingHouse)
-    console.log("NEW! :" + parkingHouseList)
     return parkingHouseList;
 
 }
@@ -99,21 +109,24 @@ function getRemoveInfo() {
     removeParkingHouse(removeTargetAdress, removeTargetCity)
 }
 
-//Removes the target house with adress and city 
+//changes the values of index 0, 1 and 6 to null, remove the dection from other funtion
 function removeParkingHouse(removeTargetAdress, removeTargetCity) {
     if (findPlace(removeTargetAdress, removeTargetCity)) {
         let idOfRemoved = parseInt(getId(removeTargetAdress, removeTargetCity))
 
-        //Honesthly no idea but it works. I kinda know but confused 
+        
+        //removes the extra arry created
         for (let i = 0; i < parkingHouseList.length; i++) {
             if (idOfRemoved === parkingHouseList[i][6]) {
-                let cloneArray = parkingHouseList.slice();
-                parkingHouseList.splice(i, 1);
+                parkingHouseList[i][0] = null;
+                parkingHouseList[i][1] = null;
+                parkingHouseList[i][6] = null;
+                return parkingHouseList
+                // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
             }
         }
         //removes the extra arry created
-        removeAllSpotsOfHous(idOfRemoved)
-
+        //removeAllReservestionsFromHouse(idOfRemoved)
         return parkingHouseList;
 
     }
@@ -135,7 +148,7 @@ function getId(houseRemoveAdress, houseRemoveCity) {
 }
 
 /*
-function removeAllSpotsOfHous(id) {
+function removeAllReservestionsFromHouse(id) {
     for (let i = 0; i > parkingHouseReservationInfo.length; i++) {
         let currentIdOfHouse = parkingHouseReservationInfo[i][o];
 
@@ -197,5 +210,6 @@ module.exports = {
     newArray: newArray,
     checkValidAdress: checkValidAdress,
     checkValidCity: checkValidCity,
+    resetParkingHouseList :resetParkingHouseList
 
 };

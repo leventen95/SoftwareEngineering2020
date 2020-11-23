@@ -27,41 +27,21 @@
               });
             }
             
-            //Sette sirkler rundt parkeringsplasser i nærheten
+            //Sette sirkler rundt parkeringsplasser i nærheten av nåværende posisjon
             function drawCircles(){
-            //Liste med parkeringsplasser
-              const parkPlasser = {
-              blaaklokkeveien1: {
-                center: { lat: 59.126, lng: 11.363 },
-                plasser: 2,
-              },
-              Edet2: {
-                center: { lat: 59.132880, lng: 11.352130 },
-                plasser: 1,
-              },
-              lokesvei2: {
-                center: { lat: 59.133070, lng: 11.360320 },
-                plasser: 3,
-              },
-              random: {
-                center: { lat: 59.133080, lng: 11.370700 },
-                plasser: 2,
-              },
-            };
-            
-            for (const plass in parkPlasser) {
-                // Add the circle for this place to the map.
-                const parkCircle = new google.maps.Circle({
-                  strokeColor: "#FF0000",
-                  strokeOpacity: 0.8,
-                  strokeWeight: 2,
-                  fillColor: "#FF0000",
-                  fillOpacity: 0.35,
-                  map,
-                  center: parkPlasser[plass].center,
-                  radius: 100,
-                });
-              }
+                if(longi==5.26 && lati==14.883333){
+                    alert("Trykk Hent lokasjon først, for å oppdatere nåværende posisjon");
+                }
+                for (const houseInList of parkingHouseList) {
+                    let current = houseInList;
+                    if(current[2] < (longi+0.2) && current[2] > (longi-0.2) && 
+                      current[3] < (lati+0.2) && current[3] > (lati-0.2)){
+                        center={lat:current[3], lng:current[2]};
+                        console.log(typeof(longi))
+                        console.log(center);
+                       drawCirclesByAddress(center);
+                    }
+                }
             }
 
             function drawCirclesByAddress(latLng){
@@ -118,7 +98,7 @@
                 x.innerHTML = "Geolocation is not supported by this browser.";
               }
             }
-
+            
             function showPosition(position) {
                 lati= position.coords.latitude;
                 longi=position.coords.longitude;
@@ -143,6 +123,7 @@
               }
             }
             
+            //Moves map and zooms in on users location
             function moveMap() {
                 if(lati==14.883333 && longi==5.26){
                         alert("Trykk 'Try it' først, for å hente posisjon");
@@ -160,6 +141,7 @@
 
             }
             
+            //To remove previous markers
             function clearOverlays() {
               for (var i = 0; i < markersArray.length; i++ ) {
                 markersArray[i].setMap(null);
@@ -171,6 +153,7 @@
             https://www.w3schools.com/html/html5_geolocation.asp
             */
 
+            //Gets array from array.js, converts address to lattitude and longitude, then draws circles around these addresses
             function getAddressAndMark(){
                 for (const houseInList of parkingHouseList) {
                     let current = houseInList;

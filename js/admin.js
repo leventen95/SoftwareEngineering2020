@@ -1,10 +1,4 @@
 //THIS SCRIPT IS CONNECTED TO admin.html
-
-
-
-
-
-
 window.onload = startup;
 
 //Currrent format on Parking House List[] =
@@ -52,7 +46,14 @@ var parkingHouseReservationInfo = [
 ]
 
 
-var xmlhttp;
+function resetParkingHouseList(){
+    parkingHouseList = [
+        ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
+        ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
+        ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
+        ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
+    ]
+}
 
 function startup() {
     add = document.getElementById("addButton");
@@ -62,10 +63,8 @@ function startup() {
     remove.addEventListener("click", getRemoveInfo);
 }
 
-
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 // number of spots,  unike ID of parking house 
-
 function getNewHouseInfo() {
     let newAdress = prompt("Please enter the new parkings house's  Adress");
     let newCity = prompt("Please enter the new parkings house's  City");
@@ -80,68 +79,39 @@ function getNewHouseInfo() {
 //newAdress, newCity, newLatitude, newLongtitude
 function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId)
 {
-   
-    let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];
-
-
-
-    
-    
-
+    let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];    
     parkingHouseList.push(newParkingHouse)
-
-    // writeToCsv();
-
-
-    console.log("NEW! :" + parkingHouseList)
     return parkingHouseList;
-
 }
 
-
-
-// adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
-// number of spots,  unike ID of parking house 
-
-
-
 function getRemoveInfo() {
-    removeTargetAdress = document.getElementById("removeAdress").value;
+    removeTargetAdress = document.getElementById("adressInput").value;
     removeTargetCity = document.getElementById("removeInCity").value;
-
-
     removeParkingHouse(removeTargetAdress, removeTargetCity)
 }
 
-//Removes the target house with adress and city 
+//changes the values of index 0, 1 and 6 to null, remove the dection from other funtion
 function removeParkingHouse(removeTargetAdress, removeTargetCity) {
-
-
-
     if (findPlace(removeTargetAdress, removeTargetCity)) {
         let idOfRemoved = parseInt(getId(removeTargetAdress, removeTargetCity))
-
-        //Honesthly no idea but it works. I kinda know but confused 
+        
+        //removes the extra arry created
         for (let i = 0; i < parkingHouseList.length; i++) {
             if (idOfRemoved === parkingHouseList[i][6]) {
-                let cloneArray = parkingHouseList.slice();
-                parkingHouseList.splice(i, 1);
+                parkingHouseList[i][0] = null;
+                parkingHouseList[i][1] = null;
+                parkingHouseList[i][6] = null;
+                return parkingHouseList
+                // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
             }
         }
         //removes the extra arry created
-
-
-        //writeToCsv();
-        removeAllSpotsOfHous(idOfRemoved)
-
+        //removeAllReservestionsFromHouse(idOfRemoved)
         return parkingHouseList;
-
     }
-
     else if (!findPlace(removeTargetAdress, removeTargetCity)) {
         alert("No parking house on that adress");
     }
-
 }
 
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
@@ -153,7 +123,9 @@ function getId(houseRemoveAdress, houseRemoveCity) {
         if (houseRemoveAdress === curentHousadress && houseRemoveCity === curretnHouseCity) return places[6]
     }
 }
-function removeAllSpotsOfHous(id) {
+
+/*
+function removeAllReservestionsFromHouse(id) {
     for (let i = 0; i > parkingHouseReservationInfo.length; i++) {
         let currentIdOfHouse = parkingHouseReservationInfo[i][o];
 
@@ -164,11 +136,10 @@ function removeAllSpotsOfHous(id) {
             i--
         }
     }
-}
+}*/
 
 
 function findPlace(targetAdress, targetCity) {
-
     if (checkValidAdress(targetAdress)
         && checkValidCity(targetCity)) {
         return true;
@@ -178,15 +149,11 @@ function findPlace(targetAdress, targetCity) {
 //Currrent format on Parking House List[] =
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 function checkValidAdress(adressToCheck) {
-
     for (const adresses of parkingHouseList) {
         if (adresses[0] === adressToCheck) return true
     }
-
     return false;
 }
-
-
 
 function checkValidCity(cityToCheck) {
     for (const cities of parkingHouseList) {
@@ -194,7 +161,6 @@ function checkValidCity(cityToCheck) {
     }
     return false;
 }
-
 
 function newArray(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId) {
     let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];
@@ -205,9 +171,7 @@ function returnArray() {
     return parkingHouseList;
 }
 
-
 module.exports = {
-
     removeParkingHouse: removeParkingHouse,
     returnArray: returnArray,
     findPlace: findPlace,
@@ -215,5 +179,6 @@ module.exports = {
     newArray: newArray,
     checkValidAdress: checkValidAdress,
     checkValidCity: checkValidCity,
+    resetParkingHouseList :resetParkingHouseList
 
 };

@@ -11,11 +11,12 @@ var parkingHouseList = [
 var nearByParkingList = [];
 
 var user = [42066669, "Kim_Jong_Trump"]
+
 //parkinghosueId[0], adress[1], parkingspotID[2], ownerCompanyUserName[3], date and time of begging of  reservation[4], date time of ending of reservation[5], user phone number[6], brukersbrukernavn[7]
 var parkingHouseReservationInfo = [
     [1, "BRA VEIEN 6a Halden", 1, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date(""), new Date(""), 12345678, "NaN"],
-    //[1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
+    // [1, "BRA VEIEN 6a Halden", 2, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
 
     [1, "BRA VEIEN 6a Halden", 3, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [1, "BRA VEIEN 6a Halden", 4, "EasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
@@ -28,7 +29,6 @@ var parkingHouseReservationInfo = [
     [2, "MOSSE VEIEN 53b Fredrikstad", 4, "NotSoEasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 23401669, "Hipster_Jesus"],
     [2, "MOSSE VEIEN 53b Fredrikstad", 5, "NotSoEasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
     [2, "MOSSE VEIEN 53b Fredrikstad", 6, "NotSoEasyPark", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Slowpoke_Rodriguez"],
-
 
     [3, "Ant 23 Moss", 1, "BadSpot", new Date("Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time"), new Date("Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"), 42016969, "Speedy_Gonzales"],
     [3, "Ant 23 Moss", 2, "BadSpot", new Date(""), new Date(""), 12345678, "NaN"],
@@ -72,7 +72,7 @@ function getCityLocations(city) {
 
     if (checkIfFound) {
         createNearbyList(nearByParkingList)
-        //ADD/REMOVE COMMENTS FOR THE LINES ABOVE AND UNDER
+        //TEST ADD COMMENT ABOVE FOR TESTING AND REMOVE THE COMMENT UNDER, REVERSE FOR FRONT END USAGE
         //return nearByParkingList;
     }
 
@@ -82,13 +82,11 @@ function getCityLocations(city) {
     }
 }
 
-
 function findCityInList(findCity) {
     let checkIfFound = false;
     for (const houseInList of parkingHouseList) {
         let current = houseInList;
         if (findCity.toLowerCase() === current[1].toLowerCase()) {
-
             nearByParkingList.push(current);
             checkIfFound = true;
         }
@@ -101,13 +99,9 @@ function findCityInList(findCity) {
 
 //NOT SURE IF I CAN TEST THIS
 function createNearbyList(returnList) {
-
-
     //THis is where the list shoudl be in the HTML
     let HTMLDropDown = document.getElementById("DropDown");
-
     let dropDownList = '<option value="all">All</option>';
-
 
     let city;
     let adress;
@@ -116,7 +110,6 @@ function createNearbyList(returnList) {
     //Creates a drop down list to select from
     //Currrent format is [] = adress, city, longititude, lattitude, ownerCompanyUserName
     // number of spots,  unike ID of parking house */
-
     for (const info of returnList) {
         adress = info[0]
         city = info[1];
@@ -146,7 +139,6 @@ function checkIfIdExsist(id) {
             lock = true;
         }
     }
-
     return lock;
 }
 
@@ -177,19 +169,16 @@ function createParkingHouseInfo(selectedHouseId) {
         eachLine.pop()
     }
 
-    if (showInfoList[0] === null) { return status }
+    if (showInfoList[0] === null) return status
 
     else {
-
         createTable(showInfoList);
-        //ADD/REMOVE COMMENTS
+        //TEST ADD COMMENT ABOVE FOR TESTING AND REMOVE THE COMMENT UNDER REVERSE FOR FRONT END USAGE
         //return showInfoList;
     }
-
 }
 
 function createTable(parkingInfoList) {
-
     sortShowList();
     let table = "";
 
@@ -228,74 +217,75 @@ function sortShowList() {
 
 
 function addToInfoList() {
-    let canBeAdded = false
-    let currentSpotID
-
     let timeInfo = addNewParkingDate();
     alert(timeInfo)
     let startInfo = timeInfo[0]; //starting parking info
     let endInfo = timeInfo[1];  //ending parking info
     targetedHouseID = parseInt(writeTargetId())
 
-    //checks if the target ID matches that house 
-    checker:
-    for (const parkingInfoSpot of parkingHouseReservationInfo) {
-        if (parkingInfoSpot[0] == targetedHouseID) {
+    let currentSpotID;
 
-            //saves the spotId for later to check if all the info on that spot has been looped thru
-            currentSpotID = parkingInfoSpot[2];
-            let checkCurrentStartDate = parkingInfoSpot[4]
-            let checkCurrentEndDate = parkingInfoSpot[5]
-
-            //check if starting time is after the exsisting one, then check if its before it ends
-            for (const spotCheck of parkingHouseReservationInfo) {
-                //Checks if the new info does not collide with anything 
-                //checks if it starts before or after the current info
-
-
-                //TO BE TESTED
-                if (startInfo < checkCurrentStartDate || startInfo > checkCurrentEndDate) {
-
-                    //If it does it will check if it ends before the start or after the end    
-                    if (endInfo < checkCurrentStartDate || endInfo > checkCurrentEndDate) canBeAdded = true;
-
-                    //If it doesnt it will be added to false
-                    else canBeAdded = false;
-                }
-                else canBeAdded = false
-
-
-                //When it has been detected that all the info on that parking spot has been looped thru it will check if can be added is true, 
-                if (currentSpotID != spotCheck[2]) {
-
-                    //If it is true it will break the entire search alogythem and add the new info to a list later
-                    if (canBeAdded == true) break checker;
-
-                }
-
-            }
-        }
-    }
-
-
-    console.log(parkingHouseReservationInfo)
-    if (canBeAdded == true) {
+    if (checkIfAvaibleSpot(startInfo, endInfo)) {
 
         let newParkingAdress = getAdress(targetedHouseID);
         let newParkingCompanyName = getCompanyName(targetedHouseID);
 
         let addToParkingHouseReseveation = [targetedHouseID, newParkingAdress, currentSpotID, newParkingCompanyName, startInfo, endInfo, user[0], user[1]]
-        console.log(parkingHouseReservationInfo)
         parkingHouseReservationInfo.push(addToParkingHouseReseveation);
-        console.log(addToParkingHouseReseveation)
+
         alert("New parking regristered. Starting at :"
             + startInfo + "\n Endig at: " + endInfo + "\n At " + addToParkingHouseReseveation[1])
     }
 
+    else {
+        alert("No spots avaible at that time on selcted house ")
+    }
+
     //Current format on ParkingHosueReservationList [[]] = 
     //parkinghosueId[0], adress[1], parkingspotID[2], ownerCompanyUserName[3], date and time of begging of  reservation[4], date time of ending of reservation[5], user phone number[6], brukersbrukernavn[7]
+}
 
-    console.log(parkingHouseReservationInfo)
+function checkIfAvaibleSpot(startInfo, endInfo) {
+    currentSpotIDSecondCheck = ""
+    let canBeAdded = true
+    //For each spot in the house
+    for (let i = 0; i < parkingHouseReservationInfo.length; i++) {
+        let parkingInfoSpot = parkingHouseReservationInfo[i];
+        if (parkingInfoSpot[0] == targetedHouseID) {
+
+            //saves the spotId for later to check if all the info on that spot has been looped thru
+            let currentSpotIDFirstCheck = parkingInfoSpot[2];
+            let checkCurrentStartDate = parkingInfoSpot[4]
+            let checkCurrentEndDate = parkingInfoSpot[5]
+
+            if (!checkIfDoesNotDatesCollide(startInfo, endInfo, checkCurrentStartDate, checkCurrentEndDate)) {
+                canBeAdded = false
+            }
+            //seconds if the spot id has changed an then check if its avaible
+            if (i != 0) {
+                if ((currentSpotIDFirstCheck != currentSpotIDSecondCheck)) {
+
+                    if (canBeAdded) {
+                        currentSpotID = currentSpotIDSecondCheck
+                        return true
+                    }
+                    //resets the value of can be added to
+                    else canBeAdded = true
+                    //return true
+                }
+            }
+            currentSpotIDSecondCheck = currentSpotIDFirstCheck;
+        }
+    }
+}
+
+
+
+function checkIfDoesNotDatesCollide(startOfParking, EndOfNewParking, startToBeChecked, EndToBeChecked) {
+    if ((startOfParking.getTime() > EndToBeChecked.getTime())) {
+        return true
+    }
+    else return false
 }
 
 function addNewParkingDate() {
@@ -304,7 +294,6 @@ function addNewParkingDate() {
     let day = parseInt(parkingDay(year, month));
     let hours = parseInt(parkingHour());
     let minutes = parseInt(parkingMinute());
-
 
     //         new Date(year, month, day, hours, minutes, seconds, milliseconds)
     newParking = new Date(year, month, day, hours, minutes, 0, 0)
@@ -316,7 +305,6 @@ function addNewParkingDate() {
     let startAndEnd = [newParking, endTime]
 
     return startAndEnd;
-
 }
 
 
@@ -336,6 +324,7 @@ function parkingYear() {
         }
     }
 }
+
 function checkIfYearIsValid(checkYear) {
     let thisYear = new Date();
     thisYear = thisYear.getFullYear();
@@ -343,7 +332,6 @@ function checkIfYearIsValid(checkYear) {
     if (checkYear < thisYear || checkYear > thisYear + 1 || isNaN(checkYear)) return false
     else return true
 }
-
 
 function parkingMonth() {
     let addMonth;
@@ -355,11 +343,11 @@ function parkingMonth() {
         else if (checkIfMonthIsValid(addMonth)) return addMonth - 1
     }
 }
+
 function checkIfMonthIsValid(monthToCheck) {
     if (monthToCheck < 1 || monthToCheck > 12 || isNaN(monthToCheck)) { return false }
     else return true
 }
-
 
 function parkingDay(year, month) {
     let addDay;
@@ -371,9 +359,8 @@ function parkingDay(year, month) {
             alert("Invalid day!\n Only valid  numbers are from 1 up to " +
                 numberOfDaysInMonth + "! \n Only v Try again!");
         }
-        else if (checkIfDayIsValid(year, month, addDay)) {
-            break;
-        }
+        else if (checkIfDayIsValid(year, month, addDay)) break;
+
     }
     return addDay;
 }
@@ -398,7 +385,6 @@ function parkingHour() {
 }
 
 function checkIfHourIsValid(addHour) {
-
     if (addHour > 23 || addHour < 0 || isNaN(addHour) || addHour == "") {
         return false;
     }
@@ -406,9 +392,7 @@ function checkIfHourIsValid(addHour) {
 }
 
 function parkingMinute() {
-
     let addMinute = "";
-
 
     while (!checkIfMinuteIsValid(addMinute)) {
         addMinute = prompt("What minute of the hour?");
@@ -421,6 +405,8 @@ function parkingMinute() {
 }
 
 function checkIfMinuteIsValid(addMinute) {
+    addMinute = parseInt(addMinute)
+    if (addMinute === 0) return true
 
     if (addMinute > 59 || addMinute < 0 || isNaN(addMinute) || addMinute == "") {
         return false;
@@ -430,43 +416,36 @@ function checkIfMinuteIsValid(addMinute) {
 
 //Checks if the it ends before the parking starts
 function endOfParking(startYear, startMonth, startDay, startHours, startMinutes) {
-
     let year = parseInt(parkingYear());
 
     while (year < startYear) {
         alert("Parking cant end at a year that happend before the parking started. Try again.")
         year = parseInt(parkingYear());
     }
-
-    let month = parseInt(parkingMonth() - 1);
+    let month = parseInt(parkingMonth());
 
     while (year === startYear && month < startMonth) {
         alert("Parking cant end at month that happend befor parking started. Try again")
-        month = parseInt(parkingMonth() - 1);
+        month = parseInt(parkingMonth());
     }
-
-    let day = parseInt(parkingDay(year, month) - 1);
+    let day = parseInt(parkingDay(year, month));
 
     while (year === startYear && month === startMonth && day < startDay) {
         alert("Parking cant end at a day before parking started. Try again")
-        day = parseInt(parkingDay(year, month) - 1);
+        day = parseInt(parkingDay(year, month));
     }
-
     let hours = parseInt(parkingHour());
 
     while (year === startYear && month === startMonth && day === startDay && hours < startHours) {
         alert("Parking cant end at  time before the parking started. Try agfain");
         hours = parseInt(parkingHour());
     }
-
     let minutes = parseInt(parkingMinute());
 
-    console.log("STARTMINUTE:  " + startMinutes + "NEW MINUTES" + minutes)
     while (year === startYear && month === startMonth && day === startDay && hours === startHours && minutes < startMinutes) {
         alert("Parking cant end at  time before the parking started. Try agfain");
         hours = parseInt(parkingHour());
     }
-
     parkingEnding = new Date(year, month, day, hours, minutes, 0, 0)
     return parkingEnding;
 }
@@ -477,6 +456,7 @@ function getAdress(id) {
         if (lines[0] === id) return lines[1]
     }
 }
+
 //get the comapny  from id with loop
 function getCompanyName(id) {
     for (const lines of parkingHouseReservationInfo) {
@@ -497,7 +477,6 @@ function writeTargetId() {
 }
 
 function checkIdInShowList(id) {
-    console.log(showInfoList)
     let shownInfoList = showInfoList;
 
     for (const ids of shownInfoList) {
@@ -505,6 +484,7 @@ function checkIdInShowList(id) {
     }
     return false
 }
+
 module.exports = {
     getAdress: getAdress,
     getCompanyName: getCompanyName,

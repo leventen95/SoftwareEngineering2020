@@ -7,7 +7,8 @@ var parkingHouseList = [
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
     ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2],
     ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
-    ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
+    ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4],
+    ["Edet 2", "Halden", 11.352130, 59.132880, "HaldenPark", 3, 6]
 ]
 
 //Current format on ParkingHosueReservationList [[]] = 

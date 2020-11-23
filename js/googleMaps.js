@@ -30,7 +30,7 @@
             //Sette sirkler rundt parkeringsplasser i nærheten
             function drawCircles(){
             //Liste med parkeringsplasser
-              const parkPlasser = {
+              /*const parkPlasser = {
               blaaklokkeveien1: {
                 center: { lat: 59.126, lng: 11.363 },
                 plasser: 2,
@@ -47,9 +47,9 @@
                 center: { lat: 59.133080, lng: 11.370700 },
                 plasser: 2,
               },
-            };
+            };*/
             
-            for (const plass in parkPlasser) {
+            /*for (const plass in parkPlasser) {
                 // Add the circle for this place to the map.
                 const parkCircle = new google.maps.Circle({
                   strokeColor: "#FF0000",
@@ -61,7 +61,20 @@
                   center: parkPlasser[plass].center,
                   radius: 100,
                 });
-              }
+              }*/
+                for (const houseInList of parkingHouseList) {
+                    let current = houseInList;
+                    if(current[2] < longi+0.2 || current[2] > longi-0.2 && 
+                      current[3] < lati+0.2 || current[3] > lati-0.2){
+                        center={lat:current[3], lng:current[2]};
+                        console.log(center);
+                       drawCirclesByAddress(center);
+                    }
+                    else{
+                        alert("hei");
+                    }
+                    
+                }
             }
 
             function drawCirclesByAddress(latLng){

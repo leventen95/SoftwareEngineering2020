@@ -55,12 +55,14 @@ describe("Checks if they find target place tests. NB! Can only test one at a tim
     afterEach(() => {
         clearNearByParkingList();
     });
+    
     test("checks if we find parking in Halden", () => {
         expect(uregistretBruker.getCityLocations("Halden")).toEqual([
             ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
             ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
         ]);
     });
+
     test("checks if we find parking in Fredrikstad", () => {
         expect(uregistretBruker.getCityLocations("Fredrikstad")).toEqual([
             ["MOSSE VEIEN 53b", "Fredrikstad", 43.32, 321.31, "NotSoEasyPark", 17, 2]
@@ -73,6 +75,7 @@ describe("Checks if they find target place tests. NB! Can only test one at a tim
             ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3]
         ]);
     });
+
     test("Check if invalid city returns false", () => {
         expect(uregistretBruker.getCityLocations("FakeLocation")).toBeFalsy()
     })
@@ -90,7 +93,6 @@ describe("checks if correct info are created in parkinghousetable in city halden
         getCityLocations("Halden");
     });
     
-
     test("check if parking house 1 returns deisred arrayy", () => {
         expect(uregistretBruker.createParkingHouseInfo(1)).toEqual([
             [1, "BRA VEIEN 6a Halden", 1, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"],
@@ -101,7 +103,6 @@ describe("checks if correct info are created in parkinghousetable in city halden
             [1, "BRA VEIEN 6a Halden", 6, "EasyPark", "Wed Oct 21 2020 03:34:08 GMT+0200 (Central European Summer Time)", "Wed Oct 22 2020 03:34:08 GMT+0200 (Central European Summer Time)"]
         ])
     })
-
 
     test("Check if parking house 2 returns teh desired array", () => {
         expect(uregistretBruker.createParkingHouseInfo(4)).toEqual([
@@ -132,15 +133,9 @@ describe("checks if correct info are created in parkinghousetable in city halden
         ])
     })
 
-
-    
-        
-
     test("Check if invalid location is false", () => {
         expect(uregistretBruker.createParkingHouseInfo("beebeeLilleLam")).toBeFalsy()
     })
-
-
 })
 
 
@@ -148,16 +143,18 @@ describe("checks if correct info are created in parkinghousetable in city halden
 
 //----------UNIT TESTING---------
 describe("FInd city in list checks", () => {
+
     test("Halden to be true", () => {
         expect(uregistretBruker.findCityInList("Halden")).toBeTruthy();
     })
+
     test("Moss to be true", () => {
         expect(uregistretBruker.findCityInList("Moss")).toBeTruthy();
     })
+
     test("Fredrikstad to be true", () => {
         expect(uregistretBruker.findCityInList("Halden")).toBeTruthy();
     })
-
 
     test("YallaTown to be false", () => {
         expect(uregistretBruker.findCityInList("YallaTown")).toBeFalsy();
@@ -166,18 +163,23 @@ describe("FInd city in list checks", () => {
 
 
 describe("Check if idexsists group", () => {
+
     test("Check if id 1  is true", () => {
         expect(uregistretBruker.checkIfIdExsist(1)).toBeTruthy()
     })
+
     test("Check if id 2  is true", () => {
         expect(uregistretBruker.checkIfIdExsist(2)).toBeTruthy()
     })
+
     test("Check if id 3  is true", () => {
         expect(uregistretBruker.checkIfIdExsist(3)).toBeTruthy()
     })
+
     test("Check if id 4  is true", () => {
         expect(uregistretBruker.checkIfIdExsist(4)).toBeTruthy()
     })
+
     test("Check if id 5  is false", () => {
         expect(uregistretBruker.checkIfIdExsist(5)).toBeFalsy()
     })

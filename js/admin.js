@@ -1,10 +1,4 @@
 //THIS SCRIPT IS CONNECTED TO admin.html
-
-
-
-
-
-
 window.onload = startup;
 
 //Currrent format on Parking House List[] =
@@ -61,9 +55,6 @@ function resetParkingHouseList(){
     ]
 }
 
-
-
-
 function startup() {
     add = document.getElementById("addButton");
     remove = document.getElementById("removeButton");
@@ -72,10 +63,8 @@ function startup() {
     remove.addEventListener("click", getRemoveInfo);
 }
 
-
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 // number of spots,  unike ID of parking house 
-
 function getNewHouseInfo() {
     let newAdress = prompt("Please enter the new parkings house's  Adress");
     let newCity = prompt("Please enter the new parkings house's  City");
@@ -93,15 +82,7 @@ function addParkingHouse(newAdress, newCity, newLatitude, newLongtitude, company
     let newParkingHouse = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];    
     parkingHouseList.push(newParkingHouse)
     return parkingHouseList;
-
 }
-
-
-
-// adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
-// number of spots,  unike ID of parking house 
-
-
 
 function getRemoveInfo() {
     removeTargetAdress = document.getElementById("adressInput").value;
@@ -113,7 +94,6 @@ function getRemoveInfo() {
 function removeParkingHouse(removeTargetAdress, removeTargetCity) {
     if (findPlace(removeTargetAdress, removeTargetCity)) {
         let idOfRemoved = parseInt(getId(removeTargetAdress, removeTargetCity))
-
         
         //removes the extra arry created
         for (let i = 0; i < parkingHouseList.length; i++) {
@@ -128,13 +108,10 @@ function removeParkingHouse(removeTargetAdress, removeTargetCity) {
         //removes the extra arry created
         //removeAllReservestionsFromHouse(idOfRemoved)
         return parkingHouseList;
-
     }
-
     else if (!findPlace(removeTargetAdress, removeTargetCity)) {
         alert("No parking house on that adress");
     }
-
 }
 
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
@@ -163,7 +140,6 @@ function removeAllReservestionsFromHouse(id) {
 
 
 function findPlace(targetAdress, targetCity) {
-
     if (checkValidAdress(targetAdress)
         && checkValidCity(targetCity)) {
         return true;
@@ -173,15 +149,11 @@ function findPlace(targetAdress, targetCity) {
 //Currrent format on Parking House List[] =
 // adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 function checkValidAdress(adressToCheck) {
-
     for (const adresses of parkingHouseList) {
         if (adresses[0] === adressToCheck) return true
     }
-
     return false;
 }
-
-
 
 function checkValidCity(cityToCheck) {
     for (const cities of parkingHouseList) {
@@ -189,7 +161,6 @@ function checkValidCity(cityToCheck) {
     }
     return false;
 }
-
 
 function newArray(newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId) {
     let newParkingHouseCheck = [newAdress, newCity, newLatitude, newLongtitude, companyNayUserName, numberOfSpots, houseId];
@@ -200,9 +171,7 @@ function returnArray() {
     return parkingHouseList;
 }
 
-
 module.exports = {
-
     removeParkingHouse: removeParkingHouse,
     returnArray: returnArray,
     findPlace: findPlace,

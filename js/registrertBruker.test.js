@@ -50,98 +50,111 @@ var parkingHouseReservationInfo = [
  */
 
 ///---------UNIT TEST------
-describe("Checks for each input of year",()=>{
+describe("Checks for each input of year", () => {
 
-    describe("Tests add parking year",()=>{
-        test("Test if year 2020 is valid", ()=>{
+    describe("Tests add parking year", () => {
+
+        test("Test if year 2020 is valid", () => {
             expect(registrertBruker.checkIfYearIsInvalid(2020)).toBeTruthy()
         })
-        test("Test if year 2021 is valid", ()=>{
+
+        test("Test if year 2021 is valid", () => {
             expect(registrertBruker.checkIfYearIsInvalid(2021)).toBeTruthy()
         })
-        test("Test if year 2019 is invalid", ()=>{
+
+        test("Test if year 2019 is invalid", () => {
             expect(registrertBruker.checkIfYearIsInvalid(2019)).toBeFalsy()
         })
-        test("Test if year 2022 is invalid", ()=>{
+
+        test("Test if year 2022 is invalid", () => {
             expect(registrertBruker.checkIfYearIsInvalid(2022)).toBeFalsy()
         })
-        
     })
-    
-    
-    
-    describe("Test if months are valid",()=>{
-        test("Test if month 4 is valid", ()=>{
+
+    describe("Test if addMonth valid", () => {
+
+        test("Test if month 4 is valid", () => {
             expect(registrertBruker.checkIfMonthIsValid(4)).toBeTruthy()
         })
-        test("Test if month 9 is valid", ()=>{
+
+        test("Test if month 9 is valid", () => {
             expect(registrertBruker.checkIfMonthIsValid(9)).toBeTruthy()
         })
-        test("Test if month 12 is valid", ()=>{
+
+        test("Test if month 12 is valid", () => {
             expect(registrertBruker.checkIfMonthIsValid(12)).toBeTruthy()
         })
-        test("Test if month 15 is invalid", ()=>{
+
+        test("Test if month 15 is invalid", () => {
             expect(registrertBruker.checkIfMonthIsValid(15)).toBeFalsy()
         })
-        test("Test if month 0 is invalid", ()=>{
+
+        test("Test if month 0 is invalid", () => {
             expect(registrertBruker.checkIfMonthIsValid(0)).toBeFalsy()
         })
     })
-    
-    
-    
-    
-    describe("Testing if days are valid",()=>{
-        test("Tests if day 29 of feburary 2020 is valid", ()=>{
+
+    describe("Testing if addDay valid", () => {
+        test("Tests if day 29 of feburary 2020 is valid", () => {
             expect(registrertBruker.checkIfDayIsValid(2020, 2, 19)).toBeTruthy()
-            
+
         })
-        test("Tests if day 15 of december 2020 is valid", ()=>{
-            expect(registrertBruker.checkIfDayIsValid(2020 ,12,15)).toBeTruthy()
-            
+
+        test("Tests if day 15 of december 2020 is valid", () => {
+            expect(registrertBruker.checkIfDayIsValid(2020, 12, 15)).toBeTruthy()
+
         })
-        test("Tests if day 29 of feburary 2019 is Invalid", ()=>{
-            expect(registrertBruker.checkIfDayIsValid(2019, 2,29)).toBeFalsy()
-            
+
+        test("Tests if day 29 of feburary 2019 is Invalid", () => {
+            expect(registrertBruker.checkIfDayIsValid(2019, 2, 29)).toBeFalsy()
+
         })
-        test("Tests if day 6th of april 2020 is valid", ()=>{
+
+        test("Tests if day 6th of april 2020 is valid", () => {
             expect(registrertBruker.checkIfDayIsValid(2020, 4, 6)).toBeTruthy()
-            
+
         })
     })
 })
 
-describe("Testing if hour is valid",()=>{
-	test("Test if hour 7 is valid", ()=>{
-		expect(registrertBruker.checkIfHourIsValid(7)).toBeTruthy()
-	})
-	test("Test if hour 23 is valid", ()=>{
-		expect(registrertBruker.checkIfHourIsValid(23)).toBeTruthy()
-	})
-	test("Test if hour 24 is invalid", ()=>{
-		expect(registrertBruker.checkIfHourIsValid(24)).toBeFalsy()
-	})
-	test("Test if hour -1 is invalid", ()=>{
-		expect(registrertBruker.checkIfHourIsValid(-1)).toBeFalsy()
-	})
+describe("Testing if hour is valid", () => {
+
+    test("Test if hour 7 is valid", () => {
+        expect(registrertBruker.checkIfHourIsValid(7)).toBeTruthy()
+    })
+
+    test("Test if hour 23 is valid", () => {
+        expect(registrertBruker.checkIfHourIsValid(23)).toBeTruthy()
+    })
+
+    test("Test if hour 24 is invalid", () => {
+        expect(registrertBruker.checkIfHourIsValid(24)).toBeFalsy()
+    })
+
+    test("Test if hour -1 is invalid", () => {
+        expect(registrertBruker.checkIfHourIsValid(-1)).toBeFalsy()
+    })
 })
 
-describe("Testing if minute is valid",()=>{
-	test("Test if minute 13 is valid", ()=>{
-		expect(registrertBruker.checkIfMinuteIsValid(13)).toBeTruthy()
-	})
-	test("Test if minute 59 is valid", ()=>{
-		expect(registrertBruker.checkIfMinuteIsValid(59)).toBeTruthy()
-	})
-	
-	test("Test if minute 60 is invalid", ()=>{
-		expect(registrertBruker.checkIfMinuteIsValid(60)).toBeFalsy()
-	})
-	test("Test if minute -1 is invalid", ()=>{
-		expect(registrertBruker.checkIfMinuteIsValid(-1)).toBeFalsy()
+describe("Testing if minute is valid", () => {
+
+    test("Test if minute 13 is valid", () => {
+        expect(registrertBruker.checkIfMinuteIsValid(13)).toBeTruthy()
     })
     
-    test("Test if minute 0 is valid",()=>{
+    test("Test if minute 59 is valid", () => {
+        expect(registrertBruker.checkIfMinuteIsValid(59)).toBeTruthy()
+    })
+
+    test("Test if minute 60 is invalid", () => {
+        expect(registrertBruker.checkIfMinuteIsValid(60)).toBeFalsy()
+    })
+
+    test("Test if minute -1 is invalid", () => {
+        expect(registrertBruker.checkIfMinuteIsValid(-1)).toBeFalsy()
+    })
+
+    test("Test if minute 0 is valid", () => {
         expect(registrertBruker.checkIfMinuteIsValid(0)).toBeTruthy()
     })
 })

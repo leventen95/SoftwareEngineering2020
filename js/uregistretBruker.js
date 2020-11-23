@@ -2,7 +2,6 @@ window.onload = startup;
 
 var nearByParkingList = [];
 
-
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseList = [
     ["BRA VEIEN 6a", "Halden", 45.32, 321.31, "EasyPark", 6, 1],
@@ -10,7 +9,6 @@ var parkingHouseList = [
     ["Ant 23", "Moss", 423.231, 62.132, "BadSpot", 5, 3],
     ["MaurStien 17", "Halden", 45.31, 321.35, "HandiCapSpot", 16, 4]
 ]
-
 
 //Current format on ParkingHosueReservationList [[]] = 
 //parkinghosueId[0], adress[1], parkingspotID[2], ownerCompanyUserName[3], date and time of begging of  reservation[4], date time of ending of reservation[5], user phone number[6], brukersbrukernavn[7]
@@ -48,8 +46,6 @@ var parkingHouseReservationInfo = [
 
 ]
 
-
-
 function startup() {
     getByCity = document.getElementById("searchCityButton");
     getByCity.addEventListener("click", getInputFromDocument);
@@ -64,7 +60,6 @@ function clearNearByParkingList() {
     nearByParkingList = []
 }
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
-
 
 //Searches for all parking houses in the city by name
 
@@ -104,17 +99,12 @@ function findCityInList(findCity) {
 }
 
 
-
-
 //NOT SURE IF I CAN TEST THIS
 function createNearbyList(returnList) {
 
-
     //THis is where the list shoudl be in the HTML
     let HTMLDropDown = document.getElementById("DropDown");
-
     let dropDownList = '<option value="all">All</option>';
-
 
     let city;
     let adress;
@@ -134,7 +124,6 @@ function createNearbyList(returnList) {
             '</option>';
     }
 
-
     HTMLDropDown.innerHTML = "<select name ='NearbySelector' id='parkingHouseListNearby'>"
         //onclick="getParkingHouseInfo()
         + dropDownList + "</select>" + " " + '<button type="button" id ="selectButton" onclick="getSelectHouseId()" ">Select</button>';
@@ -153,17 +142,13 @@ function checkIfIdExsist(id) {
             lock = true;
         }
     }
-
     return lock;
 }
-
-
 
 function getSelectHouseId() {
     let selectedHouseId = document.getElementById("parkingHouseListNearby").value;
     createParkingHouseInfo(selectedHouseId)
 }
-
 
 //CALLED BY ON CLICK BUTTON, IN HTML SCRIPT INJECTED!
 function createParkingHouseInfo(selectedHouseId) {
@@ -185,10 +170,9 @@ function createParkingHouseInfo(selectedHouseId) {
         eachLine.pop()
     }
 
-    if (showInfoList[0] == null) { return status }
+    if (showInfoList[0] == null)  return status 
 
     else {
-
         createTable(showInfoList);
         //TEST ADD COMMENT ABOVE FOR TESTING AND REMOVE THE COMMENT UNDER 
         //return showInfoList;
@@ -197,7 +181,6 @@ function createParkingHouseInfo(selectedHouseId) {
 }
 
 function createTable(parkingInfoList) {
-
     sortShowList();
     let table = "";
 
@@ -235,7 +218,6 @@ function sortShowList() {
 }
 
 
-
 module.exports = {
     getCityLocations: getCityLocations,
     clearNearByParkingList: clearNearByParkingList,
@@ -243,7 +225,6 @@ module.exports = {
     createParkingHouseInfo: createParkingHouseInfo,
     checkIfIdExsist: checkIfIdExsist,
     clearShowList: clearShowList,
-
 
 }
 

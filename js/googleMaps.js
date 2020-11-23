@@ -10,7 +10,7 @@
             function convert(address){
                 geocoder.geocode({ address: address }, (results, status) => {
                 if (status === "OK") {
-                    alert(results[0].geometry.location);
+                    return(results[0].geometry.location);
                 } else {
                   alert("Geocode was not successful for the following reason: " + status);
                 }

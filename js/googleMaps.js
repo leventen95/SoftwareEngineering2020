@@ -153,7 +153,7 @@
             https://www.w3schools.com/html/html5_geolocation.asp
             */
 
-            //Gets array from uregistrertbruker.js, converts address to lattitude and longitude, then draws circles around these addresses
+            //Gets array from array.js, converts address to lattitude and longitude, then draws circles around these addresses
             function getAddressAndMark(){
                 for (const houseInList of parkingHouseList) {
                     let current = houseInList;

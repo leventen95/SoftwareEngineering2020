@@ -1,6 +1,8 @@
 window.onload = startup;
 
-
+function startup(){
+    console.log(":)")
+}
 
 //Currrent format is [] = adress[0], city[1], longititude[2], lattitude[3], ownerCompanyUserName[4], number of spots[5],  unike ID of parking house[6] 
 var parkingHouseList = [

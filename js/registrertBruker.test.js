@@ -117,7 +117,7 @@ describe("Checks for each input of year", () => {
     })
 })
 
-describe("Testing if hour is valid", () => {
+describe("Testing addHour", () => {
 
     test("Test if hour 7 is valid", () => {
         expect(registrertBruker.checkIfHourIsValid(7)).toBeTruthy()
@@ -136,7 +136,7 @@ describe("Testing if hour is valid", () => {
     })
 })
 
-describe("Testing if minute is valid", () => {
+describe("Testing addMinute", () => {
 
     test("Test if minute 13 is valid", () => {
         expect(registrertBruker.checkIfMinuteIsValid(13)).toBeTruthy()

@@ -29,6 +29,9 @@
             
             //Sette sirkler rundt parkeringsplasser i nærheten av nåværende posisjon
             function drawCircles(){
+                if(longi==5.26 && lati==14.883333){
+                    alert("Trykk Hent lokasjon først, for å oppdatere nåværende posisjon");
+                }
                 for (const houseInList of parkingHouseList) {
                     let current = houseInList;
                     if(current[2] < (longi+0.2) && current[2] > (longi-0.2) && 
@@ -37,9 +40,6 @@
                         console.log(typeof(longi))
                         console.log(center);
                        drawCirclesByAddress(center);
-                    }
-                    else if(longi==5.26 && lati==14.883333){
-                        alert("Trykk Hent lokasjon først, for å oppdatere nåværende posisjon");
                     }
                 }
             }
